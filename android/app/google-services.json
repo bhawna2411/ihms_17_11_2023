@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1014892161236",
+    "project_id": "ihms-e34e4",
+    "storage_bucket": "ihms-e34e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014892161236:android:0e147a6e50034dfcf3b341",
+        "android_client_info": {
+          "package_name": "com.ihmsimg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014892161236-okte8p0180gq35rhgqfditl2d3m1e8rr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4wcyrt0D7XvkEXD8vOb3tmH0K5TWFkMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1014892161236-okte8p0180gq35rhgqfditl2d3m1e8rr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
