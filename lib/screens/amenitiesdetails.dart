@@ -6,11 +6,8 @@ import 'package:ihms/screens/tabbar.dart';
 import '../models/AmenitiesResponseModel.dart';
 
 class amenities_details extends StatefulWidget {
-  // String name, description, image, location;
   Datumm amenitiesListData;
-  // amenities_details(this.name, this.description, this.image, this.location);
   amenities_details(this.amenitiesListData);
-
 
   @override
   _MyHomePage4State createState() => _MyHomePage4State();
@@ -66,7 +63,6 @@ class _MyHomePage4State extends State<amenities_details> {
                       alignment: Alignment.center,
                       textDirection: TextDirection.rtl,
                       fit: StackFit.loose,
-                      // overflow: Overflow.visible,
                       clipBehavior: Clip.hardEdge,
                       children: <Widget>[
                         Container(
@@ -82,7 +78,6 @@ class _MyHomePage4State extends State<amenities_details> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
-                                //elevation: 3,
                                 child: Container(
                                   width:
                                       MediaQuery.of(context).size.width * 0.85,
@@ -113,7 +108,9 @@ class _MyHomePage4State extends State<amenities_details> {
                                             SizedBox(
                                               height: 8,
                                             ),
-                                            Text(widget.amenitiesListData.description,
+                                            Text(
+                                                widget.amenitiesListData
+                                                    .description,
                                                 style:
                                                     GoogleFonts.sourceSansPro(
                                                         textStyle: TextStyle(
@@ -146,7 +143,9 @@ class _MyHomePage4State extends State<amenities_details> {
                                             ),
                                             Padding(
                                               padding: EdgeInsets.only(top: 5),
-                                              child: Text(widget.amenitiesListData.location,
+                                              child: Text(
+                                                  widget.amenitiesListData
+                                                      .location,
                                                   style:
                                                       GoogleFonts.sourceSansPro(
                                                           textStyle: TextStyle(
@@ -170,36 +169,27 @@ class _MyHomePage4State extends State<amenities_details> {
                               ),
                               SizedBox(height: 150),
                               GestureDetector(
-                                onTap:(){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AmenitiesBookSlot(widget.amenitiesListData)));
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AmenitiesBookSlot(
+                                                  widget.amenitiesListData)));
                                 },
-                                child: 
-                                Container(
-                      padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xFFcbb269),
-                      ),
-                      child: Text(
-                        "BOOK AMENITY",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.white),
-                      )),
-                                // Container(
-                                //     padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                //     decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(20),
-                                //       color: Colors.white,
-                                //     ),
-                                //     child: Text(
-                                //       "BOOK AMENITY",
-                                //       style: TextStyle(
-                                //           fontWeight: FontWeight.bold,
-                                //           fontSize: 17,
-                                //           color: Color(0xFF90700b)),
-                                //     )),
+                                child: Container(
+                                    padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Color(0xFFcbb269),
+                                    ),
+                                    child: Text(
+                                      "BOOK AMENITY",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                          color: Colors.white),
+                                    )),
                               )
                             ],
                           ),

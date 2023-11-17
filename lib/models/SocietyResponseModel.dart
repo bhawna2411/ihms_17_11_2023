@@ -61,7 +61,7 @@ class SocietData {
   int towers;
   String status;
   String deleteStatus;
-  dynamic rememberToken;
+  String rememberToken;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -74,7 +74,7 @@ class SocietData {
         status: json["status"] == null ? null : json["status"],
         deleteStatus:
             json["delete_status"] == null ? null : json["delete_status"],
-        rememberToken: json["remember_token"],
+        rememberToken: json["remember_token"] == null ? null : json["remember_token"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
@@ -91,7 +91,7 @@ class SocietData {
         "towers": towers == null ? null : towers,
         "status": status == null ? null : status,
         "delete_status": deleteStatus == null ? null : deleteStatus,
-        "remember_token": rememberToken,
+        "remember_token": rememberToken == null ? "" : rememberToken,
         "created_at": createdAt == null ? null : createdAt.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt.toIso8601String(),
       };

@@ -144,13 +144,6 @@ class _DashboardScreenState extends State<amenities_screen> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.85,
                   width: MediaQuery.of(context).size.width,
-                  // margin: EdgeInsets.fromLTRB(
-                  //   MediaQuery.of(context).size.height * 0.000,
-                  //   MediaQuery.of(context).size.height * 0.018,
-                  //   MediaQuery.of(context).size.height * 0.000,
-                  //   MediaQuery.of(context).size.height * 0.018,
-                  // ),
-                  //decoration: BoxDecoration(shape: BoxShape.rectangle),
                   child: Container(
                       margin: EdgeInsets.fromLTRB(12, 0, 12, 0),
                       height: MediaQuery.of(context).size.height,
@@ -187,14 +180,6 @@ class _DashboardScreenState extends State<amenities_screen> {
                                                     builder: (context) =>
                                                         amenities_details(
                                                           amenitiesList[index]
-                                                          // amenitiesList[index]
-                                                          //     .name,
-                                                          // amenitiesList[index]
-                                                          //     .description,
-                                                          // amenitiesList[index]
-                                                          //     .image,
-                                                          // amenitiesList[index]
-                                                          //     .location,
                                                         )));
                                           },
                                           child: Card(
@@ -302,74 +287,3 @@ class _DashboardScreenState extends State<amenities_screen> {
     );
   }
 }
-
-// class ImagePath extends StatelessWidget {
-//   ImageDetail carddetail;
-//   ImagePath(this.carddetail);
-//   //ignore: must_be_immutable
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () => {},
-//       child:FutureBuilder(builder: builder),
-
-//        Row(
-//         children: [
-//           GestureDetector(
-//             onTap: () => {},
-//             child: Card(
-//               shape: RoundedRectangleBorder(
-//                 side: BorderSide(color: const Color(0xFF848484), width: 1),
-//                 borderRadius: BorderRadius.circular(10),
-//               ),
-//               child: Container(
-//                 height: MediaQuery.of(context).size.height * 0.13,
-//                 width: MediaQuery.of(context).size.height * 0.13,
-//                 decoration: BoxDecoration(
-//                 shape: BoxShape.rectangle,
-//                     borderRadius: BorderRadius.circular(10)),
-//                 child: Column(
-//                   children: [
-//                     Container(
-//                       margin: EdgeInsets.fromLTRB(5, 11, 2, 7),
-//                       height: MediaQuery.of(context).size.height * 0.07,
-//                       width: MediaQuery.of(context).size.width * 0.15,
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.all(
-//                           Radius.circular(130),
-//                         ),
-//                         image: DecorationImage(
-//                           image: AssetImage("${carddetail.path}"),
-//                           fit: BoxFit.fill,
-//                         ),
-//                       ),
-//                     ),
-//                     Container(
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: [
-//                           Text(
-//                             "${carddetail.name}",
-//                             style: GoogleFonts.sourceSansPro(
-//                               textStyle: TextStyle(
-//                                 color: Colors.black,
-//                                 fontSize: 10,
-//                                 fontWeight: FontWeight.bold,
-//                                 letterSpacing: 1,
-//                               ),
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-
-//     );
-//   }
-// }

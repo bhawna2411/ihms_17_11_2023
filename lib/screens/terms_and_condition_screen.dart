@@ -4,12 +4,12 @@ import 'package:ihms/screens/tabbar.dart';
 import '../apiconfig/apiConnections.dart';
 import '../models/StaticPageResponseModel.dart';
 
-class about_screen extends StatefulWidget {
+class TermsAndConditionScreen extends StatefulWidget {
   @override
   _MyHomePage4State createState() => _MyHomePage4State();
 }
 
-class _MyHomePage4State extends State<about_screen> {
+class _MyHomePage4State extends State<TermsAndConditionScreen> {
   Future navigateToTabbar(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Tabbar()));
   }
@@ -131,7 +131,7 @@ class _MyHomePage4State extends State<about_screen> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          "About IHMS",
+                                                          "Terms and Condition",
                                                           style: GoogleFonts
                                                               .sourceSansPro(
                                                             textStyle: TextStyle(
@@ -148,7 +148,7 @@ class _MyHomePage4State extends State<about_screen> {
                                                         ),
                                                         Text(
                                                           staticpageList[0]
-                                                              .aboutUs,
+                                                              .tC,
                                                           style: GoogleFonts
                                                               .sourceSansPro(
                                                             textStyle: TextStyle(

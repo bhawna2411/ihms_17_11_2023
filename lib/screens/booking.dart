@@ -43,13 +43,7 @@ class _ThankyouScreenState extends State<Booking_Screen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text("Enter name"),
       ));
-    } 
-    // else if (commentController.text.trim() == '') {
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //     content: Text("Enter comment"),
-    //   ));
-    // } 
-    else {
+    } else {
       setState(() {
         isLoading = true;
       });
@@ -71,7 +65,6 @@ class _ThankyouScreenState extends State<Booking_Screen> {
     setState(() {
       _loadevents = userProfile().then((value) {
         userProfileResponseModel = value;
-        print("OBJECT ${value.data.name}");
         setState(() {});
       });
     });
@@ -90,16 +83,6 @@ class _ThankyouScreenState extends State<Booking_Screen> {
         child: SingleChildScrollView(
           child: Stack(
             children: [
-              // Container(
-              //   height: MediaQuery.of(context).size.height,
-              //   width: MediaQuery.of(context).size.width,
-              //   decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //       image: NetworkImage(widget.image),
-              //       fit: BoxFit.cover,
-              //     ),
-              //   ),
-              // ),
               Container(
                 height: 240,
                 width: MediaQuery.of(context).size.width,
@@ -107,7 +90,8 @@ class _ThankyouScreenState extends State<Booking_Screen> {
                   image: DecorationImage(
                     image: NetworkImage(widget.image),
                     fit: BoxFit.fill,
-                     colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.dstATop),
+                    colorFilter: new ColorFilter.mode(
+                        Colors.black.withOpacity(0.6), BlendMode.dstATop),
                   ),
                 ),
               ),
@@ -156,16 +140,16 @@ class _ThankyouScreenState extends State<Booking_Screen> {
                     MediaQuery.of(context).size.height * 0.00,
                   ),
                   child: Container(
-                    padding: EdgeInsets.only(top:8.0,bottom:8.0,right:15.0,left:15.0),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 250, 238, 198),
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
+                    padding: EdgeInsets.only(
+                        top: 8.0, bottom: 8.0, right: 15.0, left: 15.0),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 250, 238, 198),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     child: Text(
                       widget.servicename,
                       style: GoogleFonts.sourceSansPro(
                         textStyle: TextStyle(
-                          // fontWeight: FontWeight.w500,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF203040),
                           fontSize: 17,
@@ -439,68 +423,7 @@ class _ThankyouScreenState extends State<Booking_Screen> {
                                         child: Row(
                                           children: [
                                             Transform.scale(
-                                                scale: 0.9, child: Text("")
-                                                //  Checkbox(
-                                                //   activeColor:
-                                                //       const Color(0xFF9a7712),
-                                                //   value: isChecked,
-                                                //   onChanged: (bool value) {
-                                                //     // This is where we update the state when the checkbox is tapped
-                                                //     setState(() {
-                                                //       isChecked = value;
-                                                //       print(isChecked);
-                                                //     });
-                                                //   },
-                                                // ),
-                                                ),
-                                            // Text("I agree to the",
-                                            //     style:
-                                            //         GoogleFonts.sourceSansPro(
-                                            //       textStyle: TextStyle(
-                                            //           fontSize: 13,
-                                            //           color: const Color(
-                                            //               0xFF9e9e9e),
-                                            //           fontFamily:
-                                            //               "Source Sans Pro",
-                                            //           fontWeight:
-                                            //               FontWeight.w500),
-                                            //     )),
-                                            // Text(" Terms",
-                                            //     style:
-                                            //         GoogleFonts.sourceSansPro(
-                                            //       textStyle: TextStyle(
-                                            //           fontSize: 13,
-                                            //           color: const Color(
-                                            //               0xFFa18634),
-                                            //           fontFamily:
-                                            //               "Source Sans Pro",
-                                            //           fontWeight:
-                                            //               FontWeight.bold),
-                                            //     )),
-                                            // Text(" &",
-                                            //     style:
-                                            //         GoogleFonts.sourceSansPro(
-                                            //       textStyle: TextStyle(
-                                            //           fontSize: 13,
-                                            //           color: const Color(
-                                            //               0xFF9e9e9e),
-                                            //           fontFamily:
-                                            //               "Source Sans Pro",
-                                            //           fontWeight:
-                                            //               FontWeight.w500),
-                                            //     )),
-                                            // Text(" Conditions",
-                                            //     style:
-                                            //         GoogleFonts.sourceSansPro(
-                                            //       textStyle: TextStyle(
-                                            //           fontSize: 13,
-                                            //           color: const Color(
-                                            //               0xFFa18634),
-                                            //           fontFamily:
-                                            //               "Source Sans Pro",
-                                            //           fontWeight:
-                                            //               FontWeight.bold),
-                                            //     )),
+                                                scale: 0.9, child: Text("")),
                                           ],
                                         ),
                                       ),

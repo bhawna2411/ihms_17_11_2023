@@ -62,7 +62,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                // gradient: Utils().getGradientColor(),
                 ),
             child: Center(
               child: SingleChildScrollView(
@@ -77,7 +76,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       decoration: BoxDecoration(
                           color: Color(0xFF96700f),
                           borderRadius: BorderRadius.circular(25)
-                          // boxShadow: BorderRadius.circular(25)
                           ),
                       child: Column(
                         children: [
@@ -138,7 +136,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        //sendfeedback(feedbackController.text, context);
                         feedback();
                       },
                       child: Container(

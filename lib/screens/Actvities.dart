@@ -145,15 +145,7 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
                 Container(
                   height: MediaQuery.of(context).size.height * 0.85,
                   width: MediaQuery.of(context).size.width,
-                  // margin: EdgeInsets.fromLTRB(
-                  //   MediaQuery.of(context).size.height * 0.000,
-                  //   MediaQuery.of(context).size.height * 0.018,
-                  //   MediaQuery.of(context).size.height * 0.000,
-                  //   MediaQuery.of(context).size.height * 0.018,
-                  // ),
-                  // decoration: BoxDecoration(shape: BoxShape.rectangle),
                   child: Container(
-                    // color: Colors.red,
                     margin: EdgeInsets.fromLTRB(12, 0, 12, 0),
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
@@ -162,15 +154,10 @@ class _ActivitiesScreenState extends State<ActivitiesScreen> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          print('loading');
                           return Center(child: CircularProgressIndicator());
-                          // showLoader(context);
                         } else {
-                          print('loaded');
                           activitesResponseModel = snapshot.data;
                           activitiesList = activitesResponseModel.data;
-                          print(
-                              "activities length from details ---- ${activitiesList.length}");
                           return GridView.builder(
                             controller: controller,
                             gridDelegate:

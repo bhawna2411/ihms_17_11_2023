@@ -1,8 +1,7 @@
 class endpoints {
   // var base_url = "http://143.110.244.110/ihms/api";
-  // var base_url = "http://admin.ihmsclubs.com/api";
-  var base_url = "http://143.110.184.198/ihms/api";
-
+  var base_url = "http://admin.ihmsclubs.com/api";
+  // var base_url = "http://143.110.184.198/ihms/api";
   var splacescreen = '/splashscreen';
   var amenities = '/amenitieslist';
   var clubs = '/clubs';

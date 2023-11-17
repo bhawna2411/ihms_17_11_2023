@@ -30,7 +30,6 @@ class _MyHomePageState extends State<splash_screen> {
     super.initState();
     SharedPreferences.getInstance().then((SharedPreferences sp) {
       getValueOfToken = sp.getString('token');
-      print(getValueOfToken);
       if (getValueOfToken == null || getValueOfToken == "") {
         loadSplaceBackground();
       } else {

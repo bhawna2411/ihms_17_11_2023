@@ -14,6 +14,8 @@ import 'package:ihms/screens/clubs.dart';
 import 'package:ihms/screens/dashboard_screen.dart';
 import 'package:ihms/screens/event.dart';
 import 'package:ihms/screens/event_history_screen.dart';
+import 'package:ihms/screens/privacy_policy_screen.dart';
+import 'package:ihms/screens/terms_and_condition_screen.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jiffy/jiffy.dart';
@@ -46,6 +48,7 @@ class _TabbarState extends State<Tabbar> {
   String text = '';
   String subject = '';
   List<String> imagePaths = [];
+  // ignore: unused_field
   bool _isLoading = false;
   bool err = false;
   String msgErr = '';
@@ -58,6 +61,7 @@ class _TabbarState extends State<Tabbar> {
   File cameraFile;
   String profileImage;
   bool isLoading = true;
+  // ignore: unused_field
   String _platformVersion = 'Unknown';
 
   loadevents() {
@@ -82,7 +86,6 @@ class _TabbarState extends State<Tabbar> {
   }
 
   whatsAppOpen() async {
-    print("hello");
     var whatsapp = "+918882212941";
     var whatsappURl_android =
         "https://api.whatsapp.com/send?phone=918882212941";
@@ -569,7 +572,6 @@ class _TabbarState extends State<Tabbar> {
                                     var aa =
                                         Jiffy(dataa).format('do MMMM yyyy');
                                     dob = aa.replaceAll(' ', '_');
-                                    // print("dob $dob");
                                   } else {
                                     dob = sp
                                         .getString('dob')
@@ -578,16 +580,14 @@ class _TabbarState extends State<Tabbar> {
                                 } else {
                                   dob = "1st_January_2023";
                                 }
-                                var firebaseMessaging = FirebaseMessaging.instance;
-                                firebaseMessaging
-                                    .unsubscribeFromTopic(
-                                        gender == null || gender == ""
-                                            ? "Male"
-                                            : gender);
-                                firebaseMessaging
-                                    .unsubscribeFromTopic(society);
-                                firebaseMessaging
-                                    .unsubscribeFromTopic(dob);
+                                var firebaseMessaging =
+                                    FirebaseMessaging.instance;
+                                firebaseMessaging.unsubscribeFromTopic(
+                                    gender == null || gender == ""
+                                        ? "Male"
+                                        : gender);
+                                firebaseMessaging.unsubscribeFromTopic(society);
+                                firebaseMessaging.unsubscribeFromTopic(dob);
 
                                 sp.clear();
 
@@ -634,7 +634,6 @@ class _TabbarState extends State<Tabbar> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                print("reached");
                                 const url = 'https://twitter.com';
                                 if (await canLaunch(url)) {
                                   await launch(url);
@@ -652,7 +651,6 @@ class _TabbarState extends State<Tabbar> {
                               onTap: () {
                                 // ignore: unnecessary_statements
                                 socialModel.data[0].youtube;
-                                print(socialModel.data[0].youtube);
                               },
                               child: Image(
                                 width: MediaQuery.of(context).size.width * 0.10,
@@ -807,30 +805,32 @@ class _TabbarState extends State<Tabbar> {
                                     // ),
                                     Container(
                                       width: 250,
-                                      child: Row(children: [
-                                        Text(
-                                        "UID - ",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.sourceSansPro(
-                                          textStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 13,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "UID - ",
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.sourceSansPro(
+                                              textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 13,
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                          Text(
+                                            userProfileResponseModel.data.uid,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.sourceSansPro(
+                                              textStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 13,
+                                              ),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                       Text(
-                                        userProfileResponseModel.data.uid,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.sourceSansPro(
-                                          textStyle: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 13,
-                                          ),
-                                        ),
-                                      )
-                                      ],),
                                     ),
                                   ],
                                 ),
@@ -1074,6 +1074,64 @@ class _TabbarState extends State<Tabbar> {
                                 ),
                                 ListTile(
                                   leading: Image.asset(
+                                    "assets/images/about.png",
+                                    height: 22,
+                                    width: 22,
+                                  ),
+                                  dense: true,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 0.0),
+                                  title: Text("Privacy Policy",
+                                      style: GoogleFonts.sourceSansPro(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF555555),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                        ),
+                                      )),
+                                  onTap: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                PrivacyPolicyScreen()));
+                                  },
+                                ),
+                                Divider(
+                                  indent: 20,
+                                  endIndent: 20,
+                                  height: 1,
+                                ),
+                                ListTile(
+                                  leading: Image.asset(
+                                    "assets/images/about.png",
+                                    height: 22,
+                                    width: 22,
+                                  ),
+                                  dense: true,
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 0.0),
+                                  title: Text("Terms and conditions",
+                                      style: GoogleFonts.sourceSansPro(
+                                        textStyle: TextStyle(
+                                          color: Color(0xFF555555),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 18,
+                                        ),
+                                      )),
+                                  onTap: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) =>
+                                                TermsAndConditionScreen()));
+                                  },
+                                ),
+                                Divider(
+                                  indent: 20,
+                                  endIndent: 20,
+                                  height: 1,
+                                ),
+                                ListTile(
+                                  leading: Image.asset(
                                     "assets/images/logout.png",
                                     height: 22,
                                     width: 22,
@@ -1115,16 +1173,15 @@ class _TabbarState extends State<Tabbar> {
                                       dob = "1st_January_2023";
                                     }
 
-                                    var firebaseMessaging = FirebaseMessaging.instance;
-                                     firebaseMessaging
-                                        .unsubscribeFromTopic(
-                                            gender == null || gender == ""
-                                                ? "Male"
-                                                : gender);
-                                     firebaseMessaging
+                                    var firebaseMessaging =
+                                        FirebaseMessaging.instance;
+                                    firebaseMessaging.unsubscribeFromTopic(
+                                        gender == null || gender == ""
+                                            ? "Male"
+                                            : gender);
+                                    firebaseMessaging
                                         .unsubscribeFromTopic(society);
-                                     firebaseMessaging
-                                        .unsubscribeFromTopic(dob);
+                                    firebaseMessaging.unsubscribeFromTopic(dob);
 
                                     sp.clear();
 
@@ -1255,7 +1312,6 @@ class _TabbarState extends State<Tabbar> {
                               ),
                               GestureDetector(
                                 onTap: () async {
-                                  print(socialModel.data[0].youtube);
                                   if (await canLaunch(
                                       'https://www.youtube.com/channel/UCfP2YvNzFVPLeRyN6sH0Xdw/')) {
                                     await launch(
@@ -1352,7 +1408,6 @@ class _TabbarState extends State<Tabbar> {
     setState(() {});
 
     PermissionStatus status = await Permission.camera.status;
-    print('status $status');
     if (status.isPermanentlyDenied) return openAppSettings();
     status = await Permission.camera.request();
     if (status.isDenied) return;

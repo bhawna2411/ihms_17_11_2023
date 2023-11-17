@@ -16,7 +16,7 @@ class WhatsNewResponseModel {
     });
 
     String msg;
-    bool error;
+    String error;
     List<Datumwhatsnew> data;
 
     factory WhatsNewResponseModel.fromJson(Map<String, dynamic> json) => WhatsNewResponseModel(

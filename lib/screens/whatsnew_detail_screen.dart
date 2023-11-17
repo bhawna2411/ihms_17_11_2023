@@ -17,7 +17,6 @@ class _WhatsNewDetailScreenState extends State<WhatsNewDetailScreen> {
   }
   final space = SizedBox(height: 10);
   _launchURL(url) async {
-    // const url = 'https://flutter.io';
     if (await canLaunchUrlString(url)) {
       await launchUrlString(url);
     } else {
@@ -35,32 +34,12 @@ class _WhatsNewDetailScreenState extends State<WhatsNewDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 80),
-
-            // Padding(
-            //   padding: const EdgeInsets.fromLTRB(18.0, 18.0, 0.0, 40.0),
-            //   child: CircleAvatar(
-            //     backgroundColor: Colors.white,
-            //     radius: 12,
-            //     child: Center(
-            //       child: IconButton(
-            //         padding: EdgeInsets.zero,
-            //         icon: Icon(Icons.arrow_back),
-            //         color: Color(0xff203040),
-            //         onPressed: () {
-            //           Navigator.pop(context);
-            //         },
-            //       ),
-            //     ),
-            //   ),
-            // ),
-
             Center(
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                       Padding(
@@ -123,8 +102,7 @@ class _WhatsNewDetailScreenState extends State<WhatsNewDetailScreen> {
                     GestureDetector(
                         onTap: () {
                           setState(() {
-                              _launchURL(
-                                                      widget.whatsnewList.url);
+                              _launchURL(widget.whatsnewList.url);
                           });
                         },
                         child: Container(

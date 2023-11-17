@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
-//import 'dart:js';
-//import 'dart:js';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ihms/models/ActivitiesResponseModel.dart';
 import 'package:ihms/models/AmenitiesHistoryResponse.dart';
@@ -25,12 +22,9 @@ import 'package:ihms/models/WhatsNewResponseModel.dart';
 import 'package:ihms/screens/Feedback_Screen.dart';
 import 'package:ihms/screens/Thankyou_join_activities.dart';
 import 'package:ihms/screens/WhatsNew_Screen.dart';
-import 'package:ihms/screens/tabbar.dart';
-import 'package:ihms/screens/thankyou_screen.dart';
 import 'package:ihms/utils.dart';
 import 'package:ihms/string_resources.dart';
 import 'package:jiffy/jiffy.dart';
-
 import '../models/OrderIdResponse.dart';
 import '../models/StaticPageResponseModel.dart';
 import '../screens/seatsBooked.dart';
@@ -63,8 +57,6 @@ SplaceResponseModel splaceResponseModelFromJson(String str) =>
 
 Future<SplaceResponseModel> getSplaceBackground() async {
   final response = await http.get(Uri.parse(ep.base_url + ep.splacescreen));
-  var jsonData = json.decode(response.body);
-  print(jsonData);
   if (response.statusCode == 200) {
     final splaceResponseModel = splaceResponseModelFromJson(response.body);
     return splaceResponseModel;
@@ -96,10 +88,7 @@ UsersResponseModel usersResponseModelFromJson(String str) =>
     UsersResponseModel.fromJson(json.decode(str));
 
 Future<UsersResponseModel> getUsers() async {
-  print("get users --- ");
   final response = await http.get(Uri.parse(ep.base_url + ep.users));
-  var jsonData = json.decode(response.body);
-  // print(jsonData);
   if (response.statusCode == 200) {
     final usersResponseModel = usersResponseModelFromJson(response.body);
     return usersResponseModel;
@@ -109,23 +98,18 @@ Future<UsersResponseModel> getUsers() async {
 }
 
 Future<EventsResponseModel> getEvents() async {
-  print("calling get event api ---------------------------------------");
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var userId = prefs.getString('id');
   final response =
       await http.get(Uri.parse(ep.base_url + ep.event + "?user_id=" + userId));
-  print("url" + ep.base_url + ep.event + "?user_id=" + userId);
 
-  var jsonData = json.decode(response.body);
-  print("event data response is ======= ${response.body}");
 
   if (response.statusCode == 200) {
     try {
       final eventsResponseModel = eventsResponseModelFromJson(response.body);
       return eventsResponseModel;
     } catch (e) {
-      print("error rajat" + e.toString());
       return EventsResponseModel();
     }
   } else {
@@ -150,18 +134,12 @@ Future<AmenitiesResponseModel> getAmenities() async {
 
 Future<ClubsResponseModel> getClubs() async {
   final response = await http.get(Uri.parse(ep.base_url + ep.clubs));
-  var jsonData = json.decode(response.body);
-  print("==============json club ==========================>>>>>{$jsonData}");
-  print("status code club   ------    ${response.statusCode}");
 
   if (response.statusCode == 200) {
     ClubsResponseModel clubsResponseModel =
         clubsResponseModelFromJson(response.body);
-    print("hiiiii");
-    print("from api   ------    ${clubsResponseModel}");
     return clubsResponseModel;
   } else {
-    print("else");
     return ClubsResponseModel();
   }
 }
@@ -173,8 +151,6 @@ Future<ServicesResponseModel> getServices() async {
 
   final response = await http
       .get(Uri.parse(ep.base_url + ep.services + "?user_id=" + userId));
-  var jsonData = json.decode(response.body);
-  // print("========================================>>>>>{$jsonData}");
   if (response.statusCode == 200) {
     final servicesResponseModel = servicesResponseModelFromJson(response.body);
     return servicesResponseModel;
@@ -190,10 +166,6 @@ Future<EventHistoryResponseModel> getEventHistory() async {
 
   final response = await http
       .get(Uri.parse(ep.base_url + ep.eventhistory + "?user_id=" + userId));
-  print(
-      "calling event history api -----  ${ep.base_url + ep.eventhistory + "?user_id=" + userId}");
-
-  var jsonData = json.decode(response.body);
   if (response.statusCode == 200) {
     final eventHistoryResponseModel =
         eventHistoryResponseModelFromJson(response.body);
@@ -224,7 +196,6 @@ Future<AmenitiesHistoryResponse> getAmenitiesHistory() async {
   var userId = prefs.getString('id');
   final response = await http
       .get(Uri.parse(ep.base_url + ep.amenitiesHistory + "?user_id=" + userId));
-   print("response of amenity ==== ${response.statusCode}");
   if (response.statusCode == 200) {
     final amenitiesHistoryResponse =
         amenitiesHistoryResponseFromJson(response.body);
@@ -236,17 +207,11 @@ Future<AmenitiesHistoryResponse> getAmenitiesHistory() async {
 }
 
 Future<UserProfileResponseModel> userProfile() async {
-  print("userProfile --------");
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var userId = prefs.getString('id');
-  // print("====== USER ID ====== + $userId");
-  print("profile url is ---------- ${ep.base_url + ep.userProfile + userId}");
   final response =
       await http.get(Uri.parse(ep.base_url + ep.userProfile + userId));
-  var jsonData = json.decode(response.body);
-  // print(ep.base_url + ep.userProfile + userId);
-  print("=====================PROFILE DATA===================>>>>>{$jsonData}");
   if (response.statusCode == 200) {
     final userProfileResponseModel =
         userProfileResponseModelFromJson(response.body);
@@ -262,8 +227,6 @@ Future<ActivitiesResponseModel> getActivities() async {
   var userId = prefs.getString('id');
   final response = await http
       .get(Uri.parse(ep.base_url + ep.activities + "?user_id=" + userId));
-  var jsonData = json.decode(response.body);
-  // print("========================================>>>>>{$jsonData}");
   if (response.statusCode == 200) {
     final activitesResponseModel =
         activitiesResponseModelFromJson(response.body);
@@ -274,10 +237,7 @@ Future<ActivitiesResponseModel> getActivities() async {
 }
 
 Future<SocietyResponseModel> getSociety() async {
-  // print("getSociety ------  ");
   final response = await http.get(Uri.parse(ep.base_url + ep.society));
-  var jsonData = json.decode(response.body);
-  print('getSociety jsonData--------------------$jsonData');
   if (response.statusCode == 200) {
     final societyResponseModel = societyResponseModelFromJson(response.body);
     return societyResponseModel;
@@ -287,13 +247,10 @@ Future<SocietyResponseModel> getSociety() async {
 }
 
 Future<WhatsNewResponseModel> whatspdf() async {
-  print("calling whatspdf  --------------------------");
   CircularProgressIndicator();
    SharedPreferences prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('id');
   final response = await http.get(Uri.parse(ep.base_url + ep.whatsnew + "?user_id=" + userId));
-  var jsonData = json.decode(response.body);
-  print("response whats new ------------ $jsonData");
   if (response.statusCode == 200) {
     final whatsNewResponseModel = whatsNewResponseModelFromJson(response.body);
     return whatsNewResponseModel;
@@ -303,7 +260,6 @@ Future<WhatsNewResponseModel> whatspdf() async {
 }
 
 Future<List<TowerData>> getTower(String societyId) async {
-  // print("get tower");
   final response = await http.post(
     Uri.parse(ep.base_url + ep.tower),
     headers: <String, String>{
@@ -313,12 +269,6 @@ Future<List<TowerData>> getTower(String societyId) async {
       "society_id": societyId,
     }),
   );
-  print(
-      "calling get tower api --- ${ep.base_url + ep.tower}  with societyId $societyId ");
-
-  var jsonData = json.decode(response.body);
-  print("get tower api data ---- $jsonData");
-
   if (response.statusCode == 200) {
     final towerResponseModel = towerResponseModelFromJson(response.body);
     return towerResponseModel.data;
@@ -330,12 +280,9 @@ Future<List<TowerData>> getTower(String societyId) async {
 Future<SocialModel> socialurl() async {
   CircularProgressIndicator();
   final response = await http.get(Uri.parse(ep.base_url + ep.social_url));
-  var jsonData = json.decode(response.body);
-  print(jsonData);
-  print(response);
   if (response.statusCode == 200) {
-    final SocialModel = socialModelFromJson(response.body);
-    return SocialModel;
+    final socialModel = socialModelFromJson(response.body);
+    return socialModel;
   } else {
     return SocialModel();
   }
@@ -344,20 +291,16 @@ Future<SocialModel> socialurl() async {
 Future<StaticPageResponseModel> staticpage() async {
   // CircularProgressIndicator();
   final response = await http.get(Uri.parse(ep.base_url + ep.static_page));
-  var jsonData = json.decode(response.body);
-  print(jsonData);
-  print(response);
   if (response.statusCode == 200) {
-    final StaticPageResponseModel =
+    final staticPageResponseModel =
         staticPageResponseModelFromJson(response.body);
-    return StaticPageResponseModel;
+    return staticPageResponseModel;
   } else {
     return StaticPageResponseModel();
   }
 }
 
 Future<List<FlatData>> getFlat(String societyId, String towerId) async {
-  // print("get flat");
   final response = await http.post(
     Uri.parse(ep.base_url + ep.flat),
     headers: <String, String>{
@@ -366,11 +309,6 @@ Future<List<FlatData>> getFlat(String societyId, String towerId) async {
     body: jsonEncode(
         <String, dynamic>{"society_id": societyId, "tower_id": towerId}),
   );
-  print(
-      "calling get flat api --- ${ep.base_url + ep.flat}  with societyId $societyId and towerId $towerId");
-
-  var jsonData = json.decode(response.body);
-  print("get flat api data ---- $jsonData");
   if (response.statusCode == 200) {
     final flatResponseModel = flatResponseModelFromJson(response.body);
     return flatResponseModel.data;
@@ -380,9 +318,7 @@ Future<List<FlatData>> getFlat(String societyId, String towerId) async {
 }
 
 void login(String mobile, String otp, BuildContext context) async {
-  // showLoader(context);
   String token = await FirebaseMessaging.instance.getToken();
-  print("token $token");
 
   final response = await http.post(
     Uri.parse(ep.base_url + ep.login),
@@ -396,8 +332,6 @@ void login(String mobile, String otp, BuildContext context) async {
       "appkey": token,
     }),
   );
-
-  print("=======LOGIN=======>>>> + ${response.body}");
 
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
@@ -460,7 +394,6 @@ void uploadImage(String userImage, BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var userId = prefs.getString('id');
-  print("====== USER ID ====== + $userId");
 
   final response = await http.post(
     Uri.parse(ep.base_url + ep.imageUploadUser),
@@ -473,11 +406,8 @@ void uploadImage(String userImage, BuildContext context) async {
     }),
   );
 
-  print("=======UPLOAD IMAGE=======>>>> + ${response.body}");
-
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
-    print(jsonData);
     showToast(
       jsonData['msg'].toString(),
     );
@@ -501,7 +431,6 @@ Future<String> sendotp(String mobile, int type, BuildContext context) async {
   );
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
-    print(jsonData);
     Fluttertoast.showToast(
         msg: jsonData['msg'].toString(),
         toastLength: Toast.LENGTH_SHORT,
@@ -549,10 +478,8 @@ void submitotp(
     },
     body: jsonEncode(<String, dynamic>{"mobile": mobile, "otp": otp}),
   );
-  print("final data----------${response.statusCode}");
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
-    print(jsonData);
     Fluttertoast.showToast(
         msg: jsonData['msg'].toString(),
         toastLength: Toast.LENGTH_SHORT,
@@ -561,7 +488,6 @@ void submitotp(
         textColor: Colors.white,
         fontSize: 16.0);
     Navigator.pop(context);
-    print("final data----------${jsonData['msg']}");
     if (jsonData['msg'].toString() == "OTP Verification Success") {
       register(
         name,
@@ -599,7 +525,6 @@ void editProfile(
     String dob,
     String anniversary,
     String userId,
-    // int id,
     String socityName,
     String profession,
     String gender,
@@ -607,7 +532,6 @@ void editProfile(
     String areaOfInterest,
     int ihmsMembership,
     BuildContext context) async {
-  print("network ihmsmembership ==== $ihmsMembership");
   final response = await http.post(
     Uri.parse(ep.base_url + ep.userprofileupdate),
     headers: <String, String>{
@@ -623,7 +547,6 @@ void editProfile(
       "dob": dob,
       "anniversary": anniversary,
       "id": userId,
-      // "id": id,
       "profession": profession,
       "gender": gender,
       "education": education,
@@ -631,14 +554,10 @@ void editProfile(
       "ihms_membership": ihmsMembership
     }),
   );
-  // print('--------------response.body------------------${response.body}');
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print('editProfile society -------------------$society ');
-    print('editProfile socityName -------------------$socityName');
     prefs.setString('society', socityName ?? "");
-    print('editProfile jsonData -------------------$jsonData');
     Navigator.pushNamed(context, 'tabbar');
     showToast(jsonData['msg']);
   }
@@ -648,8 +567,6 @@ Future<bool> switchUserSociety(bool switchValue, BuildContext context) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('id');
   var society = prefs.getString('tempsociety');
-  print("switchValue ======= $switchValue");
-  print("society ======= $society");
 
   final response = await http.post(
     Uri.parse(ep.base_url + ep.switchUserSociety),
@@ -662,18 +579,13 @@ Future<bool> switchUserSociety(bool switchValue, BuildContext context) async {
       "society": society,
     }),
   );
-
-  print("response.body ----- ${response.body}");
   var jsonData = json.decode(response.body);
   if (response.statusCode == 200) {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.remove('updatedsociety');
     prefs.setString('updatedsociety', jsonData["data"] ?? "");
-    var user_society = prefs.getString('updatedsociety');
 
     updatedSociety.value = jsonData["data"] ?? "";
-    print("updated society ======= $user_society");
-    print("society is ======= ${jsonData["data"]}");
     showToast(jsonData['msg']);
   }
   return true;
@@ -686,7 +598,6 @@ void addTransaction(
     String transaction_id,
     int amount,
     String paymentstatus,
-    // int id,
     BuildContext context,
     int eventId,
     String _UserId,
@@ -697,15 +608,6 @@ void addTransaction(
     List<dynamic> newCategory
     ) async {
   showLoader(context);
-  print("This is payment process data");
-  print("---UserId---  $userid");
-  print("---order_id---  $order_id");
-  print("---transaction_id---  $transaction_id");
-  print("---amount---  $amount");
-  print("---paymentstatus---  $paymentstatus");
-  print("---seatsBooks---  $seatsBooks");
-  print("---_startDate---  $_startDate");
-  print("---_endDate---  $_endDate");
 
   final response = await http.post(
     Uri.parse(ep.base_url + ep.addtransaction),
@@ -720,16 +622,11 @@ void addTransaction(
       "paymentstatus": paymentstatus,
       "event_id": eventId.toString(),
       "paid_seat": seatsBooks
-      // "id": id,
     }),
   );
-  // print('--------------response.body------------------${response.body}');
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
-
-    print("jsonData: ${jsonData}");
     if (jsonData['success'] == false) {
-      print("jsonData:$jsonData ");
     } else {
       eventparticipate(
           bookingDate,
@@ -747,8 +644,6 @@ void addTransaction(
           );
     }
 
-    // jsonData['success:']
-
   }
 }
 
@@ -765,10 +660,7 @@ Future<OrderIdResponse> generateOrderIdRequest(
       "paymentby": "razorpay"
     }),
   );
-  print(
-      "OrderId request response ------------------------------------ ${response.body}");
   if (response.statusCode == 200) {
-    print("payment success");
     OrderIdResponse orderIdResponse = orderIdResponseFromJson(response.body);
     return orderIdResponse;
   } else {
@@ -785,7 +677,6 @@ void bookRequest(
     int serviceId,
     String userId,
     BuildContext context) async {
-  print("service comment ==== $comment");
   final response = await http.post(
     Uri.parse(ep.base_url + ep.bookService),
     headers: <String, String>{
@@ -800,50 +691,14 @@ void bookRequest(
       "user_id": userId
     }),
   );
-  print(
-      "book request response ------------------------------------ ${response.body}");
-  print(
-      "book request status code ------------------------------------ ${response.statusCode}");
 
   if (response.statusCode == 200) {
-    print("booking has been successfully done");
     Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
         builder: (context) => ThankyouJoinACtivitiesScreen(
             "Your request for $servicename service has been received. Our team will contact you shortly.")));
   }
 }
 
-// Future<String> bookRequest(
-//     String servicename,
-//     String mobile,
-//     String email,
-//     String comment,
-//     String name,
-//     int serviceId,
-//     String userId,
-//     BuildContext context) async {
-//   // showLoader(context);
-//   final response = await http.post(
-//     Uri.parse(ep.base_url + ep.bookService),
-//     headers: <String, String>{
-//       'Content-Type': 'application/json; charset=UTF-8',
-//     },
-//     body: jsonEncode(<String, dynamic>{
-//       "mobile": mobile,
-//       "email": email,
-//       "description": comment,
-//       "name": name,
-//       "service_id": serviceId,
-//       "user_id": userId
-//     }),
-//   );
-//   if (response.statusCode == 200) {
-//     print("booking has been successfully done");
-//     Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
-//         builder: (context) => ThankyouJoinACtivitiesScreen(
-//             "Your request for $servicename service has been received. Our team will contact you shortly.")));
-//   }
-// }
 
 void eventparticipate(
     String bookingDate,
@@ -859,8 +714,6 @@ void eventparticipate(
     int nonpaid,
      List<dynamic> newCategoryy
     ) async {
-
-      print("newCategoryy non paid ============ $newCategoryy");
   showLoader(context);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('id');
@@ -951,9 +804,7 @@ void amenityParticipate(
       "description": comment
     }),
   );
-  print("res of amenity ====== ${response.body}");
   var data = json.decode(response.body);
-  print("data====== ${data}");
   if (response.statusCode == 200) {
     String message = data['msg'];
     bool error = data['error'];
@@ -995,22 +846,7 @@ void register(
     int radiovaluegender,
     String dobb,
     String anniversery) async {
-  // showLoader(context);
-  // var bodData = jsonEncode(<String, dynamic>{
-  //   "name": name,
-  //   "email": email,
-  //   'mobile': mobile,
-  //   'society': society,
-  //   'tower': tower,
-  //   'flat': flat,
-  //   'user_role': radiovalue,
-  //   'dob': dob,
-  //   'anniversary': anniversery,
-  //   'gender': radiovaluegender == 0 ? "Male" : "Female"
-  // });
-  // print(bodData);
   String token = await FirebaseMessaging.instance.getToken();
-  print("token $token");
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -1033,10 +869,6 @@ void register(
       "appkey": token,
     }),
   );
-  print('hiregister');
-  print('calling register api ------ ${ep.base_url + ep.register}');
-
-  print("=======REGISTER=======>>>> + ${response.body}");
 
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
@@ -1047,9 +879,6 @@ void register(
         backgroundColor: Colors.black, //ColorRes.primaryColor,
         textColor: Colors.white,
         fontSize: 16.0);
-    print("jsonDatajsonData $jsonData");
-    print(jsonData["id"]);
-    print("societysociety ${jsonData["society"]}");
 
     prefs.setString('gender', radiovaluegender == 0 ? "Male" : "Female");
     prefs.setString('society', jsonData["society"] ?? "");
@@ -1060,26 +889,13 @@ void register(
     var society = prefs.getString('society').replaceAll(' ', '_');
     var dob = prefs.getString('dob').replaceAll(' ', '_');
 
-    // print("register gender ${gender == null ? "Male" : gender}");
-    // print("register society $society");
-    // print("register dob ${Jiffy(dob).format('do MMMM yyyy')}");
-
-    await FirebaseMessaging.instance
-        .subscribeToTopic(gender == null ? "Male" : gender);
+    await FirebaseMessaging.instance.subscribeToTopic(gender == null ? "Male" : gender);
     await FirebaseMessaging.instance.subscribeToTopic(society);
     await FirebaseMessaging.instance.subscribeToTopic(dob);
-    // await FirebaseMessaging.instance
-    //     .subscribeToTopic(Jiffy(dob).format('do MMMM yyyy'));
-
-    // Navigator.pop(context);
-    print(jsonData);
     if (jsonData['error'] == false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      print("get token");
-      print(jsonData['token']);
       prefs.setString(StringRes.token, jsonData['token']);
       prefs.setString("id", jsonData['id'].toString());
-      print("====== REGISTER ID ======= + $jsonData['id']");
       Timer(Duration(seconds: 2), () {
         Navigator.pushReplacementNamed(context, 'tabbar');
       });
@@ -1115,10 +931,8 @@ void paidregister(int eventID, String eventName, BuildContext context,
       "end_date": endDate,
     }),
   );
-  print("-----------------------------${response}");
   if (response.statusCode == 200) {
     var jsonData = json.decode(response.body);
-    print(jsonData);
     showToast(
       jsonData['msg'].toString(),
     );
@@ -1129,14 +943,7 @@ void paidregister(int eventID, String eventName, BuildContext context,
                 "Your request for $eventName participation has been received. If more family members are keen to participate, please click on participate button again! .")),
         (route) => false);
 
-    // Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(MaterialPageRoute(
-    //     builder: (context) => ThankyouJoinACtivitiesScreen(
-    //         "Your request for $eventName participation has been received. If more family members are keen to participate, please click on participate button again! ."))); //Seats will be alloted to you once it gets approved.")));
-
   } else {
-    // showToast(
-    //   "Something Went Wrong ",
-    // );
     Navigator.pop(context);
   }
 }
@@ -1145,11 +952,6 @@ Future<AvailableSeatsResponseModel> availableSeat(
   int eventID,
   BuildContext context,
 ) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var userId = prefs.getString('id');
-
-  print("=======API CALL=======>>>> + ${ep.base_url + ep.availableSeat}");
-  print("=======eventID=======>>>> + ${eventID}");
   final response = await http.post(
     Uri.parse(ep.base_url + ep.availableSeat),
     headers: <String, String>{
@@ -1159,11 +961,7 @@ Future<AvailableSeatsResponseModel> availableSeat(
       "event_id": eventID,
     }),
   );
-  print("=======AvailableSeat response=======>>>> + ${response.body}");
   if (response.statusCode == 200) {
-    print(
-        "==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ==== ====");
-    print(eventID);
     final availableSeatsResponseModel =
         availableSeatsResponseModelFromJson(response.body);
     return availableSeatsResponseModel;
@@ -1174,27 +972,15 @@ Future<AvailableSeatsResponseModel> availableSeat(
 
 void pendingeventrequest(
   int eventID,
-  // int adultCount,
-  // int childCount,
   String eventName,
-  // String dropdownvalueFortime,
   int totalseat,
   String startdate,
   String enddate,
   BuildContext context,
 ) async {
-  print("hiiiii");
-
   showLoader(context);
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var userId = prefs.getString('id');
-  var dataa = startdate.trim();
-  print("event id is $eventID");
-  print("event name is $eventName");
-  print("userId is $userId");
-  print("start_date is ${dataa}werewrwer");
-  print("end_date is ${enddate.trim()}sdfdsf");
-  // var sdate = DateFormat('yyyy-MM-dd').format(DateTime.parse(startdate));
   final response = await http.post(
     Uri.parse(ep.base_url + ep.pendingrequest),
     headers: <String, String>{
@@ -1203,9 +989,6 @@ void pendingeventrequest(
     body: jsonEncode(<String, dynamic>{
       "user_id": userId,
       "event_id": eventID.toString(),
-      // "no_of_adult": adultCount.toString(),
-      // "no_of_child": childCount.toString(),
-      // "multislot_time": dropdownvalueFortime.toString(),
       "no_of_participants": totalseat,
       "start_date":
           DateFormat('yyyy-MM-dd').format(DateTime.parse(startdate.trim())),
@@ -1214,10 +997,7 @@ void pendingeventrequest(
     }),
   );
   if (response.statusCode == 200) {
-    var jsonData = json.decode(response.body);
-    print(jsonData);
     Fluttertoast.showToast(
-        // msg: "All Seats are occupied we will contact you soon",
         msg: "All Slots are occupied we will contact you soon",
         toastLength: Toast.LENGTH_LONG,
         timeInSecForIosWeb: 1,
@@ -1256,9 +1036,6 @@ void sendfeedback(String feedback, BuildContext context) async {
     }),
   );
   if (response.statusCode == 200) {
-    var jsonData = json.decode(response.body);
-    print(jsonData);
-    print(jsonData["msg"]);
     Fluttertoast.showToast(
         msg: "Thank You For Your Feedback",
         toastLength: Toast.LENGTH_LONG,
@@ -1266,7 +1043,6 @@ void sendfeedback(String feedback, BuildContext context) async {
         backgroundColor: Colors.orange, //ColorRes.primaryColor,
         textColor: Colors.white,
         fontSize: 16.0);
-    //Navigator.pop(context);
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => FeedbackScreen()));
   } else {
@@ -1282,10 +1058,7 @@ void sendfeedback(String feedback, BuildContext context) async {
 }
 
 Future<void> viewCountApi() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var userId = prefs.getString('id');
   final response = await http.get(Uri.parse(ep.base_url + ep.viewCount));
-  print("view response ================ ${response.body}");
   if (response.statusCode == 200) {
     print('hit view count');
   } else {
@@ -1298,8 +1071,6 @@ Future<void> clickCountApi(int bannerId) async {
   var userId = prefs.getString('id');
   final response = await http.get(
       Uri.parse(ep.base_url + ep.clickCount + "?id=" + bannerId.toString() + "&user_id=" + userId.toString()));
-  print("banner response ================ ${response.statusCode}");
-  print(ep.base_url + ep.clickCount + "?id=" + bannerId.toString() + "&user_id=" + userId.toString());
   if (response.statusCode == 200) {
     print('hit click count');   
   } else {

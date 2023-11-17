@@ -186,19 +186,6 @@ class _MyHomePageState extends State<LoginRegistration> {
                                     focusedBorder: InputBorder.none,
                                     enabledBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
-                                    // enabledBorder: UnderlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //       color: Color(0xFFdddddd)),
-                                    // ),
-                                    // focusedBorder: UnderlineInputBorder(
-                                    //   borderSide: BorderSide(
-                                    //       color: Color(0xFF96700f)),
-                                    // ),
-                                    // hintText: "OTP",
-                                    // hintStyle: TextStyle(
-                                    //     fontSize: 17,
-                                    //     color: Color(0xFF455a64),
-                                    //     fontWeight: FontWeight.w400),
                                     labelText: 'OTP',
                                     labelStyle: TextStyle(
                                         fontSize: 17,
@@ -225,33 +212,6 @@ class _MyHomePageState extends State<LoginRegistration> {
                             thickness: 1,
                             color: Color(0xFFdddddd),
                           ),
-                          // Container(
-                          //   width: MediaQuery.of(context).size.width * 0.80,
-                          //   height: MediaQuery.of(context).size.height * 0.02,
-                          //   margin: EdgeInsets.fromLTRB(
-                          //     MediaQuery.of(context).size.height * 0.00,
-                          //     MediaQuery.of(context).size.height * 0.05,
-                          //     MediaQuery.of(context).size.height * 0.00,
-                          //     MediaQuery.of(context).size.height * 0.00,
-                          //   ),
-                          //   child: Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //     children: [
-                          //       Text(
-                          //         "OTP",
-                          //         style: TextStyle(
-                          //             fontSize: 14, color: Color(0xFFbdbdbd)),
-                          //       ),
-                          //       Text(
-                          //         "Get Otp",
-                          //         style: TextStyle(
-                          //             fontSize: 12,
-                          //             fontWeight: FontWeight.bold,
-                          //             color: Color(0xFFd4b15b)),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                         ],
                       ),
                     ],
@@ -261,8 +221,6 @@ class _MyHomePageState extends State<LoginRegistration> {
             ),
             Center(
               child: Container(
-                // width: MediaQuery.of(context).size.width * 0.90,
-                // height: MediaQuery.of(context).size.height * 0.35,
                 margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.92,
                 ),

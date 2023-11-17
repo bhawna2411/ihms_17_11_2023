@@ -36,7 +36,6 @@ class _ClubScreenState extends State<clubs_screen> {
   @override
   void initState() {
     // TODO: implement initState
-    // print("Hellokkjj");
     loadevents();
     super.initState();
   }
@@ -149,17 +148,7 @@ class _ClubScreenState extends State<clubs_screen> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.84,
                     width: MediaQuery.of(context).size.width,
-                    // margin: EdgeInsets.fromLTRB(
-                    //   MediaQuery.of(context).size.height * 0.000,
-                    //   MediaQuery.of(context).size.height * 0.018,
-                    //   MediaQuery.of(context).size.height * 0.000,
-                    //   MediaQuery.of(context).size.height * 0.018,
-                    // ),
-                    //decoration: BoxDecoration(shape: BoxShape.rectangle),
-                    // color: Colors.pink,
                     child: Container(
-                      // color: Colors.amber,
-                      // margin: EdgeInsets.all(12),
                       margin: EdgeInsets.only(
                           top: 12, bottom: 12, right: 12, left: 12),
                       height: MediaQuery.of(context).size.height,
@@ -171,12 +160,8 @@ class _ClubScreenState extends State<clubs_screen> {
                               ConnectionState.waiting) {
                             return Text("");
                           } else {
-                            print("snapshot   ------    ${snapshot.data}");
                             clubsResponseModel = snapshot.data;
                             clubsList = clubsResponseModel.data;
-
-                            print(
-                                "clublist length    -------     ${clubsList.length}");
                             return GridView.builder(
                               controller: controller,
                               gridDelegate:
@@ -190,15 +175,8 @@ class _ClubScreenState extends State<clubs_screen> {
                               itemCount: clubsList.length,
                               itemBuilder: (context, index) {
                                 return 
-                                
-                                
-                                
                                 GestureDetector(
                                   onTap: () {
-                                    print(clubsList[index]
-                                            .learn_more
-                                            .toString() +
-                                        "=========>>>");
                                     Navigator.of(context,
                                             rootNavigator: true)
                                         .push(MaterialPageRoute(
@@ -224,7 +202,6 @@ class _ClubScreenState extends State<clubs_screen> {
                                               .width *
                                           0.42,
                                       decoration: BoxDecoration(
-                                          // color: Colors.red,
                                           shape: BoxShape.rectangle,
                                           borderRadius:
                                               BorderRadius.circular(10)),
@@ -248,7 +225,6 @@ class _ClubScreenState extends State<clubs_screen> {
                                                     .width *
                                                 0.25,
                                             decoration: BoxDecoration(
-                                              // color: Colors.amber,
                                               borderRadius:
                                                   BorderRadius.all(
                                                 Radius.circular(5),
@@ -256,7 +232,6 @@ class _ClubScreenState extends State<clubs_screen> {
                                               image: DecorationImage(
                                                 image: NetworkImage(
                                                     clubsList[index].icon),
-                                                // fit: BoxFit.fill,
                                               ),
                                             ),
                                           ),
@@ -271,7 +246,6 @@ class _ClubScreenState extends State<clubs_screen> {
                                                      textAlign:
                                                         TextAlign.center,
                                                     maxLines: 3,
-                                                    // softWrap: true,
                                                     style: GoogleFonts
                                                         .sourceSansPro(
                                                       textStyle: TextStyle(
@@ -292,9 +266,6 @@ class _ClubScreenState extends State<clubs_screen> {
                                     ),
                                   ),
                                 );
-                             
-                             
-                             
                               },
                             );
                           }

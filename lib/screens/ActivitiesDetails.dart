@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -152,212 +151,6 @@ class _MyHomePage4State extends State<ActivitiesDetails> {
                                                     );
                                                   },
                                                 ),
-
-                                          // children: [
-                                          //   FittedBox(
-                                          //     child: Container(
-                                          //       margin:
-                                          //           EdgeInsets.only(top: 10),
-                                          //       decoration: BoxDecoration(
-                                          //         border: Border.all(
-                                          //             color: Color(0xFFe2dcca),
-                                          //             width: 1.0),
-                                          //         borderRadius:
-                                          //             BorderRadius.all(
-                                          //           Radius.circular(20.0),
-                                          //         ),
-                                          //       ),
-                                          //       child: Center(
-                                          //         child: Padding(
-                                          //           padding: EdgeInsets.only(
-                                          //               left: 15,
-                                          //               right: 15,
-                                          //               top: 5,
-                                          //               bottom: 5),
-                                          //           child: Text(
-                                          //             "Dance Love"
-                                          //                 .toUpperCase(),
-                                          //             style: GoogleFonts.sourceSansPro(
-                                          //                 textStyle: TextStyle(
-                                          //                     fontWeight:
-                                          //                         FontWeight
-                                          //                             .w600,
-                                          //                     fontSize: 10,
-                                          //                     color: Color(
-                                          //                         0xFF455a64))),
-                                          //           ),
-                                          //         ),
-                                          //       ),
-                                          //     ),
-                                          //   ),
-                                          //   FittedBox(
-                                          //     child: Container(
-                                          //       margin:
-                                          //           EdgeInsets.only(top: 10),
-                                          //       decoration: BoxDecoration(
-                                          //         border: Border.all(
-                                          //             color: Color(0xFFe2dcca),
-                                          //             width: 1.0),
-                                          //         borderRadius:
-                                          //             BorderRadius.all(
-                                          //           Radius.circular(20.0),
-                                          //         ),
-                                          //       ),
-                                          //       child: Center(
-                                          //           child: Padding(
-                                          //         padding: EdgeInsets.only(
-                                          //             left: 15,
-                                          //             right: 15,
-                                          //             top: 5,
-                                          //             bottom: 5),
-                                          //         child: Text(
-                                          //             "Hipp Hopp".toUpperCase(),
-                                          //             style: GoogleFonts.sourceSansPro(
-                                          //                 textStyle: TextStyle(
-                                          //                     fontWeight:
-                                          //                         FontWeight
-                                          //                             .w600,
-                                          //                     fontSize: 10,
-                                          //                     color: Color(
-                                          //                         0xFF455a64)))),
-                                          //       )),
-                                          //     ),
-                                          //   ),
-                                          //   FittedBox(
-                                          //     child: Container(
-                                          //       margin:
-                                          //           EdgeInsets.only(top: 10),
-                                          //       decoration: BoxDecoration(
-                                          //         border: Border.all(
-                                          //             color: Color(0xFFe2dcca),
-                                          //             width: 1.0),
-                                          //         borderRadius:
-                                          //             BorderRadius.all(
-                                          //           Radius.circular(20.0),
-                                          //         ),
-                                          //       ),
-                                          //       child: Center(
-                                          //           child: Padding(
-                                          //         padding: EdgeInsets.only(
-                                          //             left: 15,
-                                          //             right: 15,
-                                          //             top: 5,
-                                          //             bottom: 5),
-                                          //         child: Text(
-                                          //             "Folk".toUpperCase(),
-                                          //             style: GoogleFonts.sourceSansPro(
-                                          //                 textStyle: TextStyle(
-                                          //                     fontWeight:
-                                          //                         FontWeight
-                                          //                             .w600,
-                                          //                     fontSize: 10,
-                                          //                     color: Color(
-                                          //                         0xFF455a64)))),
-                                          //       )),
-                                          //     ),
-                                          //   ),
-                                          //   FittedBox(
-                                          //     child: Container(
-                                          //       margin:
-                                          //           EdgeInsets.only(top: 10),
-                                          //       decoration: BoxDecoration(
-                                          //         border: Border.all(
-                                          //             color: Color(0xFFe2dcca),
-                                          //             width: 1.0),
-                                          //         borderRadius:
-                                          //             BorderRadius.all(
-                                          //           Radius.circular(20.0),
-                                          //         ),
-                                          //       ),
-                                          //       child: Center(
-                                          //           child: Padding(
-                                          //         padding: EdgeInsets.only(
-                                          //             left: 15,
-                                          //             right: 15,
-                                          //             top: 5,
-                                          //             bottom: 5),
-                                          //         child: Text(
-                                          //             "jazz".toUpperCase(),
-                                          //             style: GoogleFonts.sourceSansPro(
-                                          //                 textStyle: TextStyle(
-                                          //                     fontWeight:
-                                          //                         FontWeight
-                                          //                             .w600,
-                                          //                     fontSize: 10,
-                                          //                     color: Color(
-                                          //                         0xFF455a64)))),
-                                          //       )),
-                                          //     ),
-                                          //   ),
-                                          //   FittedBox(
-                                          //     child: Container(
-                                          //       margin:
-                                          //           EdgeInsets.only(top: 10),
-                                          //       decoration: BoxDecoration(
-                                          //         border: Border.all(
-                                          //             color: Color(0xFFe2dcca),
-                                          //             width: 1.0),
-                                          //         borderRadius:
-                                          //             BorderRadius.all(
-                                          //           Radius.circular(20.0),
-                                          //         ),
-                                          //       ),
-                                          //       child: Center(
-                                          //           child: Padding(
-                                          //               padding:
-                                          //                   EdgeInsets.only(
-                                          //                       left: 15,
-                                          //                       right: 15,
-                                          //                       top: 5,
-                                          //                       bottom: 5),
-                                          //               child: Text(
-                                          //                   "Salsa Dance"
-                                          //                       .toUpperCase(),
-                                          //                   style: GoogleFonts.sourceSansPro(
-                                          //                       textStyle: TextStyle(
-                                          //                           fontWeight:
-                                          //                               FontWeight
-                                          //                                   .w600,
-                                          //                           fontSize:
-                                          //                               10,
-                                          //                           color: Color(
-                                          //                               0xFF455a64)))))),
-                                          //     ),
-                                          //   ),
-                                          //   FittedBox(
-                                          //     child: Container(
-                                          //       margin:
-                                          //           EdgeInsets.only(top: 10),
-                                          //       decoration: BoxDecoration(
-                                          //         border: Border.all(
-                                          //             color: Color(0xFFe2dcca),
-                                          //             width: 1.0),
-                                          //         borderRadius:
-                                          //             BorderRadius.all(
-                                          //           Radius.circular(20.0),
-                                          //         ),
-                                          //       ),
-                                          //       child: Center(
-                                          //           child: Padding(
-                                          //         padding: EdgeInsets.only(
-                                          //             left: 15,
-                                          //             right: 15,
-                                          //             top: 5,
-                                          //             bottom: 5),
-                                          //         child: Text(
-                                          //             "Folk".toUpperCase(),
-                                          //             style: GoogleFonts.sourceSansPro(
-                                          //                 textStyle: TextStyle(
-                                          //                     fontWeight:
-                                          //                         FontWeight
-                                          //                             .w600,
-                                          //                     fontSize: 10,
-                                          //                     color: Color(
-                                          //                         0xFF455a64)))),
-                                          //       )),
-                                          //     ),
-                                          //   ),
-                                          // ],
                                         ),
                                         Padding(
                                           padding: EdgeInsets.only(top: 15),
@@ -436,7 +229,6 @@ class _MyHomePage4State extends State<ActivitiesDetails> {
                             bottom: -25,
                             child: GestureDetector(
                               onTap: () {
-                                print(widget.url);
                                 _launchURL(widget.url);
                               },
                               child: Center(
@@ -522,12 +314,7 @@ class _MyHomePage4State extends State<ActivitiesDetails> {
   }
 
   _launchURL(String newUrl) async {
+    // ignore: deprecated_member_use
     await launch(newUrl);
-
-    // if (await canLaunch(newUrl)) {
-    //   await launch(newUrl);
-    // } else {
-    //   throw 'Could not launch $newUrl';
-    // }
   }
 }

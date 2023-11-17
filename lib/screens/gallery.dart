@@ -14,7 +14,6 @@ class _GalleryimageState extends State<Galleryimage> {
 
   @override
   Widget build(BuildContext context) {
-    print("imageListSize... ${widget.imagesList}");
     return SafeArea(
       child: Scaffold(
           body: Stack(
@@ -25,39 +24,14 @@ class _GalleryimageState extends State<Galleryimage> {
               child: PageView.builder(
                   itemCount: widget.imagesList.length,
                   itemBuilder: (BuildContext ctxt, int index) {
-                    print('hey${index}');
-                    // print('hey${widget.imagesList[1]}');
-                    // print('hey${widget.imagesList[2]}');
-                    // print('hey${widget.imagesList[3]}');
                     return Container(
                       width: 200,
                       height: 200,
                       alignment: Alignment.center,
                       child:
                           Image(image: NetworkImage(widget.imagesList[index])),
-                      // decoration: BoxDecoration(
-                      //   image: DecorationImage(
-                      //     fit: BoxFit.cover,
-                      //     image: NetworkImage(widget.imagesList[index]),
-                      //   ),
-                      // )
                     );
                   }),
-              // child: CarouselSlider(
-              //   items: [
-
-              //   ],
-              //   options: CarouselOptions(
-              //     height: 300.0,
-              //     enlargeCenterPage: true,
-              //     autoPlay: false,
-              //     aspectRatio: 16 / 9,
-              //     autoPlayCurve: Curves.fastOutSlowIn,
-              //     enableInfiniteScroll: true,
-              //     // autoPlayAnimationDuration: Duration(milliseconds: 800),
-              //     viewportFraction: 1,
-              //   ),
-              // )
             ),
           ),
           Positioned(

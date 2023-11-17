@@ -36,7 +36,6 @@ class _WhatsNewScreenState extends State<YoutubeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("BUILD $_isLoading");
 
     return SafeArea(
       child: Scaffold(

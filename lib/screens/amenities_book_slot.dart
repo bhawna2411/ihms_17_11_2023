@@ -43,8 +43,7 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
   TextEditingController commentController = TextEditingController();
   UserProfileResponseModel userProfileResponseModel;
 //  Map<DateTime, List<String>> _eventsData;
- Map<DateTime, List<String>> _eventsData = {};
-
+  Map<DateTime, List<String>> _eventsData = {};
 
   @override
   void initState() {
@@ -68,26 +67,25 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
         .toList();
     setState(() {});
 
-   widget.amenitiesListData.slot.forEach((element) {
-    if(element.multislotNumberofseats != "0"){
-        Jiffy jiffyDateTime = Jiffy(element.multislotStarttime, "yyyy-MM-dd hh:mm a");
+    widget.amenitiesListData.slot.forEach((element) {
+      if (element.multislotNumberofseats != "0") {
+        Jiffy jiffyDateTime =
+            Jiffy(element.multislotStarttime, "yyyy-MM-dd hh:mm a");
         String year = jiffyDateTime.format("yyyy");
         String month = jiffyDateTime.format("MM");
         String date = jiffyDateTime.format("dd");
 
-        DateTime eventDate = DateTime(int.parse(year), int.parse(month), int.parse(date));
-
+        DateTime eventDate =
+            DateTime(int.parse(year), int.parse(month), int.parse(date));
 
         if (_eventsData.containsKey(eventDate)) {
           _eventsData[eventDate].add('symbol1');
         } else {
           _eventsData[eventDate] = ['symbol1'];
         }
-    }
-});
-
+      }
+    });
   }
-
 
   @override
   void dispose() {
@@ -105,13 +103,9 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
     });
   }
 
-
-
-
   void openCheckout(String orderId, int totalAmount) async {
     var options = {
       'key': 'rzp_live_aQI5jsUi2gFbAW',
-      // 'key': 'rzp_test_RPD53nMcVczQWe',
       'amount': totalAmount,
       'name': 'IHMS',
       "currency": "INR",
@@ -122,9 +116,6 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
         'contact': userProfileResponseModel.data.mobile,
         'email': userProfileResponseModel.data.email
       },
-      // 'external': {
-      //   'wallets': ['paytm']
-      // }
     };
 
     try {
@@ -133,8 +124,6 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
       debugPrint('Error: e');
     }
   }
-
-  
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -153,9 +142,6 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
         "SUCCESS",
         context,
         commentController.text);
-// print("success ========================= ");
-//     Fluttertoast.showToast(
-//         msg: "SUCCESS: " + response.paymentId, toastLength: Toast.LENGTH_SHORT);
   }
 
   void _handlePaymentError(PaymentFailureResponse response) async {
@@ -260,44 +246,9 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
                       color: Color(0xFFcbb269),
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
-
               SizedBox(
                 height: 5,
               ),
-              // Container(
-              //   padding: EdgeInsets.symmetric(horizontal: 16),
-              //   decoration: BoxDecoration(
-              //     border: Border(
-              //       top: BorderSide(color: Color(0xFFcbb269), width: 2.0),
-              //       bottom: BorderSide(color: Color(0xFFcbb269), width: 2.0),
-              //     ),
-              //   ),
-              //   child: DropdownButtonHideUnderline(
-              //     child: DropdownButton<String>(
-              //       icon: Icon(Icons.keyboard_arrow_down,
-              //           color: Color(0xFFcbb269)),
-              //       isExpanded: true,
-              //       value: dropdownValue,
-              //       items: <String>[
-              //         'Single',
-              //         'Multiple',
-              //       ].map((String value) {
-              //         return DropdownMenuItem<String>(
-              //           value: value,
-              //           child: Text(value,
-              //               style: TextStyle(color: Color(0xFFcbb269))),
-              //         );
-              //       }).toList(),
-              //       onChanged: (String newValue) {
-              //         dropdownValue = newValue;
-              //         setState(() {});
-              //         print(dropdownValue);
-              //       },
-              //       hint: Text('Select an option'),
-              //     ),
-              //   ),
-              // ),
-
               SizedBox(height: 10),
               TableCalendar(
                 startDay: DateTime.now(),
@@ -311,12 +262,9 @@ class _AmenitiesBookSlotState extends State<AmenitiesBookSlot> {
                   outsideHolidayStyle: TextStyle(color: Color(0xFFcbb269)),
                   outsideWeekendStyle: TextStyle(color: Color(0xFFcbb269)),
                   eventDayStyle: TextStyle(color: Color(0xFFcbb269)),
-                  // todayColor: Colors.transparent,
                   selectedColor: Theme.of(context).primaryColor,
-                  // todayStyle: TextStyle(
-                  //     color: Color(0xFFcbb269)),
                 ),
-                events: _eventsData,               
+                events: _eventsData,
                 daysOfWeekStyle: DaysOfWeekStyle(
                   weekendStyle: TextStyle(color: Colors.black),
                   weekdayStyle: TextStyle(color: Colors.black),

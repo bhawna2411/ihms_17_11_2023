@@ -38,14 +38,13 @@ class _WhatsNewScreenState extends State<FbNewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("BUILD $_isLoading");
 
     return SafeArea(
       child: Scaffold(
         body: _isLoading == true
             ? Center(child: CircularProgressIndicator())
             : WebView(
-                initialUrl: // whatsNewResponseModel.data,
+                initialUrl:
                     socialModel.data[0].facebook,
                 onWebViewCreated: (WebViewController webViewController) {
                   _controller.complete(webViewController);

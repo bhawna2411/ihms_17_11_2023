@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 
 class ParticipantsDetailScreen extends StatefulWidget {
   @override
+  // ignore: override_on_non_overriding_member
   int eventID;
   String adultAmt;
   String childAmt;
@@ -58,9 +59,7 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
   Set<dynamic> uniqueAttributes = {};
   List<dynamic> uniqueObjects = [];
   List<dynamic> newCategory = [];
-
   var _currentDate = DateTime.now();
-  // var _currentDate = DateTime.now();
   List<String> sdate = [];
   List<String> edate = [];
   List<int> index_value = [];
@@ -72,9 +71,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
         availableSeatsResponseModel = value;
         _isLoading = false;
       });
-
-      print(
-          '-------------availableSeatsResponseModel.data[0].numberOfSeatsAvailable----------------${availableSeatsResponseModel.data[0].numberOfSeatsAvailable}');
     });
   }
 
@@ -83,18 +79,9 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
       var dataa = DateFormat('yyyy-MM-dd HH:mm:ss')
           .format(DateTime.parse(widget.eventData.multislotTime[i].startDate));
       if (_currentDate.isBefore(DateTime.parse(dataa))) {
-        //  widget.eventData.multislotTime[i].startDate
-
         sdate.add(widget.eventData.multislotTime[i].startDate);
-
         edate.add(widget.eventData.multislotTime[i].endDate);
         index_value.add(i);
-        // setState(() {
-        //    numberofAvaliableSeats = widget.eventData.multislotTime[i].seatsAvailable;
-        // });
-        // print("numberofAvaliableSeats--------$numberofAvaliableSeats");
-        print("sdate------$sdate");
-        print("edate------$edate");
       }
     }
   }
@@ -103,7 +90,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
     int h = int.parse(time.split(":").first);
     int m = int.parse(time.split(":").last.split(" ").first);
     String send = "";
-    print("h------------");
     if (h > 12) {
       var temp = h - 12;
       send = "PM";
@@ -129,18 +115,10 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
       paymentby,
       context,
     ).then((value) {
-      print("orderId  ${value.orderId}");
       openCheckout(value.orderId, totalAmount);
-      // totalseats <=
-      //         numberOfAvailableSeats
-      //     ? openCheckout(value.orderId, totalAmount)
-      //     : Container();
       setState(() {
         payAmount = totalAmount;
         seatsBooks = totalseats;
-        print("startDate_generateOrderId $startDate");
-        print("endDate_generateOrderId $endDate");
-
         _startDate = startDate;
         _endDate = endDate;
       });
@@ -162,9 +140,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
       _eventId = eventId;
       _UserId = userId;
       if (widget.eventData.multislot != 1) {
-        print("_registerstartDateif $startDate");
-        print("_registerEnd $endDate");
-
         _startDate =
             widget.eventData.start_date + " " + widget.eventData.start_time;
         _endDate = widget.eventData.end_date + " " + widget.eventData.end_time;
@@ -179,50 +154,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
             totalseats, startDate, endDate);
       }
     });
-
-    //   await availableSeat(widget.eventID, context).then((value) {
-    //     availableSeatsResponseModel = value;
-    //     setState(() {
-    //       payAmount = totalAmount;
-    //       seatsBooks = totalseats;
-    //       _eventId = eventId;
-    //       _UserId = userId;
-
-    //  print("_registerstartDateelse $startDate");
-    //       print("_registerEnd $endDate");
-    //       print("widget.multislotstime ${widget.eventData.multislot.toString()}");
-
-    //       if (widget.eventData.multislot != 1) {
-    //                 print("_registerstartDateif $startDate");
-    //       print("_registerEnd $endDate");
-
-    //         _startDate = widget.eventData.start_date +" "+  widget.eventData.start_time;
-    //         _endDate = widget.eventData.end_date +" " + widget.eventData.end_time;
-    //       }else{
-    //         _startDate = startDate;
-    //         _endDate = endDate;
-
-    //       }
-    //     });
-
-    //   });
-
-    //print(availableSeatsResponseModel.data[0].numberOfSeatsAvailable);
-    //Container();
-    // print(adultCount + childCount);
-
-    //await participateRegister(adultCount, childCount, widget.eventID, context);
-    // Future.delayed(const Duration(milliseconds: 50), () {
-    //   setState(() {
-    //     (adultCount + childCount) <=
-    //             int.parse(
-    //                 availableSeatsResponseModel.data[0].numberOfSeatsAvailable)
-    //         ? openCheckout()
-    //         : showToast(
-    //             'No. of available seat is less than selected candidate',
-    //           );
-    //   });
-    // });
   }
 
   @override
@@ -237,14 +168,8 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
           _totalamount = _totalamount + int.parse(item.mamount) * item.quantity;
           _totalSeats = _totalSeats + item.quantity.toInt();
           totalQunatity = totalQunatity + item.quantity.toInt();
-          // if(item.quantity.toInt() != 0){
-          // CategoryData.add(item.mparticipantName);
-
-          // }
-          // print("CategoryData ================ $CategoryData");
           numberofAvaliableSeats = widget
               .eventData.multislotTime[dropdownSelectedIndex].seatsAvailable;
-          print("dropdownSelectedIndex-------$dropdownSelectedIndex");
         }
       } else {
         for (var item in widget.eventData.participants) {
@@ -268,7 +193,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        //image: NetworkImage(widget.eventData.splitImage[0]),
                         image:
                             ExactAssetImage("assets/images/dashboard_bg.png"),
                         fit: BoxFit.cover,
@@ -350,8 +274,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                 .participants
                                                 .length,
                                             itemBuilder: ((context, index) {
-                                              print(
-                                                  "${widget.eventData.multislotTime[dropdownSelectedIndex].participants[index].mparticipantName}");
 
                                               return Column(
                                                 children: [
@@ -375,7 +297,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                               .spaceBetween,
                                                       children: [
                                                         Container(
-                                                          // color: Colors.red,
                                                           margin:
                                                               EdgeInsets.only(
                                                                   left: 10),
@@ -420,8 +341,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                               .quantity -
                                                                           1
                                                                       : 0;
-                                                                  print(
-                                                                      "participantssss ===== ${widget.eventData.multislotTime[dropdownSelectedIndex].participants[index].quantity}");
                                                                   if (widget
                                                                           .eventData
                                                                           .multislotTime[
@@ -438,8 +357,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                             index]
                                                                         .mparticipantName);
                                                                   }
-                                                                  print(
-                                                                      "RemoveCategoryData ======= $categoryData");
                                                                 });
                                                               },
                                                               child: Icon(
@@ -479,7 +396,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                             18,
                                                                         fontWeight:
                                                                             FontWeight.w500,
-                                                                        // color: Colors.green,
                                                                       ),
                                                                     ),
                                                                   ),
@@ -489,9 +405,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                             GestureDetector(
                                                               onTap: () {
                                                                 setState(() {
-                                                                  print(
-                                                                      "increment... ${_startDate}");
-
                                                                   widget
                                                                       .eventData
                                                                       .multislotTime[
@@ -506,8 +419,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                               index]
                                                                           .quantity +
                                                                       1;
-                                                                  print(
-                                                                      "participantssss ===== ${widget.eventData.multislotTime[dropdownSelectedIndex].participants[index].quantity}");
                                                                   if (widget
                                                                           .eventData
                                                                           .multislotTime[
@@ -524,8 +435,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                             index]
                                                                         .mparticipantName);
                                                                   }
-                                                                  print(
-                                                                      "AddCategoryData ======= $categoryData");
                                                                 });
                                                               },
                                                               child: Container(
@@ -666,7 +575,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                             18,
                                                                         fontWeight:
                                                                             FontWeight.w500,
-                                                                        // color: Colors.green,
                                                                       ),
                                                                     ),
                                                                   ),
@@ -731,8 +639,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                 0.05,
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        // height: 40,
-                                        // width: 240,
                                         padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                             color: Colors.grey.shade50,
@@ -758,14 +664,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                           items: List.generate(
                                             sdate.length,
                                             (int index) {
-                                              // var dataa = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse(widget.multislotstime[index].startDate));
-                                              // if(_currentDate.isAfter(DateTime.parse(dataa))){
-                                              //    widget.multislotstime.removeAt(index);
-                                              // }
-                                              print(
-                                                  "${widget.multislotstime.length}");
-                                              print(
-                                                  "${widget.multislotstime != null ? widget.multislotstime[index].endDate : ""}");
 
                                               return widget.multislotstime !=
                                                       null
@@ -790,10 +688,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                               });
                                                             });
                                                           }
-                                                        print(
-                                                            "categoryData value ================ $categoryData");
-                                                        print(
-                                                            "clickedIndex $index");
                                                         dropdownSelectedIndex =
                                                             index_value[index];
                                                         dropdownSelectedIndex =
@@ -804,61 +698,13 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                                                 .parse(sdate[
                                                                     index]));
                                                         _startDate = stdate;
-
-                                                        print(
-                                                            "startDate  $_startDate");
                                                         var etdate = DateFormat(
                                                                 "yyyy-MM-dd HH:mm:ss")
                                                             .format(DateTime
                                                                 .parse(edate[
                                                                     index]));
                                                         _endDate = etdate;
-                                                        // _startDate = widget
-                                                        //     .multislotstime[
-                                                        //         index]
-                                                        //     .startDate
-                                                        //     .toString();
-
-                                                        // print(
-                                                        //     "startDate....  $_startDate");
-                                                        // _endDate = widget
-                                                        //     .multislotstime[
-                                                        //         index]
-                                                        //     .endDate
-                                                        //     .toString();
-
-                                                        // print(
-                                                        //     "endDate....  $_endDate");
                                                       },
-                                                      // value: DateFormat(
-                                                      //             "MMM dd,hh:mm")
-                                                      //         .format(DateTime.parse(widget
-                                                      //             .multislotstime[
-                                                      //                 index]
-                                                      //             .startDate
-                                                      //             .toString())) +
-                                                      //     ' - ' +
-                                                      //     DateFormat("MMM dd,hh:mm").format(
-                                                      //         DateTime.parse(widget
-                                                      //             .multislotstime[
-                                                      //                 index]
-                                                      //             .endDate
-                                                      //             .toString())),
-                                                      // child: Container(
-                                                      //     padding:
-                                                      //         const EdgeInsets.only(
-                                                      //             bottom: 5.0),
-                                                      //     height: 100.0,
-                                                      //     child: Text(DateFormat(
-                                                      //                 "MMM dd,hh:mm")
-                                                      //             .format(DateTime.parse(widget
-                                                      //                 .multislotstime[
-                                                      //                     index]
-                                                      //                 .startDate
-                                                      //                 .toString())) +
-                                                      //         ' - ' +
-                                                      //         DateFormat("MMM dd,hh:mm")
-                                                      //             .format(DateTime.parse(widget.multislotstime[index].endDate.toString())))),
                                                       value: DateFormat(
                                                                   "MMM dd,hh:mm")
                                                               .format(DateTime.parse(
@@ -900,11 +746,7 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                           ),
                                           onChanged: (newValue) {
                                             setState(() {
-                                              print(
-                                                  "dropdown----- ${newValue}");
                                               dropdownvalueFortime = newValue;
-                                              print(
-                                                  '---newValueee---$newValue');
                                             });
                                           },
                                         ),
@@ -925,22 +767,16 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                       ),
                       SizedBox(height: 20),
                       Center(
-                        // child: _totalSeats <= numberofAvaliableSeats
                         child: totalQunatity <= numberofAvaliableSeats
                             ? GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    // uniqueCategory =
-                                    //     categoryData.toSet().toList();
                                     categoryData.forEach((element) {
                                       newCategory.add({"category": element});
                                     });
-
-                                    print("newCategory val is =================== $newCategory");
                                   });
 
                                   _totalSeats == 0 &&
-                                          // numberofAvaliableSeats == 0 &&
                                           _totalamount == 0
                                       ? Fluttertoast.showToast(
                                           msg: widget.eventData.multislot == 1
@@ -1001,13 +837,9 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                               )
                             : GestureDetector(
                                 onTap: () {
-                                  print("--------paid----------");
                                   pendingeventrequest(
                                       widget.eventID,
-                                      // adultCount,
-                                      // childCount,
                                       widget.eventName,
-                                      // dropdownvalueFortime,
                                       _totalSeats,
                                       widget.eventData.multislot == 1
                                           ? _startDate
@@ -1041,7 +873,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             letterSpacing: 1,
-                                            // fontSize: 30,
                                             fontSize: 16,
                                             color: Colors.white)),
                                   ),
@@ -1058,14 +889,12 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
   UserProfileResponseModel userProfileResponseModel;
 
   @override
-  // var uuid = Uuid();
   void initState() {
     _loadUserDetails = userProfile();
 
     setState(() {
       userProfile().then((value) {
         userProfileResponseModel = value;
-        print("OBJECT ${value.data.name}");
         setState(() {});
       });
     });
@@ -1101,9 +930,7 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
   }
 
   void openCheckout(String orderId, int totalAmount) async {
-    print('orderId $orderId');
     var options = {
-      // 'key': 'rzp_test_RPD53nMcVczQWe',
       'key': 'rzp_live_aQI5jsUi2gFbAW',
       'amount': totalAmount,
       'name': 'IHMS',
@@ -1111,8 +938,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
       "payment_capture": 1,
       "base_currency": "INR",
       "order_id": orderId,
-      //"base_currency": "INR",
-      // 'description': 'Fine T-Shirt',
       'prefill': {
         'contact': userProfileResponseModel.data.mobile,
         'email': userProfileResponseModel.data.email
@@ -1121,14 +946,9 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
         'wallets': ['paytm']
       }
     };
-
     try {
-      // print("helllhvhgjhv");
-      print(
-          "options-------------------- detail--------------${options.toString()}");
       _razorpay.open(options);
     } catch (e) {
-      print("error... ${e.toString()}");
       debugPrint('Error: e');
     }
   }
@@ -1136,8 +956,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var userId = prefs.getString('id');
-    print("response.orderId  ${response.orderId}");
-
     addTransaction(
         dropdownvalueFortime,
         userId,
@@ -1159,12 +977,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
   }
 
   void _handlePaymentError(PaymentFailureResponse response) async {
-    print("--------_handlePaymentError----------${response.message}");
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var userId = prefs.getString('id');
-
-    print(
-        "RazorPayERROR: ----   ${response.code.toString() + " - " + response.message}");
     Fluttertoast.showToast(
         msg: "ERROR: " + response.code.toString() + " - " + response.message,
         toastLength: Toast.LENGTH_SHORT);
@@ -1173,13 +985,6 @@ class _ParticipantsDetailScreenState extends State<ParticipantsDetailScreen> {
 
   void _handleExternalWallet(ExternalWalletResponse response, contaxt) async {
     showLoader(context);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var userId = prefs.getString('id');
-
-    print("--------------_handleExternalWallet----------$response");
-
-    // addTransaction(userId,'',amount,"SUCCESS",context);
-
     Fluttertoast.showToast(
         msg: "EXTERNAL_WALLET: " + response.walletName,
         toastLength: Toast.LENGTH_SHORT);

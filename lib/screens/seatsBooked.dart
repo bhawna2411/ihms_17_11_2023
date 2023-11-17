@@ -11,10 +11,6 @@ class SeatsBookedScreen extends StatefulWidget {
 
 class _SeatsBookedScreenState extends State<SeatsBookedScreen> {
   FocusNode myFocusNode = new FocusNode();
-  //Future navigateToParticipate_Screen(context) async {
-  //   Navigator.push(
-  //       context, MaterialPageRoute(builder: (context) => Participate_Screen()));
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -73,33 +69,14 @@ class _SeatsBookedScreenState extends State<SeatsBookedScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          // Container(
-                          //   height: MediaQuery.of(context).size.height * 0.20,
-                          //   width: MediaQuery.of(context).size.width * 0.35,
-                          //   margin: EdgeInsets.fromLTRB(
-                          //     MediaQuery.of(context).size.height * 0.00,
-                          //     MediaQuery.of(context).size.height * 0.10,
-                          //     MediaQuery.of(context).size.height * 0.00,
-                          //     MediaQuery.of(context).size.height * 0.00,
-                          //   ),
-                          //   decoration: BoxDecoration(
-                          //     image: DecorationImage(
-                          //       image:
-                          //           AssetImage("assets/images/thumbs-up.png"),
-                          //       fit: BoxFit.fill,
-                          //     ),
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 30,
                           ),
                           GestureDetector(
                             onTap: () {
-                              //Navigator.pop(context);
                             },
                             child: Text(
                               "All Slots Booked !",
-                              // "All Seats Booked !",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 25,
@@ -154,8 +131,6 @@ class _SeatsBookedScreenState extends State<SeatsBookedScreen> {
                   color: Colors.white,
                   onPressed: () {
                     Navigator.pushNamed(context, "tabbar");
-                    // Navigator.of(context, rootNavigator: true).push(
-                    //     MaterialPageRoute(builder: (context) => DashboardScreen()));
                   },
                 ),
               ),

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ihms/screens/tabbar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../apiconfig/apiConnections.dart';
 import '../models/StaticPageResponseModel.dart';
 
-class about_screen extends StatefulWidget {
+class PrivacyPolicyScreen extends StatefulWidget {
   @override
   _MyHomePage4State createState() => _MyHomePage4State();
 }
 
-class _MyHomePage4State extends State<about_screen> {
+class _MyHomePage4State extends State<PrivacyPolicyScreen> {
   Future navigateToTabbar(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Tabbar()));
   }
@@ -29,6 +30,14 @@ class _MyHomePage4State extends State<about_screen> {
     super.initState();
 
     loadevents();
+  }
+
+  _launchURL(url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -78,7 +87,7 @@ class _MyHomePage4State extends State<about_screen> {
                         children: <Widget>[
                           SingleChildScrollView(
                             child: FutureBuilder(
-                                future:_loadStaticPages ,
+                                future: _loadStaticPages,
                                 builder: (context, snapshot) {
                                   // items = [];
                                   if (snapshot.connectionState ==
@@ -131,7 +140,7 @@ class _MyHomePage4State extends State<about_screen> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          "About IHMS",
+                                                          "Privacy Policy",
                                                           style: GoogleFonts
                                                               .sourceSansPro(
                                                             textStyle: TextStyle(
@@ -146,19 +155,26 @@ class _MyHomePage4State extends State<about_screen> {
                                                         SizedBox(
                                                           height: 8,
                                                         ),
-                                                        Text(
-                                                          staticpageList[0]
-                                                              .aboutUs,
-                                                          style: GoogleFonts
-                                                              .sourceSansPro(
-                                                            textStyle: TextStyle(
-                                                                height: 1.5,
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: Color(
-                                                                    0xFFcbb269)),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              _launchURL("https://ihmsclubs.com/privacy-policy");
+                                                            });
+                                                          },
+                                                          child: Text(
+                                                            staticpageList[0]
+                                                                .privacyPolicy,
+                                                            style: GoogleFonts
+                                                                .sourceSansPro(
+                                                              textStyle: TextStyle(
+                                                                  height: 1.5,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: Color(
+                                                                      0xFFcbb269)),
+                                                            ),
                                                           ),
                                                         ),
                                                         SizedBox(

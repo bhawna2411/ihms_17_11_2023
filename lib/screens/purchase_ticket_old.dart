@@ -14,8 +14,6 @@ class PurchaseTicket extends StatefulWidget {
 }
 
 class _PurchaseTicketState extends State<PurchaseTicket> {
-  // List<GlobalKey<FormState>> _formKeys = [GlobalKey<FormState>()];
-  //final _formKey = GlobalKey<FormState>();
   List<TextEditingController> _controllers = new List();
   List<TextEditingController> _controllers1 = new List();
   List<FocusNode> _FocusNode1 = new List();
@@ -35,26 +33,12 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
 
   Razorpay _razorpay;
 
-  // Map<String, String Function(String)> formFields = {
-  //     'username': (String? value) {
-  //       return (value!.isEmpty) ? 'Can not be Empty' : null;
-  //     },
-  //     'password': (String? value) {
-  //       return (value == null || value!.length < 8)
-  //           ? 'Must be 8 Char Long'
-  //           : null;
-  //     },
-  //   };
-
   _register(BuildContext context) async {
-    print(
-        "==========================PARTICIPANT REGISTRATION STARTS==========================================");
 
     bool validname;
     bool validmobile;
 
     for (var i = 0; i <= _controllers.length - 1; i++) {
-      print(_controllers[i].text.runtimeType);
       if (_controllers[i].text.trim() == "" || _controllers[i].text == null) {
         validname = false;
       } else {
@@ -79,31 +63,8 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
     } else if (validmobile == false) {
       showToast('Enter Valid Mobile Number');
     } else {
-      print(
-          "$validmobile $validname ${nameController.text} ${mobileController.text}");
-
-      // participateRegister(nameController.text, mobileController.text,
-      //     _controllers, _controllers1, widget.eventID, context);
-      print(
-          "===============================PARTICIPANT REGISTERED====================================================");
     }
   }
-  //    else if (mobileController.text.isNotEmpty &&
-  //       nameController.text.isNotEmpty) {
-  //     for (int i = 0; i < _controllers.length; i++) {
-  //       if (validmobile = false) {
-  //         showToast('Please Enter Name', context: context);
-  //       }
-  //     }
-  //   } else if (mobileController.text.isNotEmpty &&
-  //       nameController.text.isNotEmpty) {
-  //     for (int i = 0; i < _controllers1.length; i++) {
-  //       if (validmobile == false) {
-  //         showToast('Enter Valid Mobile Number', context: context);
-  //       }
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +77,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  //image: NetworkImage(widget.eventData.splitImage[0]),
                   image: ExactAssetImage("assets/images/dashboard_bg.png"),
                   fit: BoxFit.cover,
                 ),
@@ -165,7 +125,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                       ),
                       elevation: 10,
                       child: Container(
-                        //color: Colors.white,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(
@@ -174,9 +133,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                         ),
                         child: Column(
                           children: [
-                            SizedBox(
-                                //height: 10,
-                                ),
                             Center(
                               child: Container(
                                 width: MediaQuery.of(context).size.width * .71,
@@ -212,9 +168,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                                // height: MediaQuery.of(context).size.height * .013,
-                                ),
                             Container(
                               width: MediaQuery.of(context).size.width * .71,
                               height: MediaQuery.of(context).size.height * .085,
@@ -267,7 +220,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                       shrinkWrap: true,
                       itemCount: _count,
                       itemBuilder: (context, index) {
-                        print(index);
                         return _row(index);
                       },
                     ),
@@ -286,7 +238,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                             _controllers1.add(new TextEditingController());
                             _FocusNode1.add(new FocusNode());
                             _FocusNode2.add(new FocusNode());
-                            // _formKeys.add(new GlobalKey<FormState>());
                             setState(() {
                               _count++;
                             });
@@ -300,7 +251,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          // _register(context);
                           openCheckout();
                         },
                         child: Container(
@@ -354,7 +304,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                 ),
                 elevation: 10,
                 child: Container(
-                  //color: Colors.white,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(
@@ -364,7 +313,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                   child: Column(
                     children: [
                       SizedBox(
-                          // height: 10,
                           ),
                       Center(
                         child: Container(
@@ -478,7 +426,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
       'amount': amount,
       'name': 'Total Amount',
-      // 'description': 'Fine T-Shirt',
       'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
       'external': {
         'wallets': ['paytm']
@@ -493,8 +440,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print(
-        "=============HANDLE PAYMENT START========================================================");
     _register(context);
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId, toastLength: Toast.LENGTH_SHORT);

@@ -19,32 +19,23 @@ class EventScreen extends StatefulWidget {
 }
 
 class _EventScreenState extends State<EventScreen> {
+  // ignore: unused_field
   var _currentDate = DateTime.now();
 
   EventsResponseModel eventsResponseModel;
   AvailableSeatsResponseModel availableSeatsResponseModel;
   List<EventData> eventList;
   Future _loadevents;
+  // ignore: unused_field
   Future _loadammenities;
+  // ignore: unused_field
   Future _loadservices;
+  // ignore: unused_field
   Future _loadActivities;
-
-  // getseat() {
-  //   availableSeat(widget.eventData.id, context).then((value) {
-  //     setState(() {
-  //       availableSeatsResponseModel = value;
-  //     });
-
-  //     print(availableSeatsResponseModel.data[0].numberOfSeatsAvailable);
-  //   });
-  // }
 
   loadevents() {
     setState(() {
       _loadevents = getEvents();
-      //   _loadammenities = getAmenities();
-      //   _loadservices = getServices();
-      //   _loadActivities = getActivities();
     });
   }
 
@@ -102,7 +93,6 @@ class _EventScreenState extends State<EventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -131,64 +121,6 @@ class _EventScreenState extends State<EventScreen> {
               ),
             ),
           ),
-
-          // Container(
-          //   width: MediaQuery.of(context).size.width,
-          //   // margin: EdgeInsets.fromLTRB(
-          //   //   MediaQuery.of(context).size.height * 0.01,
-          //   //   MediaQuery.of(context).size.height * 0.065,
-          //   //   MediaQuery.of(context).size.height * 0.00,
-          //   //   MediaQuery.of(context).size.height * 0.00,
-          //   // ),
-          //   child: Row(
-          //     children: [
-          //       widget.bottomTabbar
-          //           ? InkWell(
-          //               child: new IconButton(
-          //                 icon: new Icon(
-          //                   Icons.arrow_back,
-          //                   size: 20,
-          //                 ),
-          //                 color: Color(0xFF203040),
-          //                 onPressed: () {
-          //                   Navigator.push(
-          //                       context,
-          //                       MaterialPageRoute(
-          //                           builder: (context) => DashboardScreen()));
-          //                 },
-          //               ),
-          //             )
-          //           : InkWell(
-          //               child: new IconButton(
-          //                 icon: new Icon(
-          //                   Icons.arrow_back,
-          //                   size: 20,
-          //                 ),
-          //                 color: Color(0xFF203040),
-          //                 onPressed: () {
-          //                   Navigator.push(
-          //                       context,
-          //                       MaterialPageRoute(
-          //                           builder: (context) => Tabbar()));
-          //                 },
-          //               ),
-          //             ),
-          //     Expanded(child: Container()),
-
-          //       Text(
-          //         "ALL EVENTS",
-          //         style: GoogleFonts.sourceSansPro(
-          //           textStyle: TextStyle(
-          //             fontWeight: FontWeight.w500,
-          //             color: Color(0xFF203040),
-          //             fontSize: 18,
-          //             letterSpacing: 1,
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.only(top: 40, bottom: 40),
             child: Column(
@@ -264,13 +196,6 @@ class _EventScreenState extends State<EventScreen> {
                               scrollDirection: Axis.vertical,
                               itemCount: eventList.length,
                               itemBuilder: (context, index) {
-                                // availableSeat(eventList[index].id, context)
-                                //     .then((value) {
-                                //   print('fgg${value.data[0].numberOfSeatsAvailable}');
-                                //   avlSeat = value.data[0].numberOfSeatsAvailable;
-                                // });
-                                // print('avlSeat$avlSeat');
-
                                 var amount1;
                                 var amount2;
                                 var amount = 0;
@@ -288,18 +213,10 @@ class _EventScreenState extends State<EventScreen> {
                                 amount =
                                     int.parse(amount1) + int.parse(amount2);
                                 return FutureBuilder(
-                                    //  future:
-                                    //    availableSeat(eventList[index].id, context),
                                     builder: (context, snap) {
                                   if (true) {
-                                    //var avlSeat =
-                                    //  snap.data.data[0].numberOfSeatsAvailable;
                                     var avlSeat = eventList[index]
                                         .number_of_seats_available;
-                                    print('avl SEat$avlSeat');
-                                    print(
-                                        " eventType.............. ${eventList[index].type}");
-                                    print(" multislot-------------");
                                     return GestureDetector(
                                       onTap: () => {
                                         // ignore: unrelated_type_equality_checks
@@ -349,7 +266,6 @@ class _EventScreenState extends State<EventScreen> {
                                                 MainAxisAlignment.start,
                                             children: [
                                               Container(
-                                                // height: 130,
                                                 height: 110,
                                                 width: MediaQuery.of(context)
                                                         .size
@@ -395,8 +311,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                 .start,
                                                         children: [
                                                           SizedBox(
-                                                              // width: double
-                                                              //     .infinity,
                                                               child: eventList[index]
                                                                           .type ==
                                                                       "non-paid"
@@ -410,16 +324,13 @@ class _EventScreenState extends State<EventScreen> {
                                                                         children: [
                                                                           Container(
                                                                             width: MediaQuery.of(context).size.width * 0.45,
-                                                                            // padding: EdgeInsets.only(top: 5),
                                                                             child: Text(
                                                                               capitalizeAllWord(eventList[index].name),
                                                                               textAlign: TextAlign.left,
-                                                                              // overflow: TextOverflow.clip,
                                                                               overflow: TextOverflow.ellipsis,
                                                                               style: TextStyle(color: const Color(0xFF96700f), fontSize: 14, fontWeight: FontWeight.w600),
                                                                             ),
                                                                           ),
-                                                                          // SizedBox(width: 70,),
                                                                           Container(
                                                                             height: 20,
                                                                             width: 60,
@@ -432,11 +343,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                                   const Color(0xFF9a7210),
                                                                                 ],
                                                                               ),
-                                                                              // border: Border.all(
-                                                                              //     color: const Color(
-                                                                              //         0xFF9a7210),
-                                                                              //     width:
-                                                                              //         4),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
                                                                                   ),
                                                                             ),
@@ -445,7 +351,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                                   style: GoogleFonts.sourceSansPro(
                                                                                       textStyle: TextStyle(
                                                                                           fontWeight: FontWeight.bold,
-                                                                                          // letterSpacing: 3,
                                                                                           fontSize: 13,
                                                                                           color: Colors.white))),
                                                                             ),
@@ -473,7 +378,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                               style: TextStyle(color: const Color(0xFF96700f), fontSize: 14, fontWeight: FontWeight.w600),
                                                                             ),
                                                                           ),
-                                                                          // SizedBox(width: 70,),
                                                                           Container(
                                                                             height: 20,
                                                                             width: 60,
@@ -486,11 +390,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                                   const Color(0xFF9a7210),
                                                                                 ],
                                                                               ),
-                                                                              // border: Border.all(
-                                                                              //     color: const Color(
-                                                                              //         0xFF9a7210),
-                                                                              //     width:
-                                                                              //         4),
                                                                               borderRadius: BorderRadius.all(Radius.circular(10.0) //                 <--- border radius here
                                                                                   ),
                                                                             ),
@@ -500,7 +399,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                                 style: GoogleFonts.sourceSansPro(
                                                                                   textStyle: TextStyle(
                                                                                       fontWeight: FontWeight.bold,
-                                                                                      // letterSpacing: 3,
                                                                                       fontSize: 13,
                                                                                       color: Colors.white),
                                                                                 ),
@@ -522,37 +420,25 @@ class _EventScreenState extends State<EventScreen> {
                                                                           children: [
                                                                             Container(
                                                                               padding: EdgeInsets.only(top: 5
-                                                                                  // top: 3
                                                                                   ),
                                                                               child: Text(
                                                                                   getDateFormat(eventList[index].start_date)
-
-                                                                                  // eventList[index]
-                                                                                  //     .date
                                                                                   ,
                                                                                   style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                             ),
                                                                             Container(
                                                                               padding: EdgeInsets.only(top: 5
-                                                                                  // top: 3
                                                                                   ),
                                                                               child: Text(
                                                                                   '-'
-
-                                                                                  // eventList[index]
-                                                                                  //     .date
                                                                                   ,
                                                                                   style: TextStyle(color: const Color(0xFF5b6368), fontSize: 13, fontWeight: FontWeight.w600)),
                                                                             ),
                                                                             Container(
                                                                               padding: EdgeInsets.only(top: 5
-                                                                                  // top: 3
                                                                                   ),
                                                                               child: Text(
                                                                                   getDateFormat1(eventList[index].end_date)
-
-                                                                                  // eventList[index]
-                                                                                  //     .date
                                                                                   ,
                                                                                   style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                             ),
@@ -562,53 +448,28 @@ class _EventScreenState extends State<EventScreen> {
                                                                           children: [
                                                                             Container(
                                                                               padding: EdgeInsets.only(top: 5
-                                                                                  // top: 3
                                                                                   ),
                                                                               child: Text(
                                                                                   getDateFormat(eventList[index].start_date)
-
-                                                                                  // eventList[index]
-                                                                                  //     .date
                                                                                   ,
                                                                                   style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                             ),
-                                                                            // SizedBox(width: 10),
                                                                             Container(
                                                                               padding: EdgeInsets.only(top: 5
-                                                                                  // top: 3
                                                                                   ),
                                                                               child: Text(
                                                                                   ","
-
-                                                                                  // eventList[index]
-                                                                                  //     .date
                                                                                   ,
                                                                                   style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                             ),
                                                                             Container(
                                                                               padding: EdgeInsets.only(top: 5
-                                                                                  // top: 3
                                                                                   ),
                                                                               child: Text(
                                                                                   getDateFormat2(eventList[index].start_date)
-
-                                                                                  // eventList[index]
-                                                                                  //     .date
                                                                                   ,
                                                                                   style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                             ),
-                                                                            // Container(
-                                                                            //   padding: EdgeInsets.only(top: 5
-                                                                            //       // top: 3
-                                                                            //       ),
-                                                                            //   child: Text(
-                                                                            //       eventList[index].end_time
-
-                                                                            //       // eventList[index]
-                                                                            //       //     .date
-                                                                            //       ,
-                                                                            //       style: TextStyle(color: const Color(0xFF333333), fontSize: 12, fontWeight: FontWeight.w600)),
-                                                                            // ),
                                                                           ],
                                                                         ))
                                                               : SizedBox(
@@ -626,38 +487,20 @@ class _EventScreenState extends State<EventScreen> {
                                                                   child: Row(
                                                                     children: [
                                                                       Container(
-                                                                        // padding: EdgeInsets.only(top: 5
-                                                                        //     // top: 3
-                                                                        //     ),
                                                                         child: Text(
                                                                             time24to12Format(eventList[index].start_time)
-
-                                                                            // eventList[index]
-                                                                            //     .date
                                                                             ,
                                                                             style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                       ),
                                                                       Container(
-                                                                        // padding: EdgeInsets.only(top: 5
-                                                                        //     // top: 3
-                                                                        //     ),
                                                                         child: Text(
                                                                             '-'
-
-                                                                            // eventList[index]
-                                                                            //     .date
                                                                             ,
                                                                             style: TextStyle(color: const Color(0xFF5b6368), fontSize: 13, fontWeight: FontWeight.w600)),
                                                                       ),
                                                                       Container(
-                                                                        // padding: EdgeInsets.only(top: 5
-                                                                        //     // top: 3
-                                                                        //     ),
                                                                         child: Text(
                                                                             time24to12Format(eventList[index].end_time)
-
-                                                                            // eventList[index]
-                                                                            //     .date
                                                                             ,
                                                                             style: TextStyle(color: const Color(0xFF5b6368), fontSize: 12, fontWeight: FontWeight.w600)),
                                                                       ),
@@ -675,7 +518,6 @@ class _EventScreenState extends State<EventScreen> {
                                                             child: Container(
                                                               padding: EdgeInsets
                                                                   .only(top: 5
-                                                                      // top: 3
                                                                       ),
                                                               child: Text(
                                                                 "Description: ${capitalize(eventList[index].description)}",
@@ -694,8 +536,6 @@ class _EventScreenState extends State<EventScreen> {
                                                                       0xFF5b6368),
                                                                   fontSize:
                                                                       11,
-                                                                  // fontWeight:
-                                                                  //     FontWeight.w600
                                                                 ),
                                                               ),
                                                             ),
@@ -707,11 +547,7 @@ class _EventScreenState extends State<EventScreen> {
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         top: 2
-                                                                        // top: 3
                                                                         ),
-                                                                // child: eventList[index].type ==
-                                                                //         "non-paid"
-                                                                //     ?
                                                                 child: Row(
                                                                   children: [
                                                                     Text(
@@ -733,102 +569,8 @@ class _EventScreenState extends State<EventScreen> {
                                                                           color:
                                                                               const Color(0xFF96700f)),
                                                                     ),
-                                                                    // SizedBox(width: 15),
-                                                                    //                  Container(
-                                                                    //   height:30,
-                                                                    //   width: 60,
-                                                                    //   decoration:
-                                                                    //       BoxDecoration(
-                                                                    //     gradient:
-                                                                    //         LinearGradient(
-                                                                    //       begin: Alignment
-                                                                    //           .centerLeft,
-                                                                    //       end: Alignment
-                                                                    //           .centerRight,
-                                                                    //       colors: [
-                                                                    //         const Color(
-                                                                    //             0xFFb48919),
-                                                                    //         const Color(
-                                                                    //             0xFF9a7210),
-                                                                    //       ],
-                                                                    //     ),
-                                                                    //     // border: Border.all(
-                                                                    //     //     color: const Color(
-                                                                    //     //         0xFF9a7210),
-                                                                    //     //     width:
-                                                                    //     //         4),
-                                                                    //     borderRadius:
-                                                                    //         BorderRadius.all(
-                                                                    //             Radius.circular(10.0) //                 <--- border radius here
-                                                                    //             ),
-                                                                    //   ),
-                                                                    //   child: Center(
-                                                                    //     child: Text(
-                                                                    //         "Non-Paid",
-                                                                    //         style: GoogleFonts.sourceSansPro(
-                                                                    //             textStyle: TextStyle(
-                                                                    //                 fontWeight: FontWeight.bold,
-                                                                    //                 // letterSpacing: 3,
-                                                                    //                 fontSize: 10,
-                                                                    //                 color: Colors.white))),
-                                                                    //   ),
-                                                                    // ),
-                                                                    //  Text(
-                                                                    //     "Non-Paid",
-                                                                    //     style: TextStyle(color: Colors.green),
-                                                                    //   ),
                                                                   ],
                                                                 )
-                                                                //           : Row(
-                                                                //               children: [
-                                                                //                 Text("Available-Seats:-"),
-                                                                //                 Text(avlSeat == 0 ? '' : avlSeat),
-                                                                //                 SizedBox(width: 15),
-                                                                //                 //   Text(
-                                                                //                 //   "Paid",
-                                                                //                 //   style: TextStyle(color: Colors.green),
-                                                                //                 // ),
-                                                                //                  Container(
-                                                                //   height:30,
-                                                                //   width: 60,
-                                                                //   decoration:
-                                                                //       BoxDecoration(
-                                                                //     gradient:
-                                                                //         LinearGradient(
-                                                                //       begin: Alignment
-                                                                //           .centerLeft,
-                                                                //       end: Alignment
-                                                                //           .centerRight,
-                                                                //       colors: [
-                                                                //         const Color(
-                                                                //             0xFFb48919),
-                                                                //         const Color(
-                                                                //             0xFF9a7210),
-                                                                //       ],
-                                                                //     ),
-                                                                //     // border: Border.all(
-                                                                //     //     color: const Color(
-                                                                //     //         0xFF9a7210),
-                                                                //     //     width:
-                                                                //     //         4),
-                                                                //     borderRadius:
-                                                                //         BorderRadius.all(
-                                                                //             Radius.circular(10.0) //                 <--- border radius here
-                                                                //             ),
-                                                                //   ),
-                                                                //   child: Center(
-                                                                //     child: Text(
-                                                                //         "Paid",
-                                                                //         style: GoogleFonts.sourceSansPro(
-                                                                //             textStyle: TextStyle(
-                                                                //                 fontWeight: FontWeight.bold,
-                                                                //                 // letterSpacing: 3,
-                                                                //                 fontSize: 10,
-                                                                //                 color: Colors.white))),
-                                                                //   ),
-                                                                // ),
-                                                                //               ],
-                                                                //             ),
                                                                 ),
                                                           ),
                                                         ],
@@ -847,26 +589,6 @@ class _EventScreenState extends State<EventScreen> {
               ],
             ),
           ),
-
-          // Container(
-          //   margin: EdgeInsets.fromLTRB(
-          //     MediaQuery.of(context).size.height * 0.15,
-          //     MediaQuery.of(context).size.height * 0.080,
-          //     MediaQuery.of(context).size.height * 0.00,
-          //     MediaQuery.of(context).size.height * 0.00,
-          //   ),
-          //   child: Text(
-          //     "ALL EVENTS",
-          //     style: GoogleFonts.sourceSansPro(
-          //       textStyle: TextStyle(
-          //         fontWeight: FontWeight.w500,
-          //         color: Color(0xFF203040),
-          //         fontSize: 18,
-          //         letterSpacing: 1,
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -879,7 +601,6 @@ class _EventScreenState extends State<EventScreen> {
 
   getDateFormat2(String date) {
     String result2 = DateFormat("EEEE").format(DateTime.parse(date));
-    // String result2 = Jiffy(date).day.toString();
     return result2;
   }
 

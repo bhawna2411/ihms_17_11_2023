@@ -28,13 +28,8 @@ class _MyHomePage4State extends State<club_details> {
 
   final space = SizedBox(height: 10);
   Future<void> _launchURL(url) async {
-    // const url = 'https://flutter.io';
-    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
-      // await launchUrlString(url);
-      // ignore: deprecated_member_use
       await launch(url);
-
     } else {
       throw 'Could not launch $url';
     }
@@ -43,13 +38,12 @@ class _MyHomePage4State extends State<club_details> {
   FocusNode myFocusNode = new FocusNode();
   @override
   Widget build(BuildContext context) {
-    print(widget.clubsList.learn_more.toString() + "-------");
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Stack(
           children: [
-          Container(
+            Container(
               height: 240,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -87,7 +81,6 @@ class _MyHomePage4State extends State<club_details> {
                         // overflow: Overflow.visible,
                         clipBehavior: Clip.hardEdge,
                         children: <Widget>[
-                         
                           Container(
                             margin: EdgeInsets.fromLTRB(
                               MediaQuery.of(context).size.height * 0.00,
@@ -188,8 +181,6 @@ class _MyHomePage4State extends State<club_details> {
                                                                         Galleryimage(widget
                                                                             .clubsList
                                                                             .gallery)));
-                                                            print(
-                                                                'Helloo ${widget.clubsList.gallery.toString()}');
                                                           },
                                                           child: Hero(
                                                             tag: "item",
@@ -248,28 +239,6 @@ class _MyHomePage4State extends State<club_details> {
                                                                       .w600,
                                                               color: Color(
                                                                   0xFFcbb269)))),
-                                              // Text("${widget.clubsList.about}",
-                                              //     style:
-                                              //         GoogleFonts.sourceSansPro(
-                                              //             textStyle: TextStyle(
-                                              //                 height: 1.5,
-                                              //                 fontSize: 12,
-                                              //                 fontWeight:
-                                              //                     FontWeight
-                                              //                         .w600,
-                                              //                 color: Color(
-                                              //                     0xFFcbb269)))),
-                                              // Text("${widget.clubsList.about}",
-                                              //     style:
-                                              //         GoogleFonts.sourceSansPro(
-                                              //             textStyle: TextStyle(
-                                              //                 height: 1.5,
-                                              //                 fontSize: 12,
-                                              //                 fontWeight:
-                                              //                     FontWeight
-                                              //                         .w600,
-                                              //                 color: Color(
-                                              //                     0xFFcbb269)))),
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 15),
@@ -370,137 +339,77 @@ class _MyHomePage4State extends State<club_details> {
                                                         ),
                                                 ),
                                               ),
-                                               SizedBox(height: 10,),
-                                           
+                                              SizedBox(
+                                                height: 10,
+                                              ),
                                               GestureDetector(
                                                 onTap: () {
-                                                 
                                                   _launchURL(
                                                       widget.clubsList.url);
                                                 },
                                                 child: Center(
-                                                  child: widget.clubsList
-                                                              .learn_more ==
-                                                          0
-                                                      ? Container()
-                                                      : GestureDetector(
-                                                          // onTap: () {
-                                                          //   Navigator.push(
-                                                          //       context,
-                                                          //       MaterialPageRoute(
-                                                          //           builder: (context) =>
-                                                          //               Booking_Screen(
-                                                          //                   widget
-                                                          //                       .image,
-                                                          //                   widget.id,
-                                                          //                   widget
-                                                          //                       .name)));
-                                                          // },
-                                                          child: 
-  
-                              Align(
-                                alignment:Alignment.center,
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 2,horizontal: 10),
-                                  // height: 50,
-                                  // width: MediaQuery.of(context).size.width * 0.30,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        const Color(0xFFb48919),
-                                        const Color(0xFF9a7210),
-                                      ],
-                                    ),
-                                    // border: Border.all(color: Colors.white, width: 4),
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                            70.0) //                 <--- border radius here
-                                        ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "Learn More",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1,
-                                          // fontSize: 16,
-                                          fontSize: 13,
-                                          color: Colors.white),
-                                           textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          
-                                                          // Center(
-                                                          //   child: Container(
-                                                          //     width: 260,
-                                                          //     margin:
-                                                          //         EdgeInsets
-                                                          //             .only(
-                                                          //       top: 20,
-                                                          //     ),
-                                                          //     decoration:
-                                                          //         BoxDecoration(
-                                                          //       border: Border.all(
-                                                          //           color: Color(
-                                                          //               0xFF9a7210),
-                                                          //           width: 1),
-                                                          //       borderRadius:
-                                                          //           BorderRadius.all(
-                                                          //               Radius.circular(
-                                                          //                   70.0) //                 <--- border radius here
-                                                          //               ),
-                                                          //       color: Colors
-                                                          //           .brown,
-                                                          //     ),
-                                                          //     child:
-                                                          //         Container(
-                                                          //       height: 70,
-                                                          //       width: 260,
-                                                          //       decoration:
-                                                          //           BoxDecoration(
-                                                          //         gradient:
-                                                          //             LinearGradient(
-                                                          //           begin: Alignment
-                                                          //               .centerLeft,
-                                                          //           end: Alignment
-                                                          //               .centerRight,
-                                                          //           colors: [
-                                                          //             const Color(
-                                                          //                 0xFFb48919),
-                                                          //             const Color(
-                                                          //                 0xFF9a7210),
-                                                          //           ],
-                                                          //         ),
-                                                          //         border: Border.all(
-                                                          //             color: Colors
-                                                          //                 .white,
-                                                          //             width:
-                                                          //                 4),
-                                                          //         borderRadius:
-                                                          //             BorderRadius.all(
-                                                          //                 Radius.circular(70.0) //                 <--- border radius here
-                                                          //                 ),
-                                                          //       ),
-                                                          //       child: Center(
-                                                          //         child: Text(
-                                                          //             "Learn More",
-                                                          //             style: GoogleFonts.sourceSansPro(
-                                                          //                 textStyle: TextStyle(
-                                                          //                     fontWeight: FontWeight.bold,
-                                                          //                     letterSpacing: 3,
-                                                          //                     fontSize: 16,
-                                                          //                     color: Colors.white))),
-                                                          //       ),
-                                                          //     ),
-                                                          //   ),
-                                                          // ),
-                                                        
-                                                        ),
+                                                  child:
+                                                      widget.clubsList
+                                                                  .learn_more ==
+                                                              0
+                                                          ? Container()
+                                                          : GestureDetector(
+                                                              child: Align(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                child:
+                                                                    Container(
+                                                                  padding: EdgeInsets
+                                                                      .symmetric(
+                                                                          vertical:
+                                                                              2,
+                                                                          horizontal:
+                                                                              10),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    gradient:
+                                                                        LinearGradient(
+                                                                      begin: Alignment
+                                                                          .centerLeft,
+                                                                      end: Alignment
+                                                                          .centerRight,
+                                                                      colors: [
+                                                                        const Color(
+                                                                            0xFFb48919),
+                                                                        const Color(
+                                                                            0xFF9a7210),
+                                                                      ],
+                                                                    ),
+                                                                    borderRadius:
+                                                                        BorderRadius.all(
+                                                                            Radius.circular(70.0) //                 <--- border radius here
+                                                                            ),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            8.0),
+                                                                    child: Text(
+                                                                      "Learn More",
+                                                                      style: TextStyle(
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          letterSpacing:
+                                                                              1,
+                                                                          fontSize:
+                                                                              13,
+                                                                          color:
+                                                                              Colors.white),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
                                                 ),
                                               ),
                                               SizedBox(

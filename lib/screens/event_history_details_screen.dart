@@ -9,13 +9,8 @@ import 'package:intl/intl.dart';
 final themeMode = ValueNotifier(2);
 
 getDateFormat(String date) {
-  // if (date != null) {
-  // String dataa = DateTime.parse(date);
-  print("date--------$date");
   String result2 = Jiffy(DateTime.parse(date)).format('EEE , do MMM yyyy');
-  print("----------result2-----------${result2}");
   return result2;
-  // }
 }
 
 class EventHistoryDetailsScreen extends StatefulWidget {
@@ -54,9 +49,6 @@ class _EventHistoryDetailsScreenState extends State<EventHistoryDetailsScreen> {
             widget.eventData.startTime;
         return _finalDate;
       } else {
-        // for (var each in widget.eventData.multislotTime.stratTime) {
-        //   persons.add(DateTime.parse(each).millisecondsSinceEpoch);
-        // }
         var _fDate = persons.reduce((curr, next) => curr > next ? curr : next);
         var dt = DateTime.fromMillisecondsSinceEpoch(_fDate);
         _finalDate = DateFormat('yyyy-MM-dd hh:mm').format(dt);
@@ -143,8 +135,6 @@ class _EventHistoryDetailsScreenState extends State<EventHistoryDetailsScreen> {
                               ],
                             ),
                           ),
-                          // widget.eventData.multislot == 0
-                          //     ? 
                               Container(
                                   margin: EdgeInsets.only(
                                     bottom: MediaQuery.of(context).size.height *
@@ -378,12 +368,6 @@ class _EventHistoryDetailsScreenState extends State<EventHistoryDetailsScreen> {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      // Text("Tags",
-                                      //     textAlign: TextAlign.start,
-                                      //     style: TextStyle(
-                                      //         fontSize: 17,
-                                      //         fontWeight: FontWeight.w600,
-                                      //         color: Color(0xFFba8e1c))),
                                     ],
                                   ),
                                   Wrap(
@@ -465,25 +449,6 @@ class _EventHistoryDetailsScreenState extends State<EventHistoryDetailsScreen> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          // Wrap(
-                                          //   spacing: 5,
-                                          //   direction: Axis.vertical,
-                                          //   children: List.generate(
-                                          //       widget
-                                          //           .eventData
-                                          //           .participants
-                                          //           .participantName
-                                          //           .length, (index) {
-                                          //     return Text(
-                                          //       '${widget.eventData.participants.participantName[index]} : \u{20B9} ${widget.eventData.participants.amount[index]} per seat',
-                                          //       style: TextStyle(
-                                          //         fontSize: 10,
-                                          //         fontWeight: FontWeight.w600,
-                                          //         color: Color(0xFFcbb269),
-                                          //       ),
-                                          //     );
-                                          //   }),
-                                          // ),
                                         ],
                                       ),
                                     )

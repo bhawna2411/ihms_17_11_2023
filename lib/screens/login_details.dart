@@ -43,26 +43,12 @@ class _LoginDetailsState extends State<LoginDetails> {
   loadevents() {
     setState(() {
       _loadSocieties = getSociety();
-      // _loadStaticPages = staticpage();
       staticpage().then((value) {
         staticPageResponseModel = value;
-        // socialModel.data[0].facebook
-        print(
-            '---------staticPageResponseModeltc----------${staticPageResponseModel.data[0].tC}');
       });
     });
   }
 
-  // loadevents() {
-  //   setState(() {
-  //     socialurl().then((value) {
-  //       socialModel = value;
-  //       setState(() {
-  //         _isLoading = false;
-  //       });
-  //     });
-  //   });
-  // }
   String getDayOfMonthSuffix(int dayNum) {
     if (!(dayNum >= 1 && dayNum <= 31)) {
       throw Exception('Invalid day of month');
@@ -113,21 +99,12 @@ class _LoginDetailsState extends State<LoginDetails> {
       showToast(
         'Enter DOB',
       );
-    } else if (dropdownvalueForSociety == 'Select Club Location or Site Location') {
+    } else if (dropdownvalueForSociety ==
+        'Select Club Location or Site Location') {
       showToast(
         'Select Society',
       );
-    }
-    // else if (dropdownvalueForTower == 'Select Tower') {
-    //   showToast(
-    //     'Select Tower',
-    //   );
-    // } else if (dropdownvalueForFlaat == 'Select Flat no') {
-    //   showToast(
-    //     'Select flat',
-    //   );
-    // }
-    else if (_radiovaluegender == null) {
+    } else if (_radiovaluegender == null) {
       showToast(
         'Select Gender',
       );
@@ -140,10 +117,6 @@ class _LoginDetailsState extends State<LoginDetails> {
         'Check I agree to the terms and condition ',
       );
     } else {
-      print("=============New Society===================");
-      print(
-        societyList[items.indexOf(dropdownvalueForSociety) - 1].id.toString(),
-      );
       sendotp(mobileController.text, type, context).then((value) {
         if (value == "true") {
           Timer(Duration(seconds: 2), () {
@@ -161,12 +134,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                         .toString(),
                     towerController.text,
                     flatController.text,
-                    // towerList[toweritems.indexOf(dropdownvalueForTower) - 1]
-                    //     .id
-                    //     .toString(),
-                    // flatList[flatitems.indexOf(dropdownvalueForFlaat) - 1]
-                    //     .id
-                    //     .toString(),
                     type)));
           });
         }
@@ -237,38 +204,26 @@ class _LoginDetailsState extends State<LoginDetails> {
           },
           child: SafeArea(
             child: SingleChildScrollView(
-              // physics: const NeverScrollableScrollPhysics(),
               child: Stack(
                 children: [
                   Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
-                    //color: const Color(0xFFf5d892),
-                    //color: Colors.amber,
                   ),
                   Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 1.1,
                       clipBehavior: Clip.hardEdge,
-                      //color: Colors.white,
                       decoration: new BoxDecoration(
-                        // borderRadius: BorderRadius.only(
-                        //     bottomLeft: Radius.circular(35),
-                        //     bottomRight: Radius.circular(35)),
                         image: new DecorationImage(
                           image: ExactAssetImage('assets/images/login.png'),
                           fit: BoxFit.fill,
                         ),
                       )),
                   Container(
-                      // height: 174,
                       height: MediaQuery.of(context).size.height * .16,
                       width: MediaQuery.of(context).size.width,
-                      //color: Colors.white,
                       decoration: new BoxDecoration(
-                        // borderRadius: BorderRadius.only(
-                        //     bottomLeft: Radius.circular(35),
-                        //     bottomRight: Radius.circular(35)),
                         image: new DecorationImage(
                           image: ExactAssetImage("assets/images/k.png"),
                           fit: BoxFit.fill,
@@ -280,15 +235,9 @@ class _LoginDetailsState extends State<LoginDetails> {
                           MediaQuery.of(context).size.width * .07,
                           0,
                           0),
-                      //height: 45,
                       height: MediaQuery.of(context).size.height * .05,
-                      // width: 165,
                       width: MediaQuery.of(context).size.width * .4,
-                      //color: Colors.white,
                       decoration: new BoxDecoration(
-                        // borderRadius: BorderRadius.only(
-                        //     bottomLeft: Radius.circular(35),
-                        //     bottomRight: Radius.circular(35)),
                         image: new DecorationImage(
                           image:
                               ExactAssetImage('assets/images/logo copy 3.png'),
@@ -321,11 +270,13 @@ class _LoginDetailsState extends State<LoginDetails> {
                             ],
                           );
                         } else {
-                          print(societyResponseModel = snapshot?.data);
+                          societyResponseModel = snapshot.data;
                           societyList = societyResponseModel?.data;
                           items.add("Select Club Location or Site Location");
-                          for (var each in societyList) {
-                            items.add(each.name);
+                          if (societyList != null) {
+                            for (var each in societyList) {
+                              items.add(each.name);
+                            }
                           }
 
                           return Stack(
@@ -342,12 +293,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                     ),
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
-                                      // margin: EdgeInsets.fromLTRB(
-                                      //   20,
-                                      //   MediaQuery.of(context).size.height * .16,
-                                      //   0,
-                                      //   MediaQuery.of(context).size.height * .2,
-                                      // ),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(40)),
@@ -460,161 +405,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                               ),
                                             ),
                                             SizedBox(height: 5),
-                                            // FittedBox(
-                                            //   child: Row(
-                                            //     children: [
-                                            //       Container(
-                                            //         width:
-                                            //             MediaQuery.of(context)
-                                            //                     .size
-                                            //                     .width *
-                                            //                 .34,
-                                            //         height: 12,
-                                            //         // height:MediaQuery.of(context).size.width * .05 ,
-                                            //         child: DropdownButton(
-                                            //           isExpanded: true,
-                                            //           iconSize: 15,
-                                            //           underline: Container(
-                                            //               child: Column(
-                                            //             children: [
-                                            //               Text(
-                                            //                 "",
-                                            //                 style: TextStyle(
-                                            //                   color: const Color(
-                                            //                       0xFFa5a5a5),
-                                            //                 ),
-                                            //               )
-                                            //             ],
-                                            //           )),
-                                            //           value:
-                                            //               dropdownvalueForTower,
-                                            //           icon: Icon(Icons
-                                            //               .keyboard_arrow_down),
-                                            //           items: toweritems
-                                            //               .map((String tower) {
-                                            //             return DropdownMenuItem(
-                                            //                 value: tower,
-                                            //                 child: Text(
-                                            //                   tower,
-                                            //                   style: TextStyle(
-                                            //                     fontSize: 11,
-                                            //                     fontWeight:
-                                            //                         FontWeight
-                                            //                             .w500,
-                                            //                     color: const Color(
-                                            //                         0xFFa5a5a5),
-                                            //                   ),
-                                            //                 ));
-                                            //           }).toList(),
-                                            //           onChanged: (newValue) {
-                                            //             if (dropdownvalueForFlaat !=
-                                            //                 'Select Flat no') {
-                                            //               setState(() {
-                                            //                 dropdownvalueForFlaat =
-                                            //                     'Select Flat no';
-                                            //               });
-                                            //             }
-                                            //             dropdownvalueForTower =
-                                            //                 newValue.toString();
-                                            //             setState(() {
-                                            //               getFlat(
-                                            //                       societyList[
-                                            //                               items.indexOf(dropdownvalueForSociety) -
-                                            //                                   1]
-                                            //                           .id
-                                            //                           .toString(),
-                                            //                       towerList[
-                                            //                               toweritems.indexOf(dropdownvalueForTower) -
-                                            //                                   1]
-                                            //                           .id
-                                            //                           .toString())
-                                            //                   .then((value) {
-                                            //                 if (value.length >
-                                            //                     0)
-                                            //                   flatList = value;
-                                            //                 flatitems = [
-                                            //                   'Select Flat no'
-                                            //                 ];
-                                            //                 setState(() {
-                                            //                   for (var each
-                                            //                       in flatList) {
-                                            //                     flatitems.add(
-                                            //                         each.name);
-                                            //                   }
-                                            //                 });
-                                            //               });
-                                            //             });
-                                            //           },
-                                            //         ),
-                                            //       ),
-                                            //       SizedBox(
-                                            //         width: 12,
-                                            //       ),
-                                            //       Container(
-                                            //         // margin: EdgeInsets.fromLTRB(
-                                            //         //     MediaQuery.of(context).size.height * .250,
-                                            //         //     MediaQuery.of(context).size.height * .329,
-                                            //         //     0,
-                                            //         //     0),
-                                            //         width:
-                                            //             MediaQuery.of(context)
-                                            //                     .size
-                                            //                     .width *
-                                            //                 .34,
-                                            //         height: 12,
-                                            //         child: DropdownButton(
-                                            //           isExpanded: true,
-                                            //           iconSize: 15,
-                                            //           underline: Container(
-                                            //               child: Padding(
-                                            //             padding:
-                                            //                 const EdgeInsets
-                                            //                     .only(top: 100),
-                                            //             child: Column(
-                                            //               children: [
-                                            //                 Text(
-                                            //                   "",
-                                            //                   style: TextStyle(
-                                            //                     color: const Color(
-                                            //                         0xFFa5a5a5),
-                                            //                   ),
-                                            //                 )
-                                            //               ],
-                                            //             ),
-                                            //           )),
-                                            //           value:
-                                            //               dropdownvalueForFlaat,
-                                            //           icon: Icon(Icons
-                                            //               .keyboard_arrow_down),
-                                            //           items: flatitems
-                                            //               .map((String flats) {
-                                            //             return DropdownMenuItem(
-                                            //                 value: flats,
-                                            //                 child: Text(
-                                            //                   flats,
-                                            //                   style: TextStyle(
-                                            //                     fontWeight:
-                                            //                         FontWeight
-                                            //                             .w500,
-                                            //                     fontSize: 11,
-                                            //                     color: const Color(
-                                            //                         0xFFa5a5a5),
-                                            //                   ),
-                                            //                 ));
-                                            //           }).toList(),
-                                            //           onChanged: (newValue) {
-                                            //             setState(() {
-                                            //               dropdownvalueForFlaat =
-                                            //                   newValue
-                                            //                       .toString();
-                                            //             });
-                                            //           },
-                                            //         ),
-                                            //       ),
-                                            //     ],
-                                            //   ),
-                                            // ),
-
                                             Row(
                                               children: [
                                                 Container(
@@ -628,7 +418,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                       .070,
                                                   child: new TextFormField(
                                                     controller: towerController,
-                                                    // focusNode: myFocusNode2,
                                                     style: TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -654,7 +443,8 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                         ),
                                                         border:
                                                             UnderlineInputBorder(),
-                                                        labelText: 'Your Address Line 1',
+                                                        labelText:
+                                                            'Your Address Line 1',
                                                         labelStyle: TextStyle(
                                                             fontSize: 11,
                                                             fontWeight:
@@ -679,7 +469,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                       .070,
                                                   child: new TextFormField(
                                                     controller: flatController,
-                                                    // focusNode: myFocusNode2,
                                                     style: TextStyle(
                                                         height: 1.5,
                                                         fontWeight:
@@ -705,7 +494,8 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                         ),
                                                         border:
                                                             UnderlineInputBorder(),
-                                                        labelText: 'Your Address Line 2',
+                                                        labelText:
+                                                            'Your Address Line 2',
                                                         labelStyle: TextStyle(
                                                             fontSize: 11,
                                                             fontWeight:
@@ -793,12 +583,8 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                     fontSize: 12),
                                                 cursorColor:
                                                     const Color(0xFFa5a5a5),
-                                                // inputFormatters: [
-                                                //   new LengthLimitingTextInputFormatter(10),
-                                                // ],
                                                 keyboardType:
                                                     TextInputType.text,
-
                                                 decoration: InputDecoration(
                                                     enabledBorder: UnderlineInputBorder(
                                                         borderSide: BorderSide(
@@ -848,9 +634,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                     fontSize: 12),
                                                 cursorColor:
                                                     const Color(0xFFa5a5a5),
-                                                // inputFormatters: [
-                                                //   new LengthLimitingTextInputFormatter(10),
-                                                // ],
                                                 keyboardType:
                                                     TextInputType.number,
                                                 decoration: InputDecoration(
@@ -944,9 +727,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                           fontSize: 12),
                                                       cursorColor: const Color(
                                                           0xFFa5a5a5),
-                                                      // inputFormatters: [
-                                                      //   new LengthLimitingTextInputFormatter(10),
-                                                      // ],
                                                       decoration:
                                                           InputDecoration(
                                                               counterText: '',
@@ -999,7 +779,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                                 firstDate:
                                                                     new DateTime(
                                                                         1900),
-                                                                //lastDate: new DateTime(2100));
                                                                 lastDate:
                                                                     new DateTime
                                                                         .now());
@@ -1031,8 +810,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                             birthDateInString =
                                                                 "${birthDate.day}${getDayOfMonthSuffix(birthDate.day)} ${months[current_mon - 1]} ${birthDate.year}";
                                                           });
-                                                          print(
-                                                              birthDateInString);
                                                         }
                                                       })
                                                 ],
@@ -1072,9 +849,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                           fontSize: 12),
                                                       cursorColor: const Color(
                                                           0xFFa5a5a5),
-                                                      // inputFormatters: [
-                                                      //   new LengthLimitingTextInputFormatter(10),
-                                                      // ],
                                                       decoration:
                                                           InputDecoration(
                                                               counterText: '',
@@ -1124,7 +898,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                                 firstDate:
                                                                     new DateTime(
                                                                         1900),
-                                                                //lastDate: new DateTime(2100));
                                                                 lastDate:
                                                                     new DateTime
                                                                         .now());
@@ -1155,8 +928,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                             birthDateInString1 =
                                                                 "${birthDate.day}${getDayOfMonthSuffix(birthDate.day)} ${months[current_mon - 1]} ${birthDate.year}";
                                                           });
-                                                          print(
-                                                              birthDateInString1);
                                                         }
                                                       })
                                                 ],
@@ -1261,7 +1032,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                       onChanged: (value) {
                                                         setState(() {
                                                           _radiovalue = value;
-                                                          print(_radiovalue);
                                                         });
                                                       }),
                                                 ),
@@ -1433,6 +1203,57 @@ class _LoginDetailsState extends State<LoginDetails> {
                                                           ),
                                                         ),
                                                       ),
+                                                      Container(
+                                                        child: Text(
+                                                          " and",
+                                                          style: TextStyle(
+                                                              fontSize: 11,
+                                                              color: const Color(
+                                                                  0xFF9e9e9e),
+                                                              fontFamily:
+                                                                  "Source Sans Pro",
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                SizedBox(
+                                                  height: 24,
+                                                  width: 24,
+                                                  child: Container(),
+                                                ),
+                                                SizedBox(width: 10),
+                                                Container(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      GestureDetector(
+                                                        onTap: () {
+                                                          Alertbox_privacy_policy();
+                                                        },
+                                                        child: Container(
+                                                          child: Text(
+                                                            " Privacy Policy",
+                                                            style: TextStyle(
+                                                                fontSize: 11,
+                                                                color: const Color(
+                                                                    0xFFa18634),
+                                                                fontFamily:
+                                                                    "Source Sans Pro",
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -1525,12 +1346,6 @@ class _LoginDetailsState extends State<LoginDetails> {
                                             padding: const EdgeInsets.only(
                                                 top: 300.0),
                                             child: Container(
-                                              // margin: EdgeInsets.fromLTRB(
-                                              //   0,
-                                              //   MediaQuery.of(context).size.height * .79,
-                                              //   0,
-                                              //   0,
-                                              // ),
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
@@ -1620,86 +1435,51 @@ class _LoginDetailsState extends State<LoginDetails> {
                           style: TextStyle(
                             fontSize: 15,
                           )),
-//                           Text('''Use of ihmsclubs.com''',
-//                           style: TextStyle(
-//                               fontSize: 18, fontWeight: FontWeight.bold)),
-//                       Text('''This site is owned and operated by Innovest Hospitality Management Services Pet Ltd By using ihmsclubs.com you agree to be legally bound by these terms, which shall take effect immediately on your first use of ihmsclubs.com If you do not agree to be legally bound by all the following terms please do not access and/or use ihmsclubs.com.
+                    ],
+                  )),
+                ),
+                Positioned(
+                  top: -40,
+                  right: -35,
+                  child: CircleAvatar(
+                    child: Icon(Icons.close),
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color(0xFFa18634),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
 
-// No material from the site may be copied, reproduced, republished, uploaded, posed, transmitted, or distributed in any way, except that you may download one copy of the materials on any single computer for your non-commercial use only, provided that you keep intact all copyright and other proprietary notices. Modification of the materials or use of the materials for any other purpose is a violation of ihmsclubs.com. copyright and other proprietary rights. The use of any such material on any other web site or networked computer environment is prohibited. Except as otherwise indicated on this site and except for the trademarks, service marks and trade names of other companies that are displayed on this site, all trademarks, service marks and trade names are property of ihmsclubs.com.
-
-// ihmsclubs.com. may change these terms at any time by posting changes online. Please review these terms regularly to ensure you are aware of any changes made by  ihmsclubs.com.
-
-// Your continued use of  ihmsclubs.com. after changes are posted means you agree to be legally bound by these terms as updated and amended.
-
-// In the event that you download any software from this, or any accompanying site, the software, including any files, images incorporated in or generated by the software, and data accompanying the software (collectively, the “Software”) are non-exclusively licensed to you by  ihmsclubs.com.''',
-//                           style: TextStyle(
-//                             fontSize: 15,
-//                           )),
-//                       Text('''Delivery Times.''',
-//                           style: TextStyle(
-//                               fontSize: 18, fontWeight: FontWeight.bold)),
-//                       Text(
-//                           '''Our aim is to meet a delivery window for our customers, agreed at the time of placing the order. Whilst we will do our utmost to meet this delivery time unfortunately there may be factors beyond our control that prevent us from meeting the time slot.
-
-// We shall have no liability whatsoever for any delay or failure to deliver to you where such delay or failure is caused by a circumstance beyond our reasonable control. Such circumstances include, but are not limited to;
-// • Unforeseen Traffic Delays
-// • Accidents Causing Delays on the Service Route
-// • Severe Weather Conditions.
-
-// ''',
-//                           style: TextStyle(
-//                             fontSize: 15,
-//                           )),
-                      // Text('''Your Order Confirmation''',
-                      //     style: TextStyle(
-                      //         fontSize: 18, fontWeight: FontWeight.bold)),
-//                       Text(
-//                           '''Your Order Confirmation is a record of our agreement to deliver the products ordered and paid for in full. If someone else made the booking on your behalf, you agree that such person acted as your agent.
-
-// Amendments to Orders
-
-// Amendments to the order or delivery time can be made no later than 1 hour prior to the start of the delivery window booked.Amendments to the content of your order can be made up to 1 Hour before the delivery window begins.
-
-// Amendments to the order must be made by phoning the Restaurant.
-
-// The delivery time slot may be altered up to 1 hour before the start of your order window. The order can only be changed to a new time slot if it is available.
-
-// ''',
-//                           style: TextStyle(
-//                             fontSize: 15,
-//                           )),
-                      // Text('''Customer Responsibilities''',
-                      //     style: TextStyle(
-                      //         fontSize: 18, fontWeight: FontWeight.bold)),
-//                       Text(
-//                           '''It is the customer responsibility to enter the delivery address in full to ensure the driver may locate the correct property for delivery. Failure to deliver due to incorrect address details will be charged in full.
-
-// You must ensure that delivery can be made to the address during the selected window. If we are unable to make delivery at the given address in the selected time slot then we will deem the order cancelled at full cost.
-
-// No rescheduling of time will be permitted.
-
-// In the case of addresses that are irregular or difficult to locate, it is the responsibility of the customer to clearly mark special delivery instructions in the box required (Notes) Failure to do so may result in a delayed delivery, or the order being cancelled by ihmsclubs.com.
-
-// ''',
-//                           style: TextStyle(
-//                             fontSize: 15,
-//                           )),
-//                       Text('''Trade marks and Copyright''',
-//                           style: TextStyle(
-//                               fontSize: 18, fontWeight: FontWeight.bold)),
-//                       Text(
-//                           '''The content and software on this site may be used as either or both an information and shopping resource. Any other use including reproduction, modification, distribution, transmission or republication of the content of this service is strictly prohibited. Amendments and Waivers to these terms and conditions
-
-// None of our employees, agents, or representatives, has authority to alter, modify or waive any provision of these Conditions of order.
-
-// Complaints or feedback: In the event that you are dissatisfied with the quality of any Products or the service provided by Restaurant, please consider providing feedback in the form of ratings, comments and reviews on the Website (together, “Reviews”) to reflect your experience. The Reviews are an important part of our quality control process.
-
-// Estimated times for deliveries and collections are provided by the Restaurants and are only estimates. the Restaurant can not guarantee that Orders will be delivered or will be available for collection within the estimated times.
-
-// By ordering from ihmsclubs.com. you accept the above terms and conditions.''',
-//                           style: TextStyle(
-//                             fontSize: 15,
-//                           )),
+  Alertbox_privacy_policy() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Stack(
+              // overflow: Overflow.visible,
+              alignment: Alignment.center,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white),
+                  padding: EdgeInsets.all(5),
+                  child: SingleChildScrollView(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('''Use of ihmsclubs.com''',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(
+                          '''${staticPageResponseModel.data[0].privacyPolicy}''',
+                          style: TextStyle(
+                            fontSize: 15,
+                          )),
                     ],
                   )),
                 ),

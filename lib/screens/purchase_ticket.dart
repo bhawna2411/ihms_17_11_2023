@@ -9,6 +9,7 @@ import 'Thankyou_join_activities.dart';
 
 class PurchaseTicket extends StatefulWidget {
   @override
+  // ignore: override_on_non_overriding_member
   int eventID;
   String eventAmount;
   String eventName;
@@ -41,17 +42,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
 
   Razorpay _razorpay;
 
-  // _register(BuildContext context) async {
-  //   participateRegister(nameController.text, mobileController.text,
-  //       _namecontrollers, _mobilecontroller, widget.eventID, context);
-  //   //openCheckout();
-  //   Future.delayed(const Duration(milliseconds: 300), () {
-  //     setState(() {
-  //       openCheckout();
-  //     });
-  //   });
-  // }
-
   _register(BuildContext context) async {
     Future.delayed(const Duration(milliseconds: 300), () {
       setState(() {
@@ -72,14 +62,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
           isValid = false;
           break;
         }
-        // else {
-        //   if (!(_formKey1.currentState.validate())) {
-        //     if (!(_formKeys[i].currentState.validate())) {
-        //       isValid = false;
-        //       return;
-        //     }
-        //   }
-        // }
       }
 
       if (isValid) {
@@ -106,7 +88,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  //image: NetworkImage(widget.eventData.splitImage[0]),
                   image: ExactAssetImage("assets/images/dashboard_bg.png"),
                   fit: BoxFit.cover,
                 ),
@@ -155,7 +136,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                       ),
                       elevation: 10,
                       child: Container(
-                        //color: Colors.white,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(Radius.circular(
@@ -213,24 +193,7 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                                       if (value.length < 1 || value.isEmpty) {
                                         return "Please Enter Name";
                                       }
-
                                       return null;
-                                      // if (_count > 0) {
-                                      //   if (mobileController.text
-                                      //           .trim()
-                                      //           .isEmpty &&
-                                      //       nameController.text
-                                      //           .trim()
-                                      //           .isEmpty) {
-                                      //     return null;
-                                      //   } else {
-                                      //     if (value.length < 1 ||
-                                      //         value.isEmpty) {
-                                      //       return "Please Enter Name";
-                                      //     }
-                                      //   }
-                                      // }
-                                      // return null;
                                     },
                                   ),
                                 ),
@@ -282,22 +245,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                                       return "Atleast 10 digit required";
                                     }
                                     return null;
-                                    // if (_count > 0) {
-                                    //   if (mobileController.text
-                                    //           .trim()
-                                    //           .isEmpty &&
-                                    //       nameController.text
-                                    //           .trim()
-                                    //           .isEmpty) {
-                                    //     return null;
-                                    //   } else {
-                                    //     if (value.length < 10 ||
-                                    //         value.isEmpty) {
-                                    //       return "Atleast 10 digit required";
-                                    //     }
-                                    //   }
-                                    // }
-                                    // return null;
                                   },
                                 ),
                               ),
@@ -314,7 +261,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                       shrinkWrap: true,
                       itemCount: _count,
                       itemBuilder: (context, index) {
-                        print(index);
 
                         return _row(index);
                       },
@@ -349,14 +295,7 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                       child: GestureDetector(
                         onTap: () {
                           _validateInputs();
-                          // openCheckout();
                           _register(context);
-                          // print(nameController.text);
-                          //  print(mobileController.text);
-                          //   print( _namecontrollers[0].text);
-                          //    print( _mobilecontroller[0].text);
-                          //     print( _namecontrollers[1].text);
-                          //    print( _mobilecontroller[1].text);
                         },
                         child: Container(
                           height: 70,
@@ -411,7 +350,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                   ),
                   elevation: 10,
                   child: Container(
-                    //color: Colors.white,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(
@@ -461,21 +399,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                                             ? const Color(0xFFa5a5a5)
                                             : const Color(0xFFa5a5a5))),
                                 validator: (value) {
-                                  // if (_namecontrollers[index]
-                                  //         .text
-                                  //         .trim()
-                                  //         .isEmpty &&
-                                  //     _mobilecontroller[index]
-                                  //         .text
-                                  //         .trim()
-                                  //         .isEmpty) {
-                                  //   return null;
-                                  // } else {
-                                  //   if (value.length < 1 || value.isEmpty) {
-                                  //     return "Please Enter Name";
-                                  //   }
-                                  //   return null;
-                                  // }
                                   if (value.length < 1 || value.isEmpty) {
                                     return "Please Enter Name";
                                   }
@@ -497,7 +420,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                                   _autovalidatemobile = true;
                                 }
                               },
-                              //enabled: _isEnable,
                               controller: _mobilecontroller[index],
                               focusNode: _FocusNodemobile[index],
                               style: TextStyle(
@@ -526,21 +448,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
                                           ? const Color(0xFFa5a5a5)
                                           : const Color(0xFFa5a5a5))),
                               validator: (value) {
-                                // if (_namecontrollers[index]
-                                //         .text
-                                //         .trim()
-                                //         .isEmpty &&
-                                //     _mobilecontroller[index]
-                                //         .text
-                                //         .trim()
-                                //         .isEmpty) {
-                                //   return null;
-                                // } else {
-                                //   if (value.length < 10 || value.isEmpty) {
-                                //     return "Atleast 10 digit required";
-                                //   }
-                                //   return null;
-                                // }
                                 if (value.length < 10 || value.isEmpty) {
                                   return "Atleast 10 digit required";
                                 }
@@ -575,7 +482,6 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
     setState(() {
       userProfile().then((value) {
         userProfileResponseModel = value;
-        print("OBJECT ${value.data.name}");
         setState(() {});
       });
     });
@@ -594,12 +500,10 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
   void openCheckout() async {
     var amount = (int.parse(widget.eventAmount) * (_count + 1) * 100);
     var options = {
-      // 'key': 'rzp_test_1DP5mmOlF5G5ag',
       'orderId': "Order1234",
       'key': 'rzp_live_TKrtmDZafufwpX',
       'amount': "100", //amount,
       'name': 'Total Amount',
-      // 'description': 'Fine T-Shirt',
       'prefill': {
         'contact': userProfileResponseModel.data.mobile,
         'email': userProfileResponseModel.data.email
@@ -617,13 +521,8 @@ class _PurchaseTicketState extends State<PurchaseTicket> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    print(
-        "=============HANDLE PAYMENT START========================================================");
-    // _register(context);
     Fluttertoast.showToast(
         msg: "SUCCESS: " + response.paymentId, toastLength: Toast.LENGTH_SHORT);
-    // participateRegister(nameController.text, mobileController.text,
-    //     _namecontrollers, _mobilecontroller, widget.eventID, context);
     Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
         builder: (context) => ThankyouJoinACtivitiesScreen(
             "Your request for ${widget.eventName} participation has been received. If more family members are keen to participate, please click on participate button again! ."))); //Seats will be alloted to you once it gets approved.")));

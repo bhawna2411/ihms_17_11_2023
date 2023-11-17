@@ -17,13 +17,8 @@ class ImageDetail {
 }
 
 getDateFormat(String date) {
-  // if (date != null) {
-  // String dataa = DateTime.parse(date);
-  print("date--------$date");
   String result2 = Jiffy(DateTime.parse(date)).format('EEE , do MMM yyyy');
-  print("----------result2-----------${result2}");
   return result2;
-  // }
 }
 
 final List<String> imgList = [
@@ -67,8 +62,6 @@ class _MyHomePageState extends State<Participate_Screen> {
   @override
   void initState() {
     if (widget.eventData.multislot == 1) {
-      print("multislot length ${widget.eventData.multislotTime.length}");
-
       for (var eachh in widget.eventData.multislotTime) {
         if(now.isBefore(DateTime.parse(eachh.startDate.toString()))){
           for (var pdata in eachh.participants) {
@@ -77,7 +70,6 @@ class _MyHomePageState extends State<Participate_Screen> {
           }
         }
       }
-      print("participiantName----------$participiantName");
     }
     super.initState();
   }
@@ -128,21 +120,9 @@ class _MyHomePageState extends State<Participate_Screen> {
       if (widget.eventData.multislot == 0) {
         _finalDate =
             widget.eventData.start_date + ' ' + widget.eventData.start_time;
-        print("_finalDate-------------$_finalDate");
-        print("_finalDate-------------${DateTime.parse(_finalDate)}");
-        print("_currentDate-------------${_currentDate}");
         return _finalDate;
       } else {
-        // for (var each in widget.eventData.multislotTime) {
-        //   persons.add(
-        //       DateTime.parse(each.startDate.toString()).millisecondsSinceEpoch);
-        // }
-        // var _fDate = persons.reduce((curr, next) => curr > next ? curr : next);
-        // var dt = DateTime.fromMillisecondsSinceEpoch(_fDate);
-        // _finalDate = DateFormat('yyyy-MM-dd hh:mm').format(dt);
-        // return _finalDate;
         if (widget.eventData.multislotTime.length > 0) {
-          print("multislot length ${widget.eventData.multislotTime.length}");
 
           for (var eachh in widget.eventData.multislotTime) {
             persons.add(DateTime.parse(eachh.startDate.toString())
@@ -151,18 +131,11 @@ class _MyHomePageState extends State<Participate_Screen> {
           var _fDate =
               persons.reduce((curr, next) => curr > next ? curr : next);
           var dt = DateTime.fromMillisecondsSinceEpoch(_fDate);
-          print("--------check----" + dt.toString());
           _finalDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(dt);
-          print("_finalDate-------------${DateTime.parse(_finalDate)}");
-          print("_currentDate-------------${_currentDate}");
-          // DateTime.parse(getFinalDate())
           return _finalDate;
-          // fdate = DateTime.parse(dt.toString());
         }
       }
     }
-
-    print("avl SEat ${widget.eventData.number_of_seats_available}");
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -209,9 +182,7 @@ class _MyHomePageState extends State<Participate_Screen> {
           Center(
               child: Stack(
             alignment: Alignment.center,
-            // textDirection: TextDirection.rtl,
             fit: StackFit.loose,
-            // overflow: Overflow.visible,
             clipBehavior: Clip.hardEdge,
             children: [
               FittedBox(
@@ -223,7 +194,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                     bottom: MediaQuery.of(context).size.height * 0.10,
                   ),
                   width: MediaQuery.of(context).size.width * 0.92,
-                  // height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(30.0),
@@ -271,86 +241,41 @@ class _MyHomePageState extends State<Participate_Screen> {
                                   children: [
                                     Icon(
                                       Icons.access_time_outlined,
-                                      // size: 20,
                                       size: 15,
                                       color: Color(0xFF90700b),
                                     ),
                                     SizedBox(width: 5),
                                     Text(
-                                        // DateFormat('dd-MM-yyyy').format(widget.eventData.start_date!),
-                                        // getDateFormat(
-                                        //     widget.eventData.start_date),
-                                        // widget.eventData.start_time,
                                         time24to12Format(
                                             widget.eventData.start_time),
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 13,
-                                            // fontSize: 9,
-                                            // color: Color(0xFF59696b)
                                             color: Color(0xFFcbb269))),
                                     Text("-",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 13,
-                                            // fontSize: 9,
-                                            // color: Color(0xFF59696b)
                                             color: Color(0xFFcbb269))),
                                     Text(
-                                        // DateFormat('dd-MM-yyyy').format(widget.eventData.start_date!),
-                                        // getDateFormat(
-                                        //     widget.eventData.start_date),
-                                        // widget.eventData.start_time,
                                         time24to12Format(
                                             widget.eventData.end_time),
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 13,
-                                            // fontSize: 9,
-                                            // color: Color(0xFF59696b)
                                             color: Color(0xFFcbb269))),
-                                    // SizedBox(
-                                    //   width: 10,
-                                    // ),
-                                    // Container(
-                                    //   // color: Colors.black,
-                                    //   // width: 80,
-                                    //   // width: 100,
-                                    //   child: Text(
-                                    //       // DateFormat('dd-MM-yyyy').format(widget.eventData.start_date!),
-                                    //       getDateFormat(
-                                    //           widget.eventData.start_date),
-                                    //       style: TextStyle(
-                                    //           fontWeight: FontWeight.w600,
-                                    //           fontSize: 13,
-                                    //           // fontSize: 9,
-                                    //           // color: Color(0xFF59696b)
-                                    //           color: Color(0xFFcbb269))),
-                                    // ),
                                   ],
                                 ),
                                 SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    // Icon(
-                                    //   Icons.access_time_outlined,
-                                    //   // size: 20,
-                                    //   size: 15,
-                                    //   color: Color(0xFF90700b),
-                                    // ),
                                     Container(
-                                      // color: Colors.black,
-                                      // width: 80,
-                                      // width: 100,
                                       child: Text(
-                                          // DateFormat('dd-MM-yyyy').format(widget.eventData.start_date!),
                                           getDateFormat(
                                               widget.eventData.start_date),
                                           style: TextStyle(
                                               fontWeight: FontWeight.w600,
                                               fontSize: 13,
-                                              // fontSize: 9,
-                                              // color: Color(0xFF59696b)
                                               color: Color(0xFFcbb269))),
                                     ),
                                     SizedBox(
@@ -360,37 +285,10 @@ class _MyHomePageState extends State<Participate_Screen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 13,
-                                            // fontSize: 9,
-                                            // color: Color(0xFF59696b)
                                             color: Color(0xFFcbb269))),
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    // Text("Till -",
-                                    //     style: TextStyle(
-                                    //         fontWeight: FontWeight.w600,
-                                    //         fontSize: 13,
-                                    //         color: Color(0xFFcbb269))),
-                                    // SizedBox(width: 5),
-                                    // Text(
-                                    //     time24to12Format(
-                                    //         widget.eventData.start_time),
-                                    //     style: TextStyle(
-                                    //         fontWeight: FontWeight.w600,
-                                    //         fontSize: 13,
-                                    //         color: Color(0xFFcbb269))),
-                                    // Text("-",
-                                    //     style: TextStyle(
-                                    //         fontWeight: FontWeight.w600,
-                                    //         fontSize: 13,
-                                    //         color: Color(0xFFcbb269))),
-                                    // Text(
-                                    //     time24to12Format(
-                                    //         widget.eventData.end_time),
-                                    //     style: TextStyle(
-                                    //         fontWeight: FontWeight.w600,
-                                    //         fontSize: 13,
-                                    //         color: Color(0xFFcbb269))),
                                     SizedBox(
                                       width: 5,
                                     ),
@@ -409,383 +307,7 @@ class _MyHomePageState extends State<Participate_Screen> {
                                 )
                               ],
                             )
-                          //  Container(
-                          //     // color: Colors.amber,
-                          //     margin: EdgeInsets.only(
-                          //       bottom:
-                          //           MediaQuery.of(context).size.height * 0.03,
-                          //     ),
-                          //     child: Column(children: [
-                          //       Row(
-                          //         children: [
-                          //           Container(
-                          //             height:
-                          //                 MediaQuery.of(context).size.width *
-                          //                     0.10,
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 0.10,
-                          //             decoration: BoxDecoration(
-                          //               // color: Color(0xFFf7f2ce),
-                          //               color: Color(0xFFf7f2ce),
-                          //               borderRadius: BorderRadius.all(
-                          //                 Radius.circular(5.0),
-                          //               ),
-                          //             ),
-                          //             child: Center(
-                          //               child: new IconButton(
-                          //                 icon: new Icon(
-                          //                   Icons.calendar_today,
-                          //                   // size: 20,
-                          //                   size: 15,
-                          //                   color: Color(0xFF90700b),
-                          //                 ),
-                          //                 onPressed: () {},
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           Container(
-                          //             margin: EdgeInsets.only(
-                          //               left:
-                          //                   MediaQuery.of(context).size.height *
-                          //                       0.01,
-                          //               top:
-                          //                   MediaQuery.of(context).size.height *
-                          //                       0.01,
-                          //               // right:
-                          //               //     MediaQuery.of(context).size.height *
-                          //               //         0.01,
-                          //             ),
-                          //             // color: Colors.red,
-                          //             // height: MediaQuery.of(context).size.height *
-                          //             //     0.05,
-                          //             height:
-                          //                 MediaQuery.of(context).size.height *
-                          //                     0.06,
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 0.28,
-                          //             child: Column(
-                          //               crossAxisAlignment:
-                          //                   CrossAxisAlignment.start,
-                          //               children: [
-                          //                 Text("EVENT START DATE",
-                          //                     style: TextStyle(
-                          //                         fontWeight: FontWeight.bold,
-                          //                         fontSize: 11,
-                          //                         // color: Color(0xFF59696b)
-                          //                         color: Color(0xFFba8e1c))),
-                          //                 // Text("DAY & DATE",
-                          //                 //     style: TextStyle(
-                          //                 //         fontWeight: FontWeight.bold,
-                          //                 //         fontSize: 11,
-                          //                 //         color: Color(0xFF59696b))),
-                          //                 //   SizedBox(
-                          //                 //   height: 1,
-                          //                 // ),
-                          //                 // SizedBox(
-                          //                 //   height: 3,
-                          //                 // ),
-                          //                 Container(
-                          //                   // color: Colors.black,
-                          //                   // width: 80,
-                          //                   width: 100,
-                          //                   child: Text(
-                          //                       // DateFormat('dd-MM-yyyy').format(widget.eventData.start_date!),
-                          //                       getDateFormat(widget
-                          //                           .eventData.start_date),
-                          //                       style: TextStyle(
-                          //                           fontWeight: FontWeight.w500,
-                          //                           fontSize: 12,
-                          //                           // fontSize: 9,
-                          //                           // color: Color(0xFF59696b)
-                          //                           color: Color(0xFFcbb269))),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //           // SizedBox(
-                          //           //   width: 8,
-                          //           // ),
-                          //           // Container(
-                          //           //   height: MediaQuery.of(context).size.width *
-                          //           //       0.10,
-                          //           //   width: MediaQuery.of(context).size.width *
-                          //           //       0.10,
-                          //           //   decoration: BoxDecoration(
-                          //           //     color: Color(0xFFf7f2ce),
-                          //           //     borderRadius: BorderRadius.all(
-                          //           //         Radius.circular(
-                          //           //             5.0) //                 <--- border radius here
-                          //           //         ),
-                          //           //   ),
-                          //           //   child: Center(
-                          //           //     child: new IconButton(
-                          //           //       icon: new Icon(
-                          //           //         Icons.calendar_today,
-                          //           //         // size: 18,
-                          //           //         size: 15,
-                          //           //         color: Color(0xFF90700b),
-                          //           //       ),
-                          //           //       color: Colors.white,
-                          //           //       onPressed: () {},
-                          //           //     ),
-                          //           //   ),
-                          //           // ),
-                          //           // Container(
-                          //           //   // color: Colors.green,
-                          //           //   // width:150,
-                          //           //   margin: EdgeInsets.only(
-                          //           //     left: MediaQuery.of(context).size.height *
-                          //           //         0.01,
-                          //           //     // right:
-                          //           //     //     MediaQuery.of(context).size.height *
-                          //           //     //         0.01,
-                          //           //     top: MediaQuery.of(context).size.height *
-                          //           //         0.01,
-                          //           //   ),
-                          //           //   // height: MediaQuery.of(context).size.height *
-                          //           //   //     0.05,
-                          //           //   height: MediaQuery.of(context).size.height *
-                          //           //   0.06,
-                          //           //       // color: Colors.red,
-                          //           //   width: MediaQuery.of(context).size.width * 0.28,
-                          //           //   // width: MediaQuery.of(context).size.width *
-                          //           //   //     0.18,
-                          //           //   child: Column(
-                          //           //     crossAxisAlignment:
-                          //           //         CrossAxisAlignment.start,
-                          //           //     children: [
-                          //           //       // Text("DAY & DATE",
-                          //           //       //     style: TextStyle(
-                          //           //       //         fontWeight: FontWeight.bold,
-                          //           //       //         fontSize: 11,
-                          //           //       //         color: Color(0xFF59696b))),
-                          //           //       Text("EVENT END",
-                          //           //           style: TextStyle(
-                          //           //               fontWeight: FontWeight.bold,
-                          //           //               fontSize: 11,
-                          //           //               // color: Color(0xFF59696b)
-                          //           //               color: Color(0xFFba8e1c))),
-                          //           //       // SizedBox(
-                          //           //       //   height: 1,
-                          //           //       // ),
-                          //           //       SizedBox(
-                          //           //         height: 3,
-                          //           //       ),
-                          //           //       Flexible(
-                          //           //         child: Container(
-                          //           //           // color: Colors.red,
-
-                          //           //           child: Text(
-                          //           //             getDateFormat(
-                          //           //                 widget.eventData.end_date),
-                          //           //             style: TextStyle(
-                          //           //                 fontWeight: FontWeight.w500,
-                          //           //                 fontSize: 12,
-                          //           //                 // fontSize: 9,
-                          //           //                 // color: Color(0xFF59696b),
-                          //           //                 color: Color(0xFFcbb269)),
-                          //           //           ),
-                          //           //         ),
-                          //           //       ),
-                          //           //     ],
-                          //           //   ),
-                          //           // ),
-                          //         ],
-                          //       ),
-                          //       Row(
-                          //         children: [
-                          //           Container(
-                          //             height:
-                          //                 MediaQuery.of(context).size.width *
-                          //                     0.10,
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 0.10,
-                          //             decoration: BoxDecoration(
-                          //               // color: Color(0xFFf7f2ce),
-                          //               color: Color(0xFFf7f2ce),
-                          //               borderRadius: BorderRadius.all(
-                          //                 Radius.circular(5.0),
-                          //               ),
-                          //             ),
-                          //             child: Center(
-                          //               child: new IconButton(
-                          //                 icon: new Icon(
-                          //                   Icons.access_time_outlined,
-                          //                   // size: 20,
-                          //                   size: 15,
-                          //                   color: Color(0xFF90700b),
-                          //                 ),
-                          //                 onPressed: () {},
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           Container(
-                          //             margin: EdgeInsets.only(
-                          //               left:
-                          //                   MediaQuery.of(context).size.height *
-                          //                       0.01,
-                          //               top:
-                          //                   MediaQuery.of(context).size.height *
-                          //                       0.01,
-                          //               // right:
-                          //               //     MediaQuery.of(context).size.height *
-                          //               //         0.01,
-                          //             ),
-                          //             // color: Colors.red,
-                          //             // height: MediaQuery.of(context).size.height *
-                          //             //     0.05,
-                          //             height:
-                          //                 MediaQuery.of(context).size.height *
-                          //                     0.06,
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 0.28,
-                          //             child: Column(
-                          //               crossAxisAlignment:
-                          //                   CrossAxisAlignment.start,
-                          //               children: [
-                          //                 Text("EVENT START TIME",
-                          //                     style: TextStyle(
-                          //                         fontWeight: FontWeight.bold,
-                          //                         fontSize: 11,
-                          //                         // color: Color(0xFF59696b)
-                          //                         color: Color(0xFFba8e1c))),
-                          //                 // Text("DAY & DATE",
-                          //                 //     style: TextStyle(
-                          //                 //         fontWeight: FontWeight.bold,
-                          //                 //         fontSize: 11,
-                          //                 //         color: Color(0xFF59696b))),
-                          //                 //   SizedBox(
-                          //                 //   height: 1,
-                          //                 // ),
-                          //                 // SizedBox(
-                          //                 //   height: 3,
-                          //                 // ),
-                          //                 Container(
-                          //                   // color: Colors.black,
-                          //                   // width: 80,
-                          //                   width: 100,
-                          //                   child: Text(
-                          //                       // DateFormat('dd-MM-yyyy').format(widget.eventData.start_date!),
-                          //                       // getDateFormat(
-                          //                       //     widget.eventData.start_date),
-                          //                       // widget.eventData.start_time,
-                          //                       time24to12Format(widget
-                          //                           .eventData.start_time),
-                          //                       style: TextStyle(
-                          //                           fontWeight: FontWeight.w500,
-                          //                           fontSize: 12,
-                          //                           // fontSize: 9,
-                          //                           // color: Color(0xFF59696b)
-                          //                           color: Color(0xFFcbb269))),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //           SizedBox(
-                          //             width: 8,
-                          //           ),
-                          //           Container(
-                          //             height:
-                          //                 MediaQuery.of(context).size.width *
-                          //                     0.10,
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 0.10,
-                          //             decoration: BoxDecoration(
-                          //               color: Color(0xFFf7f2ce),
-                          //               borderRadius: BorderRadius.all(
-                          //                   Radius.circular(
-                          //                       5.0) //                 <--- border radius here
-                          //                   ),
-                          //             ),
-                          //             child: Center(
-                          //               child: new IconButton(
-                          //                 icon: new Icon(
-                          //                   Icons.access_time_outlined,
-                          //                   // size: 18,
-                          //                   size: 15,
-                          //                   color: Color(0xFF90700b),
-                          //                 ),
-                          //                 color: Colors.white,
-                          //                 onPressed: () {},
-                          //               ),
-                          //             ),
-                          //           ),
-                          //           Container(
-                          //             // color: Colors.green,
-                          //             // width:150,
-                          //             margin: EdgeInsets.only(
-                          //               left:
-                          //                   MediaQuery.of(context).size.height *
-                          //                       0.01,
-                          //               // right:
-                          //               //     MediaQuery.of(context).size.height *
-                          //               //         0.01,
-                          //               top:
-                          //                   MediaQuery.of(context).size.height *
-                          //                       0.01,
-                          //             ),
-                          //             // height: MediaQuery.of(context).size.height *
-                          //             //     0.05,
-                          //             height:
-                          //                 MediaQuery.of(context).size.height *
-                          //                     0.06,
-                          //             // color: Colors.red,
-                          //             width: MediaQuery.of(context).size.width *
-                          //                 0.28,
-                          //             // width: MediaQuery.of(context).size.width *
-                          //             //     0.18,
-                          //             child: Column(
-                          //               crossAxisAlignment:
-                          //                   CrossAxisAlignment.start,
-                          //               children: [
-                          //                 // Text("DAY & DATE",
-                          //                 //     style: TextStyle(
-                          //                 //         fontWeight: FontWeight.bold,
-                          //                 //         fontSize: 11,
-                          //                 //         color: Color(0xFF59696b))),
-                          //                 Text("EVENT END TIME",
-                          //                     style: TextStyle(
-                          //                         fontWeight: FontWeight.bold,
-                          //                         fontSize: 11,
-                          //                         // color: Color(0xFF59696b)
-                          //                         color: Color(0xFFba8e1c))),
-                          //                 // SizedBox(
-                          //                 //   height: 1,
-                          //                 // ),
-                          //                 SizedBox(
-                          //                   height: 3,
-                          //                 ),
-                          //                 Flexible(
-                          //                   child: Container(
-                          //                     // color: Colors.red,
-
-                          //                     child: Text(
-                          //                       // getDateFormat(
-                          //                       //     widget.eventData.end_date),
-                          //                       //  widget.eventData.end_time,
-                          //                       time24to12Format(
-                          //                           widget.eventData.end_time),
-
-                          //                       style: TextStyle(
-                          //                           fontWeight: FontWeight.w500,
-                          //                           fontSize: 12,
-                          //                           // fontSize: 9,
-                          //                           // color: Color(0xFF59696b),
-                          //                           color: Color(0xFFcbb269)),
-                          //                     ),
-                          //                   ),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       ),
-                          //     ]),
-                          //   )
                           : Container(
-                              // height: 90,
-                              // color: Colors.green,
-                              // color: Colors.amber,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -807,7 +329,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                                       children: [
                                         Container(
                                           width: 300,
-                                          // color: Colors.amber,
                                           child: ListView.builder(
                                               padding: EdgeInsets.all(0),
                                               scrollDirection: Axis.vertical,
@@ -819,7 +340,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                                                     Icon(
                                                       Icons
                                                           .access_time_outlined,
-                                                      // size: 20,
                                                       size: 15,
                                                       color: Color(0xFF90700b),
                                                     ),
@@ -828,7 +348,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                                                       "${getTime(widget.eventData.multislotTime[index].startDate)}-${getTime(widget.eventData.multislotTime[index].endDate)}   ${getDate(widget.eventData.multislotTime[index].endDate)}",
                                                       style: TextStyle(
                                                         height: 1.5,
-                                                        // fontSize: 10,
                                                         fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -873,7 +392,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                               Text(widget.eventData.description,
                                   style: TextStyle(
                                       height: 1.5,
-                                      // fontSize: 10,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600,
                                       color: Color(0xFFcbb269))),
@@ -886,9 +404,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                         decoration: BoxDecoration(),
                         clipBehavior: Clip.antiAlias,
                         child: Container(
-                          // margin: EdgeInsets.only(
-                          //   bottom: MediaQuery.of(context).size.height * 0.03,
-                          // ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -923,48 +438,10 @@ class _MyHomePageState extends State<Participate_Screen> {
                                           color: Color(0xFFba8e1c))),
                                 ],
                               ),
-                              // Text(widget.eventData.number_of_seats_available,
-                              //     style: TextStyle(
-                              //         height: 1.5,
-                              //         // fontSize: 10,
-                              //         fontSize: 13,
-                              //         fontWeight: FontWeight.w600,
-                              //         color: Color(0xFFcbb269))),
                             ],
                           ),
                         ),
                       ),
-                      // Container(
-                      //   decoration: BoxDecoration(),
-                      //   clipBehavior: Clip.antiAlias,
-                      //   child: Container(
-                      //     margin: EdgeInsets.only(
-                      //       bottom: MediaQuery.of(context).size.height * 0.03,
-                      //     ),
-                      //     child: Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.start,
-                      //           children: [
-                      //             Text("status",
-                      //                 textAlign: TextAlign.start,
-                      //                 style: TextStyle(
-                      //                     fontSize: 17,
-                      //                     fontWeight: FontWeight.w600,
-                      //                     color: Color(0xFFba8e1c))),
-                      //           ],
-                      //         ),
-                      //         Text(widget.eventData.status.toString(),
-                      //             style: TextStyle(
-                      //                 height: 1.5,
-                      //                 fontSize: 10,
-                      //                 fontWeight: FontWeight.w600,
-                      //                 color: Color(0xFFcbb269))),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       Container(
                         decoration: BoxDecoration(),
                         clipBehavior: Clip.antiAlias,
@@ -978,76 +455,15 @@ class _MyHomePageState extends State<Participate_Screen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  // Text("Tags",
-                                  //     textAlign: TextAlign.start,
-                                  //     style: TextStyle(
-                                  //         fontSize: 17,
-                                  //         fontWeight: FontWeight.w600,
-                                  //         color: Color(0xFFba8e1c))),
                                 ],
                               ),
-                              // Wrap(
-                              //   spacing: 5.0,
-                              //   children: widget.eventData.tags.length < 1
-                              //       ? Container()
-                              //       : List.generate(
-                              //           widget.eventData.tags.length,
-                              //           (index) {
-                              //             return FittedBox(
-                              //               child: Container(
-                              //                 margin: EdgeInsets.only(top: 10),
-                              //                 decoration: BoxDecoration(
-                              //                   border: Border.all(
-                              //                       color: Color(0xFFe2dcca),
-                              //                       width: 1.0),
-                              //                   borderRadius: BorderRadius.all(
-                              //                     Radius.circular(20.0),
-                              //                   ),
-                              //                 ),
-                              //                 child: Center(
-                              //                   child: Padding(
-                              //                     padding: EdgeInsets.only(
-                              //                         left: 15,
-                              //                         right: 15,
-                              //                         top: 5,
-                              //                         bottom: 5),
-                              //                     child: Column(
-                              //                       children: [
-                              //                         Text(
-                              //                           widget.eventData
-                              //                               .tags[index]
-                              //                               .toLowerCase(),
-                              //                           style: GoogleFonts.sourceSansPro(
-                              //                               textStyle: TextStyle(
-                              //                                   fontWeight:
-                              //                                       FontWeight
-                              //                                           .w600,
-                              //                                   fontSize: 10,
-                              //                                   color: Color(
-                              //                                       0xFF455a64))),
-                              //                         ),
-                              //                       ],
-                              //                     ),
-                              //                   ),
-                              //                 ),
-                              //               ),
-                              //             );
-                              //           },
-                              //         ),
-                              // ),
                             ],
                           ),
                         ),
                       ),
                       Row(
                         children: [
-                          // widget.eventData.type == "non-paid"
-                          //     ? Container()
-                          //     : 
                               Container(
-                                  // color: Colors.amber,
-                                  // height: 100,
-
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
@@ -1123,7 +539,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                               ),
                             ),
                             SizedBox(
-                                // width: 20,
                                 width:
                                     MediaQuery.of(context).size.width * 0.05),
                             Text("Location",
@@ -1132,43 +547,8 @@ class _MyHomePageState extends State<Participate_Screen> {
                                     fontWeight: FontWeight.w600,
                                     color: Color(0xFFba8e1c))),
                             SizedBox(
-                              // width: 120,
                               width: MediaQuery.of(context).size.width * 0.35,
                             ),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     onPressed:
-                            //     _launchURL(widget.eventData.url);
-                            //   },
-                            //   // onTap: () {
-                            //   //   Navigator.of(context, rootNavigator: true).push(
-                            //   //       MaterialPageRoute(
-                            //   //           builder: (context) => FbNewScreen()));
-                            //   // },
-                            //   // child: Icon(
-                            //   //   Icons.attachment,
-                            //   //   size: 25,
-                            //   //   color: Colors.blue,
-                            //   // ),
-                            //   // ignore: unrelated_type_equality_checks
-                            //   child: widget.eventData.url != null
-                            //       ?
-                            //       // Icon(
-                            //       //     Icons.attachment,
-                            //       //     size: 30,
-                            //       //     color: Color(0xFFba8e1c),
-                            //       //   )
-                            //       Text(
-                            //           "Event gallery",
-                            //           style: TextStyle(
-                            //               fontSize: 15,
-                            //               color: Color(0xFFba8e1c)),
-                            //         )
-                            //       : Container(),
-                            // ),
-                            // SizedBox(
-                            //   width: 5,
-                            // ),
                           ],
                         ),
                       ),
@@ -1179,7 +559,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                             : Text(widget.eventData.location,
                                 style: TextStyle(
                                     height: 1.5,
-                                    // fontSize: 10,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     color: Color(0xFFcbb269))),
@@ -1192,10 +571,8 @@ class _MyHomePageState extends State<Participate_Screen> {
                             _launchInBrowser(widget.eventData.url);
                           },
                           child: Row(
-                            children: [
-                              
+                            children: [   
                               Container(
-                                // height: 50,
                                 width: MediaQuery.of(context).size.width * 0.25,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -1206,7 +583,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                                       const Color(0xFF9a7210),
                                     ],
                                   ),
-                                  // border: Border.all(color: Colors.white, width: 4),
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(
                                           70.0) //                 <--- border radius here
@@ -1258,14 +634,7 @@ class _MyHomePageState extends State<Participate_Screen> {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            // setState(() =>
-                            //     widget.eventData.status.toString() == "0"
-                            //         ? _enabled = false
-                            //         : _enabled = true);
-                            print("participate");
-                            print('paidd${widget.eventData.type}');
                             if (widget.eventData.type == "paid") {
-                              print('This is paid event');
                               Navigator.of(context, rootNavigator: true).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
@@ -1280,12 +649,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                                 ),
                               );
                             } else {
-                              print('This is unpaid event');
-                              print(
-                                  "=====EVENT TYPE second=====${widget.eventData.type}");
-                              print(
-                                  "+++++++++++++++++++++${widget.eventData.multislotTime.length}+++++++++++++++++++++++++");
-                              print("=====Id=====${widget.eventData.id}");
                               Navigator.of(context, rootNavigator: true).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
@@ -1299,8 +662,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                                           widget.eventData),
                                 ),
                               );
-                              // eventparticipate(widget.eventData.id,
-                              //     widget.eventData.name, context);
                             }
                           },
                           child: Container(
@@ -1334,47 +695,6 @@ class _MyHomePageState extends State<Participate_Screen> {
                     ),
             ],
           )),
-
-          // Container(
-          //   margin: EdgeInsets.fromLTRB(
-          //     MediaQuery.of(context).size.height * 0.05,
-          //     MediaQuery.of(context).size.height * 0.71,
-          //     MediaQuery.of(context).size.height * 0.00,
-          //     MediaQuery.of(context).size.height * 0.00,
-          //   ),
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //         child: ListView.builder(
-          //             controller: controller,
-          //             physics: BouncingScrollPhysics(),
-          //             shrinkWrap: true,
-          //             scrollDirection: Axis.horizontal,
-          //             itemCount: carddetails.length,
-          //             itemBuilder: (context, index) {
-          //               return Align(
-          //                   widthFactor: 0.6,
-          //                   alignment: Alignment.topCenter,
-          //                   child: ImagePath(carddetails[index]));
-          //             }),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // Container(
-          //   margin: EdgeInsets.fromLTRB(
-          //     MediaQuery.of(context).size.height * 0.25,
-          //     MediaQuery.of(context).size.height * 0.74,
-          //     MediaQuery.of(context).size.height * 0.00,
-          //     MediaQuery.of(context).size.height * 0.00,
-          //   ),
-          //   child: Text("+13 Participants",
-          //       style: TextStyle(
-          //         fontWeight: FontWeight.bold,
-          //         fontSize: 13,
-          //         color: Color(0xFF85959c),
-          //       )),
-          // ),
         ],
       ),
     ));

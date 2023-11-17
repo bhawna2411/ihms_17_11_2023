@@ -64,9 +64,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   var fdatee;
   var finalDate;
   var datetime;
-  // List<int> eventlist = [];
   var _currentDate = DateTime.now();
-  // var _currentDate1 = DateTime.now();
   final List<String> images = [
     'https://images.unsplash.com/photo-1586882829491-b81178aa622e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80',
     'https://images.unsplash.com/photo-1586871608370-4adee64d1794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2862&q=80',
@@ -99,7 +97,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   society() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var societyyy = prefs.getString('tempsociety');
-    print("societyyy =================== $societyyy");
   }
 
   @override
@@ -109,55 +106,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     viewCountApi();
     // TODO: implement initState
     loadevents();
-    print('----_loadbanners-------$_loadbanners');
-
-    // getBanners().then(
-    //   (value) {
-    //     bannersList = value.result;
-    //     print("getBannersvalue.... ${value.result[0].image}");
-    //   },
-    // );
-
     getfutureEvents();
-    print("isSwitch value from init ------  $isSwitched");
   }
 
   getfutureEvents() {
     getEvents().then((value) {
-      // searchEventList.clear();
-
-      // searchEventList = value.data;
-      print('-------------------value.data------------${value.data}');
-
-      // for (var each in value.data) {
-      //   if (each.start_date == '') {
-      //     for (var eachh in each.multislotTime.stratTime) {
-      //       persons.add(DateTime.parse(eachh).millisecondsSinceEpoch);
-      //     }
-      //     var _fDate =
-      //         persons.reduce((curr, next) => curr > next ? curr : next);
-      //     var dt = DateTime.fromMillisecondsSinceEpoch(_fDate);
-      //     finalDate = DateFormat('yyyy-MM-dd hh:mm').format(dt);
-      //     fdate = DateTime.parse(finalDate);
-      //   } else {
-      //     datetime = each.start_date + ' ' + each.start_time;
-      //     fdate = DateTime.parse(datetime);
-      //   }
-      //   if (_currentDate.isBefore(fdate)) {
-      //     futureEvents.add(each);
-      //   }
-      // }
       isSwitched = value.switchVal == 1 ? true : false;
 
       futureEvents.clear();
       for (int i = 0; i < value.data.length; i++) {
-        print("------Hello------");
         if (value?.data[i].end_date == '') {
           persons.clear();
-          print("multislot  ${value.data[i].multislotTime}");
-          print("multislot length ${value.data.length}");
           if (value.data[i].multislotTime.length > 0) {
-            print("multislot length ${value.data[i].multislotTime.length}");
 
             for (var eachh in value.data[i].multislotTime) {
               persons.add(DateTime.parse(eachh.endDate.toString())
@@ -166,36 +126,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
             var _fDate =
                 persons.reduce((curr, next) => curr > next ? curr : next);
             var dt = DateTime.fromMillisecondsSinceEpoch(_fDate);
-            print("--------check----" + dt.toString());
             finalDate = DateFormat('yyyy-MM-dd hh:mm:ss').format(dt);
             fdate = DateTime.parse(dt.toString());
           }
         } else {
           datetime = value.data[i].end_date + " " + value.data[i].end_time;
-          // datetime = value.data[i].start_date != null
-          //     ? value.data[i].start_date
-          //     : "" + ' ' + value.data[i].start_time != null
-          //         ? value.data[i].start_time
-          //         : "";
-          print("--------single----" + datetime.toString());
-
-          // if (datetime != ""){
           fdate = DateTime.parse(datetime);
-
-          // }
         }
-        print('------------fdate------------$fdate');
-        print('------------fdate time------------$_currentDate');
-        // if (fdate != null) {
         if (_currentDate.isBefore(fdate)) {
           futureEvents.add(value.data[i]);
         }
-        // }
-
-        // else {
-        print("Heyyyyyyyyyyy ${futureEvents.length}");
-        //   futureEvents.removeAt(i);
-        // }
       }
 
       setState(() {});
@@ -228,7 +168,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   MediaQuery.of(context).size.height * 0.00,
                   MediaQuery.of(context).size.height * 0.00,
                 ),
-                // height: MediaQuery.of(context).size.height * 0.95, //1.1,
                 height: MediaQuery.of(context).size.height * 1.15,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
@@ -249,12 +188,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.02,
                       width: MediaQuery.of(context).size.width * 0.05,
-                      // margin: EdgeInsets.fromLTRB(
-                      //   MediaQuery.of(context).size.height * 0.02,
-                      //   MediaQuery.of(context).size.height * 0.04,
-                      //   MediaQuery.of(context).size.height * 0.00,
-                      //   MediaQuery.of(context).size.height * 0.00,
-                      // ),
                       margin: EdgeInsets.only(
                           left: MediaQuery.of(context).size.height * 0.02),
                       decoration: BoxDecoration(
@@ -265,7 +198,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ),
                   ),
-                  // Spacer(),
                   SizedBox(
                     width: 13,
                   ),
@@ -274,12 +206,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.037,
                       width: MediaQuery.of(context).size.width * 0.30,
-                      // margin: EdgeInsets.fromLTRB(
-                      //   MediaQuery.of(context).size.height * 0.100,
-                      //   MediaQuery.of(context).size.height * 0.04,
-                      //   MediaQuery.of(context).size.height * 0.03,
-                      //   MediaQuery.of(context).size.height * 0.00,
-                      // ),
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage("assets/images/logo copy 3.png"),
@@ -288,9 +214,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   width: 20,
-                  // ),
                   Column(
                     children: [
                       Row(
@@ -298,45 +221,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Container(
                             padding: EdgeInsets.only(right: 10, top: 5),
-                            // color: Colors.blue,
                             child: Image.asset(
                               'assets/images/meraki_blue.png',
-                              // height: 60,
-                              // width: 60,
                               height: 50,
                               width: 80,
                             ),
                           ),
-                          // Container(
-                          //   margin: EdgeInsets.only(
-                          //       right:
-                          //           MediaQuery.of(context).size.height * 0.02),
-                          //   child: Image.asset(
-                          //     'assets/images/social_club_logo.png',
-                          //     height: 50,
-                          //     width: 50,
-                          //   ),
-                          // ),
                         ],
                       ),
                       Container(
                         padding: EdgeInsets.only(right: 10),
-                        // color: Colors.pink,
                         height: 35,
-                        // width: 75,
                         child: FittedBox(
                             fit: BoxFit.contain,
                             child: Row(
                               children: [
-                                // Text(isSwitched ? "Off" : "On",
-                                //     style: TextStyle(
-                                //         fontSize: 25,
-                                //         fontWeight: FontWeight.w400)),
                                 Container(
-                                  // margin: EdgeInsets.only(
-                                  //     right:
-                                  //         MediaQuery.of(context).size.height *
-                                  //             0.02),
                                   child: Image.asset(
                                     'assets/images/social_club_logo.png',
                                     height: 50,
@@ -345,16 +245,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 SizedBox(width: 5),
                                 CupertinoSwitch(
-                                  // materialTapTargetSize :MaterialTapTargetSize.shrinkWrap,
                                   activeColor: Color(0xFFcbb269),
                                   trackColor: Colors.grey,
                                   value: isSwitched,
                                   onChanged: (value) {
                                     isSwitched = value;
                                     reloadData.value = !reloadData.value;
-                                    print("isSwitched ======== $isSwitched");
+                                     if(!isSwitched)
+                                     {
+                                        userProfile().then((value) async {
 
-                                    switchUserSociety(isSwitched, context)
+                                           SharedPreferences prefs = await SharedPreferences.getInstance();
+   
+
+                                           
+                                            prefs.setString('society', value.data.society ?? "");
+                                             prefs.setString('tempsociety', value.data.society ?? "");
+
+                                      switchUserSociety(isSwitched, context)
                                         .then((value) {
                                       getfutureEvents();
                                       _loadbanners = getBanners();
@@ -362,6 +270,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       _loadservices = getServices();
                                       _loadactivities = getActivities();
                                     });
+
+                                        });
+                                     }
+                                     else{
+ switchUserSociety(isSwitched, context)
+                                        .then((value) {
+                                      getfutureEvents();
+                                      _loadbanners = getBanners();
+                                      _loadamenities = getAmenities();
+                                      _loadservices = getServices();
+                                      _loadactivities = getActivities();
+                                    });
+                                     }
+                                   
                                   },
                                 ),
                               ],
@@ -390,7 +312,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       color: Colors.grey,
                       spreadRadius: 3,
                       blurRadius: 5,
-                      // offset: Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -468,31 +389,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 5,
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 15),
-                    //   child: Container(
-                    //     // margin: EdgeInsets.only(
-                    //     //   left: MediaQuery.of(context).size.height * 0.02,
-                    //     //   top: MediaQuery.of(context).size.height * 0.24,
-                    //     // ),
-                    //     child: Row(
-                    //       children: [
-                    //         Text("",
-                    //           // "Explore these interesting finds!",
-                    //           style: GoogleFonts.sourceSansPro(
-                    //             textStyle: TextStyle(
-                    //                 color: Color(0xff203040),
-                    //                 fontWeight: FontWeight.w400,
-                    //                 fontSize: 13),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 10,
                     ),
@@ -500,12 +396,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: FutureBuilder(
                         future: getEvents(),
                         builder: (context, snapshot) {
-                          print(snapshot.connectionState);
-                          print(
-                              "calling events future builder ---------------------------");
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            print("wait state");
                             return CircularProgressIndicator();
                           } else {
                             var eventsResponseModel = snapshot.data;
@@ -520,10 +412,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     .contains(searchEventController.text
                                         .toLowerCase()))
                                 .toList();
-                            print(
-                                " eventList event list length ==== ${eventList.length}");
                             eventList.forEach((element) {
-                              print(element.name);
                             });
                             return Row(
                               children: [
@@ -536,7 +425,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         width:
                                             MediaQuery.of(context).size.width,
                                         child:
-                                            // eventList.length != 0 ||
                                             searchEventController
                                                     .text.isNotEmpty
                                                 ? ListView.builder(
@@ -580,12 +468,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                   .fromLTRB(20,
                                                                       0, 0, 0),
                                                           child: Container(
-                                                            // height: MediaQuery.of(context)
-                                                            //         .size
-                                                            //         .height *
-                                                            //     0.50,
-                                                            // width: MediaQuery.of(context).size.width * 0.50,
-                                                            // height: 200,
                                                             width: 300,
                                                             decoration: BoxDecoration(
                                                                 shape: BoxShape
@@ -602,8 +484,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                           .size
                                                                           .height *
                                                                       0.18,
-
-                                                                  // height: 180,
                                                                   width: 300,
                                                                   decoration:
                                                                       BoxDecoration(
@@ -633,17 +513,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                   ),
                                                                 ),
                                                                 FittedBox(
-                                                                  //height: 67,
-                                                                  // decoration: BoxDecoration(
-                                                                  //   borderRadius:
-                                                                  //       BorderRadius.only(
-                                                                  //           bottomLeft:
-                                                                  //               Radius.circular(
-                                                                  //                   10),
-                                                                  //           bottomRight:
-                                                                  //               Radius.circular(
-                                                                  //                   10)),
-                                                                  // ),
                                                                   child: Row(
                                                                     children: [
                                                                       eventList[index].multislot ==
@@ -666,9 +535,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                 children: [
                                                                                   Text(
                                                                                     DateFormat("MMM").format(DateTime.parse(eventList[index]?.start_date)),
-
-                                                                                    // eventList[index]
-                                                                                    //     .date,
                                                                                     style: GoogleFonts.sourceSansPro(
                                                                                       textStyle: TextStyle(
                                                                                         color: const Color(0xFF96700f),
@@ -764,21 +630,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                         (context, index) {
                                                       return GestureDetector(
                                                         onTap: () {
-                                                          // String date =
-                                                          //     "2019-07-19 8:40:23";
-                                                          // String time = "8:40:23";
-                                                          // DateTime datetime =
-                                                          //     DateFormat("hh:mm").parse(
-                                                          //         "2019-07-19 8:40:23");
-                                                          // print("time date");
-                                                          // print(datetime);
-                                                          // print(DateTime.parse(
-                                                          //     time));
-                                                          // print(DateTime.parse(
-                                                          //     eventList[index]
-                                                          //         .time));
-                                                          // print(eventList[index]
-                                                          //     .date);
                                                           Navigator.of(context,
                                                                   rootNavigator:
                                                                       true)
@@ -812,12 +663,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                   .fromLTRB(20,
                                                                       0, 0, 0),
                                                           child: Container(
-                                                            // height: MediaQuery.of(context)
-                                                            //         .size
-                                                            //         .height *
-                                                            //     0.50,
-                                                            // width: MediaQuery.of(context).size.width * 0.50,
-                                                            // height: 200,
                                                             width: 300,
                                                             decoration: BoxDecoration(
                                                                 shape: BoxShape
@@ -834,8 +679,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                           .size
                                                                           .height *
                                                                       0.18,
-
-                                                                  // height: 180,
                                                                   width: 300,
                                                                   decoration:
                                                                       BoxDecoration(
@@ -864,17 +707,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                   ),
                                                                 ),
                                                                 FittedBox(
-                                                                  //height: 67,
-                                                                  // decoration: BoxDecoration(
-                                                                  //   borderRadius:
-                                                                  //       BorderRadius.only(
-                                                                  //           bottomLeft:
-                                                                  //               Radius.circular(
-                                                                  //                   10),
-                                                                  //           bottomRight:
-                                                                  //               Radius.circular(
-                                                                  //                   10)),
-                                                                  // ),
                                                                   child: Row(
                                                                     children: [
                                                                       futureEvents[index].multislot ==
@@ -885,7 +717,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                     margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                                                                     height: 40,
                                                                                     width: 40,
-                                                                                    // padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                                                                                     decoration: BoxDecoration(
                                                                                       color: const Color(0xFFfbf0d4),
                                                                                       borderRadius: BorderRadius.circular(10),
@@ -927,7 +758,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                     Container(
                                                                                         height: 40,
                                                                                         width: 40,
-                                                                                        // padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                                                                                         decoration: BoxDecoration(
                                                                                           color: const Color(0xFFfbf0d4),
                                                                                           borderRadius: BorderRadius.circular(10),
@@ -965,7 +795,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                     margin: EdgeInsets.fromLTRB(15, 0, 0, 0),
                                                                                     height: 40,
                                                                                     width: 40,
-                                                                                    // padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                                                                                     decoration: BoxDecoration(
                                                                                       color: const Color(0xFFfbf0d4),
                                                                                       borderRadius: BorderRadius.circular(10),
@@ -1007,7 +836,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                     Container(
                                                                                         height: 40,
                                                                                         width: 40,
-                                                                                        // padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                                                                                         decoration: BoxDecoration(
                                                                                           color: const Color(0xFFfbf0d4),
                                                                                           borderRadius: BorderRadius.circular(10),
@@ -1040,7 +868,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                               ],
                                                                             ),
                                                                       Container(
-                                                                        //width: 210,
                                                                         padding:
                                                                             EdgeInsets.all(5),
                                                                         child:
@@ -1114,64 +941,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 15),
                       child: Container(
-                        // margin: EdgeInsets.only(
-                        //   left: MediaQuery.of(context).size.height * 0.02,
-                        //   top: MediaQuery.of(context).size.height * 0.58,
-                        // ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // Text(
-                            //   "BANNERS",
-                            //   style: GoogleFonts.sourceSansPro(
-                            //     textStyle: TextStyle(
-                            //       color: const Color(0xFFfbf0d4),
-                            //       fontWeight: FontWeight.w400,
-                            //       fontSize: 16,
-                            //       letterSpacing: 1,
-                            //     ),
-                            //   ),
-                            // ),
-                            // Column(
-                            //   children: [
-                            //     GestureDetector(
-                            //       onTap: () {
-                            //         Navigator.of(context, rootNavigator: true)
-                            //             .push(MaterialPageRoute(
-                            //                 builder: (context) =>
-                            //                     amenities_screen()));
-                            //       },
-                            //       child: Padding(
-                            //         padding:
-                            //             const EdgeInsets.only(top: 10, right: 20),
-                            //         child: Container(
-                            //           height: MediaQuery.of(context).size.height *
-                            //               0.030,
-                            //           width: MediaQuery.of(context).size.width *
-                            //               0.15,
-                            //           decoration: BoxDecoration(
-                            //             color: const Color(0xFFffffff),
-                            //             borderRadius: BorderRadius.circular(20),
-                            //             border: Border.all(
-                            //               color: const Color(0xFF96700f),
-                            //             ),
-                            //           ),
-                            //           child: Center(
-                            //             child: Text(
-                            //               "VIEW ALL",
-                            //               style: GoogleFonts.sourceSansPro(
-                            //                 textStyle: TextStyle(
-                            //                     color: const Color(0xFFc0a155),
-                            //                     fontWeight: FontWeight.w400,
-                            //                     fontSize: 10),
-                            //               ),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
                           ],
                         ),
                       ),
@@ -1183,7 +955,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             Text(
                               "",
-                              // "Explore these interesting finds!",
                               style: GoogleFonts.sourceSansPro(
                                 textStyle: TextStyle(
                                   color: const Color(0xFFFFFFFF),
@@ -1208,7 +979,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               bannerResponseModel = snapshot.data;
                               bannersList = bannerResponseModel.data;
                               return Container(
-                                  // color: Colors.amber,
                                   width: MediaQuery.of(context).size.width,
                                   height:
                                       MediaQuery.of(context).size.height * 0.15,
@@ -1217,12 +987,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     boxFit: BoxFit.fitWidth,
                                     autoplay: true,
                                     animationCurve: Curves.fastOutSlowIn,
-                                    // animationDuration:
-                                    //     Duration(milliseconds: 1000),
                                     animationDuration:
                                         Duration(milliseconds: 2000),
                                     dotSize: 3.0,
-                                    // dotIncreaseSize: 4.0,
                                     dotBgColor: Colors.transparent,
                                     dotColor: Colors.white,
                                     dotPosition: DotPosition.bottomCenter,
@@ -1241,10 +1008,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 10, left: 15),
                       child: Container(
-                        // margin: EdgeInsets.only(
-                        //   left: MediaQuery.of(context).size.height * 0.02,
-                        //   top: MediaQuery.of(context).size.height * 0.58,
-                        // ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1311,7 +1074,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             Text(
                               "",
-                              // "Explore these interesting finds!",
                               style: GoogleFonts.sourceSansPro(
                                 textStyle: TextStyle(
                                   color: const Color(0xFFFFFFFF),
@@ -1327,19 +1089,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 0, top: 10),
                       child:
-
-                          // amenitiesList.length == 0
-                          //     ? Container()
-                          //     :
-                          // amenitiesList.length == 0
-                          //     ? Container()
                           Container(
-                              // margin: EdgeInsets.fromLTRB(
-                              //   MediaQuery.of(context).size.width * 0.00,
-                              //   MediaQuery.of(context).size.height * 0.65,
-                              //   MediaQuery.of(context).size.height * 0.00,
-                              //   MediaQuery.of(context).size.height * 0.00,
-                              // ),
                               child: FutureBuilder(
                                   future: _loadamenities,
                                   builder: (context, snapshot) {
@@ -1379,16 +1129,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                         true)
                                                                 .push(MaterialPageRoute(
                                                                     builder: (context) => amenities_details(amenitiesList[index]
-                                                                        // amenitiesList[index].name,
-                                                                        // amenitiesList[index].description,
-                                                                        // amenitiesList[index].image,
-                                                                        // amenitiesList[index].location,
                                                                         )))
                                                           },
                                                           child: Card(
-                                                            // margin: EdgeInsets.only(
-                                                            //   left: MediaQuery.of(context).size.height * 0.023,
-                                                            //),
                                                             color: Colors.white,
                                                             shape:
                                                                 RoundedRectangleBorder(
@@ -1466,7 +1209,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                                 fontSize: 12,
                                                                                 fontWeight: FontWeight.bold,
                                                                                 color: const Color(0xFF333333),
-                                                                                // fontWeight: FontWeight.w400,
                                                                                 letterSpacing: 0,
                                                                               ),
                                                                             ),
@@ -1490,10 +1232,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15, top: 20),
                       child: Container(
-                        // margin: EdgeInsets.only(
-                        //   left: MediaQuery.of(context).size.height * 0.02,
-                        //   top: MediaQuery.of(context).size.height * 0.82,
-                        // ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1512,7 +1250,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    print("conciergesdfds");
                                     Navigator.of(context, rootNavigator: true)
                                         .push(MaterialPageRoute(
                                             builder: (context) =>
@@ -1522,12 +1259,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     padding: const EdgeInsets.only(
                                         top: 10, right: 20),
                                     child: Container(
-                                      // margin: EdgeInsets.fromLTRB(
-                                      //   MediaQuery.of(context).size.height * 0.37,
-                                      //   MediaQuery.of(context).size.height * 0.825,
-                                      //   MediaQuery.of(context).size.height * 0.02,
-                                      //   MediaQuery.of(context).size.height * 0.00,
-                                      // ),
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.030,
@@ -1563,15 +1294,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Container(
-                        // margin: EdgeInsets.only(
-                        //   left: MediaQuery.of(context).size.height * 0.021,
-                        //   top: MediaQuery.of(context).size.height * 0.85,
-                        // ),
                         child: Row(
                           children: [
                             Text(
                               "",
-                              // "Explore these interesting finds!",
                               style: GoogleFonts.sourceSansPro(
                                 textStyle: TextStyle(
                                     color: const Color(0xFFFFFFFF),
@@ -1586,12 +1312,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                         padding: const EdgeInsets.only(top: 10, left: 0),
                         child: Container(
-                          // margin: EdgeInsets.fromLTRB(
-                          //   MediaQuery.of(context).size.height * 0.00,
-                          //   MediaQuery.of(context).size.height * 0.89,
-                          //   MediaQuery.of(context).size.height * 0.00,
-                          //   MediaQuery.of(context).size.height * 0.00,
-                          // ),
                           child: FutureBuilder(
                               future: _loadservices,
                               builder: (context, snapshot) {
@@ -1640,9 +1360,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                                             )))
                                                       },
                                                       child: Card(
-                                                        // margin: EdgeInsets.only(
-                                                        //   left: MediaQuery.of(context).size.height * 0.023,
-                                                        //),
                                                         color: Colors.white,
                                                         shape:
                                                             RoundedRectangleBorder(
@@ -1751,10 +1468,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 20, left: 15),
                       child: Container(
-                        // margin: EdgeInsets.only(
-                        //   left: MediaQuery.of(context).size.height * 0.023,
-                        //   top: MediaQuery.of(context).size.height * 1.06,
-                        // ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -1763,7 +1476,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               style: GoogleFonts.sourceSansPro(
                                 textStyle: TextStyle(
                                   color: const Color(0xFFfbf0d4),
-                                  // color: Color(0xFF203040),
                                   fontWeight: FontWeight.w400,
                                   fontSize: 16,
                                   letterSpacing: 1,
@@ -1783,12 +1495,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   top: 10,
                                 ),
                                 child: Container(
-                                  // margin: EdgeInsets.fromLTRB(
-                                  //   MediaQuery.of(context).size.height * 0.37,
-                                  //   MediaQuery.of(context).size.height * 1.069,
-                                  //   MediaQuery.of(context).size.height * 0.02,
-                                  //   MediaQuery.of(context).size.height * 0.00,
-                                  // ),
                                   height: MediaQuery.of(context).size.height *
                                       0.030,
                                   width:
@@ -1806,7 +1512,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       style: GoogleFonts.sourceSansPro(
                                         textStyle: TextStyle(
                                             color: const Color(0xFFc0a155),
-                                            // color: const Color(0xFFc0a155),
                                             fontWeight: FontWeight.w400,
                                             fontSize: 10),
                                       ),
@@ -1819,39 +1524,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(
-                    //     left: 15,
-                    //   ),
-                    //   child: Container(
-                    //     // margin: EdgeInsets.only(
-                    //     //   left: MediaQuery.of(context).size.height * 0.023,
-                    //     //   top: MediaQuery.of(context).size.height * 1.09,
-                    //     // ),
-                    //     child: Row(
-                    //       children: [
-                    //         Text("",
-                    //           // "Explore these interesting finds!",
-                    //           style: GoogleFonts.sourceSansPro(
-                    //             textStyle: TextStyle(
-                    //                 color: const Color(0xFFFFFFFF),
-                    //                 fontWeight: FontWeight.w400,
-                    //                 fontSize: 13),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
                       child: Container(
-                        // margin: EdgeInsets.fromLTRB(
-                        //   MediaQuery.of(context).size.height * 0.00,
-                        //   MediaQuery.of(context).size.height * 1.125,
-                        //   MediaQuery.of(context).size.height * 0.00,
-                        //   MediaQuery.of(context).size.height * 0.00,
-                        // ),
                         child: FutureBuilder(
                             future: _loadactivities,
                             builder: (context, snapshot) {
@@ -2032,20 +1707,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   filterEvents(String val) {
     setState(() {});
-    // if (val == "") {
-    // } else {
-    //   setState(() {
-    //     eventList.clear();
-    //     for (var each in searchEventList) {
-    //       if (each.name.toLowerCase().contains(val)) {
-    //         eventList.add(each);
-    //       }
-    //     }
-    //   });
-
-    //   //setState(() {});
-
-    // }
   }
 
   List<Widget> imageList() {
@@ -2075,22 +1736,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
       setState(() {});
       return;
     }
-    // filterEvents(String val) {
-    //   if (val == "") {
-    //   } else {
-    //     print(searchEventList.length);
-    //     searchEventList = [];
-    //     print(searchEventList.length);
-    //     print(eventList.length);
-    //     print(val);
-    //     for (var each in eventList) {
-    //       if (each.name.contains(val)) {
-    //         searchEventList.add(each);
-    //       }
-    //     }
-    //     setState(() {});
-    //     print(eventList[0].name);
-    //   }
-    // }
   }
 }
